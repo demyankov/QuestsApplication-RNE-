@@ -1,6 +1,10 @@
 {
+<<<<<<< HEAD
   "compilerOptions": {
     "baseUrl": "."
   },
+=======
+  "compilerOptions": {},
+>>>>>>> 0eed9a0f9a6d54545a2cd9ab19c5782999804490
   "extends": "expo/tsconfig.base"
 }
