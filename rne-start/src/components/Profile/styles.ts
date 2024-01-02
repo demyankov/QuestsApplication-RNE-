@@ -1,13 +1,13 @@
 import { StyleSheet } from "react-native";
-import { scaleSize } from "../../utils";
 
 export const styles = StyleSheet.create({
   wrapper: {
+    flex: 1,
     alignItems: "center",
     justifyContent: "center",
   },
-  image: {
-    width: scaleSize(150),
-    height: scaleSize(150),
+  switch: {},
+  item: {
+    color: "red",
   },
 });

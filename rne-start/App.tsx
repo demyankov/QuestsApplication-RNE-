@@ -1,12 +1,18 @@
 import { StyleSheet, SafeAreaView } from "react-native";
-import { Header, ContentSection } from "./components";
+import { Profile } from "./src/components";
+import { Provider } from "react-redux";
+import { persistor, store } from "./src/store/store";
+import { PersistGate } from "redux-persist/integration/react";
 
 export default function App() {
   return (
-    <SafeAreaView style={styles.container}>
-      <Header />
-      <ContentSection />
-    </SafeAreaView>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <SafeAreaView style={styles.container}>
+          <Profile />
+        </SafeAreaView>
+      </PersistGate>
+    </Provider>
   );
 }
 
