@@ -1,19 +1,20 @@
-import { View, Text, Switch } from "react-native";
+import { View, Text, Switch, useColorScheme } from "react-native";
 import { styles } from "./styles";
 import {
-  THEMES,
   getActiveTheme,
   toggleTheme,
   useAppDispatch,
   useAppSelector,
 } from "../../store";
+import { THEMES } from "../../constants/theme";
 
 export default function Header() {
   const dispatch = useAppDispatch();
-  const theme = useAppSelector(getActiveTheme);
+  const currentTheme = useAppSelector(getActiveTheme);
   const toggleSwitch = (): any => dispatch(toggleTheme());
+  const colorScheme = useColorScheme();
 
-  const isEnabled = theme === THEMES.DARK;
+  const isEnabled = currentTheme === THEMES.DARK;
 
   return (
     <View style={styles.wrapper}>
@@ -25,7 +26,8 @@ export default function Header() {
         onValueChange={toggleSwitch}
         value={isEnabled}
       />
-      <Text>dfdf12wsw1 {theme}</Text>
+      <Text>dfdf12wsw1 {currentTheme}</Text>
+      <Text>dfdf12wsw1 {colorScheme}</Text>
     </View>
   );
 }

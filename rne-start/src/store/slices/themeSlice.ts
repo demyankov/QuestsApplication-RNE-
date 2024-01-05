@@ -1,9 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-export enum THEMES {
-  LIGHT = "light",
-  DARK = "dark",
-}
+import { THEMES } from "../../constants/theme";
 
 export interface Theme {
   theme: THEMES;

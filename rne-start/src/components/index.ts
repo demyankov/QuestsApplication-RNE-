@@ -1,4 +1,4 @@
 import Header from "./Header/Header";
-import Profile from "./Profile/Profile";
+import Profile from "../screens/Profile/Profile";
 
 export { Header, Profile };

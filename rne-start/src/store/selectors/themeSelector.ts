@@ -1,3 +1,3 @@
 import { RootState } from "../types";
 
-export const getActiveTheme = (state: RootState) => state.theme;
+export const getActiveTheme = (state: RootState) => state.theme.theme;

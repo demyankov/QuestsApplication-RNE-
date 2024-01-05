@@ -1,5 +1,5 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { themeReducer } from "./slices";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { subscribersReducer, themeReducer } from "./slices";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   persistStore,
@@ -10,15 +10,23 @@ import {
   PERSIST,
   PURGE,
   REGISTER,
+  persistCombineReducers,
 } from "redux-persist";
+import { subscriptionsReducer } from "./slices/subscriptionsSlice";
+import { postsReducer } from "./slices/postsSlice";
 
 const persistConfig = {
   key: "theme",
   storage: AsyncStorage,
-  // whiteList: ["Theme"],
+  whiteList: ["Theme"],
 };
 
-const persistedReducer = persistReducer(persistConfig, themeReducer);
+const persistedReducer = persistCombineReducers(persistConfig, {
+  theme: themeReducer,
+  subscribers: subscribersReducer,
+  subscriptions: subscriptionsReducer,
+  posts: postsReducer,
+});
 
 export const store = configureStore({
   reducer: persistedReducer,
