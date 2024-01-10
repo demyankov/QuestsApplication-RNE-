@@ -10,4 +10,7 @@ export const styles = StyleSheet.create({
   item: {
     color: "red",
   },
+  background: {
+    flexBasis: "50%",
+  },
 });

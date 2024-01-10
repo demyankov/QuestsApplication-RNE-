@@ -1,4 +1,4 @@
-import { View, Text, Switch, useColorScheme } from "react-native";
+import { View, Text, Switch, useColorScheme, Button } from "react-native";
 import { styles } from "./styles";
 import {
   getActiveTheme,
@@ -7,8 +7,14 @@ import {
   useAppSelector,
 } from "../../store";
 import { THEMES } from "../../constants/theme";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { SCREENS } from "../../constants/screens";
+import { RootStackParamList } from "../../navigation/AppStack";
+import { LinearGradient } from "expo-linear-gradient";
 
-export default function Header() {
+type ProfileProps = NativeStackScreenProps<RootStackParamList, SCREENS.PROFILE>;
+
+export const Profile = ({ navigation }: ProfileProps) => {
   const dispatch = useAppDispatch();
   const currentTheme = useAppSelector(getActiveTheme);
   const toggleSwitch = (): any => dispatch(toggleTheme());
@@ -16,8 +22,16 @@ export default function Header() {
 
   const isEnabled = currentTheme === THEMES.DARK;
 
+  const navigateTo = (to: SCREENS): void => navigation.navigate(to);
+
   return (
     <View style={styles.wrapper}>
+      <LinearGradient
+        colors={["#4c669f", "#3b5998", "#192f6a"]}
+        style={styles.background}
+      >
+        <Text>Sign in with Facebook</Text>
+      </LinearGradient>
       <Switch
         style={styles.switch}
         trackColor={{ false: "#767577", true: "#81b0ff" }}
@@ -28,6 +42,17 @@ export default function Header() {
       />
       <Text>dfdf12wsw1 {currentTheme}</Text>
       <Text>dfdf12wsw1 {colorScheme}</Text>
+      <View>
+        <Button title="POSTS" onPress={() => navigateTo(SCREENS.POSTS)} />
+        <Button
+          title="SUBSCRIBERS"
+          onPress={() => navigateTo(SCREENS.SUBSCRIBERS)}
+        />
+        <Button
+          title="SUBSCRIPTONS"
+          onPress={() => navigateTo(SCREENS.SUBSCRIPTONS)}
+        />
+      </View>
     </View>
   );
-}
+};
