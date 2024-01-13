@@ -1,8 +1,8 @@
 import { Text, View } from "react-native";
 import { styles } from "./styles";
 
-export const Subscribers = () => (
+export const Follow = () => (
   <View style={styles.wrapper}>
-    <Text>Подписчики</Text>
+    <Text>Подписки</Text>
   </View>
 );

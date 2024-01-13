@@ -1,26 +1,17 @@
-import { View, Text, Switch, useColorScheme, Button } from "react-native";
-import { styles } from "./styles";
-import {
-  getActiveTheme,
-  toggleTheme,
-  useAppDispatch,
-  useAppSelector,
-} from "../../store";
-import { THEMES } from "../../constants/theme";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { View, Text, useColorScheme, Button } from "react-native";
+import { createStyles } from "./styles";
 import { SCREENS } from "../../constants/screens";
-import { RootStackParamList } from "../../navigation/AppStack";
 import { LinearGradient } from "expo-linear-gradient";
+import { useNavigation } from "@react-navigation/native";
+import { THEMES } from "../../constants/theme";
+import { useTheme } from "@react-navigation/native";
+import { MainStackType } from "../../types";
+import { UserIcon } from "../../components";
 
-type ProfileProps = NativeStackScreenProps<RootStackParamList, SCREENS.PROFILE>;
-
-export const Profile = ({ navigation }: ProfileProps) => {
-  const dispatch = useAppDispatch();
-  const currentTheme = useAppSelector(getActiveTheme);
-  const toggleSwitch = (): any => dispatch(toggleTheme());
-  const colorScheme = useColorScheme();
-
-  const isEnabled = currentTheme === THEMES.DARK;
+export const Profile = () => {
+  const navigation = useNavigation<MainStackType>();
+  const theme = useTheme();
+  const styles = createStyles(theme);
 
   const navigateTo = (to: SCREENS): void => navigation.navigate(to);
 
@@ -29,29 +20,15 @@ export const Profile = ({ navigation }: ProfileProps) => {
       <LinearGradient
         colors={["#4c669f", "#3b5998", "#192f6a"]}
         style={styles.background}
-      >
-        <Text>Sign in with Facebook</Text>
-      </LinearGradient>
-      <Switch
-        style={styles.switch}
-        trackColor={{ false: "#767577", true: "#81b0ff" }}
-        thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
-        ios_backgroundColor="#3e3e3e"
-        onValueChange={toggleSwitch}
-        value={isEnabled}
-      />
-      <Text>dfdf12wsw1 {currentTheme}</Text>
-      <Text>dfdf12wsw1 {colorScheme}</Text>
+      ></LinearGradient>
+      <UserIcon />
       <View>
         <Button title="POSTS" onPress={() => navigateTo(SCREENS.POSTS)} />
         <Button
-          title="SUBSCRIBERS"
-          onPress={() => navigateTo(SCREENS.SUBSCRIBERS)}
+          title="FOLLOWERS"
+          onPress={() => navigateTo(SCREENS.FOLLOWERS)}
         />
-        <Button
-          title="SUBSCRIPTONS"
-          onPress={() => navigateTo(SCREENS.SUBSCRIPTONS)}
-        />
+        <Button title="FOLLOW" onPress={() => navigateTo(SCREENS.FOLLOW)} />
       </View>
     </View>
   );

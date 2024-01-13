@@ -1,6 +1,6 @@
-import { Subscribers } from "./Subscribers/Subscribers";
-import { Subscriptions } from "./Subscriptions/Subscriptions";
+import { Followers } from "./Followers/Followers";
+import { Follow } from "./Follow/Follow";
 import { Profile } from "./Profile/Profile";
 import { Posts } from "./Posts/Posts";
 
-export { Subscribers, Subscriptions, Profile, Posts };
+export { Followers, Follow, Profile, Posts };

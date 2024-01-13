@@ -1,4 +1,4 @@
-import Header from "./Header/Header";
-import Profile from "../screens/Profile/Profile";
+import { UserIcon } from "./UserIcon/UserIcon";
+import { StatisticsItem } from "./StatisticsItem/StatisticsItem";
 
-export { Header, Profile };
+export { UserIcon, StatisticsItem };

@@ -1,10 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-export interface Post {
-  id: string;
-  text: string;
-  authorId: string;
-}
+import { Post } from "../types";
 
 const initialState: Post[] = [
   {

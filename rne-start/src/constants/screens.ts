@@ -1,6 +1,10 @@
+export enum STACKS {
+  MAIN_STACK = "MainStack",
+}
+
 export enum SCREENS {
   PROFILE = "Profile",
   POSTS = "Posts",
-  SUBSCRIBERS = "Subscribers",
-  SUBSCRIPTONS = "subscriptions",
+  FOLLOWERS = "Followers",
+  FOLLOW = "Follow",
 }
