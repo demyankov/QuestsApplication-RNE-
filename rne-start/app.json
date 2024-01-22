@@ -31,6 +31,9 @@
         "projectId": "7d36f130-cd87-45d4-ba78-92eefacfe0a1"
       }
     },
-    "owner": "demyantaurus"
+    "owner": "demyantaurus",
+    "plugins": [
+      "expo-localization"
+    ]
   }
 }

@@ -1,8 +1,8 @@
 import { Text, View } from "react-native";
 import { styles } from "./styles";
 
-export const Posts = () => (
+export const Settings = () => (
   <View style={styles.wrapper}>
-    <Text>Посты</Text>
+    <Text>Настройки личных данных</Text>
   </View>
 );

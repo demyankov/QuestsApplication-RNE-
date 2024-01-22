@@ -6,6 +6,7 @@ export type MainStackParamsList = {
   [SCREENS.POSTS]: undefined;
   [SCREENS.FOLLOWERS]: undefined;
   [SCREENS.FOLLOW]: undefined;
+  [SCREENS.SETTINGS]: undefined;
 };
 
 export type AppNavigatorParamList = {

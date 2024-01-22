@@ -16,6 +16,8 @@ export const theme: ThemeType = {
     colors: {
       ...DefaultTheme.colors,
       text: "#000000",
+      background: "#eee",
+      border: "#0d8c2f",
     },
   },
   [THEMES.DARK]: {
@@ -23,6 +25,8 @@ export const theme: ThemeType = {
     colors: {
       ...DarkTheme.colors,
       text: "#ffffff",
+      background: "#474644",
+      border: "#ede02b",
     },
   },
 };

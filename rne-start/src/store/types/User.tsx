@@ -1,7 +1,8 @@
 export interface User {
   id: string;
   isAuth: boolean;
-  name: string;
+  firstName: string;
+  secondName: string;
   age: string;
   location: string;
   countOfFollowers: string;

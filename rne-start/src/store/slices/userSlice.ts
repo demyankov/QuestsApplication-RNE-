@@ -4,8 +4,9 @@ import { User } from "../types";
 const initialState: User = {
   id: "001",
   isAuth: true,
-  name: "Фёдор",
-  age: "33",
+  firstName: "Геннадий",
+  secondName: "Бабушкин",
+  age: "9",
   location: "Беларусь",
   countOfFollowers: "45",
   countOfFollows: "32",

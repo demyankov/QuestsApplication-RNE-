@@ -7,4 +7,5 @@ export enum SCREENS {
   POSTS = "Posts",
   FOLLOWERS = "Followers",
   FOLLOW = "Follow",
+  SETTINGS = "Settings",
 }
