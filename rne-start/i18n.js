@@ -32,6 +32,7 @@ i18n
           follows: "Follows",
           posts: "Posts",
           profile: "Profile",
+          lastPosts: "Last posts",
         },
       },
       ru: {
@@ -41,6 +42,7 @@ i18n
           follows: "Подписки",
           posts: "Посты",
           profile: "Профиль",
+          lastPosts: "Последние посты",
         },
       },
       // have a initial namespace

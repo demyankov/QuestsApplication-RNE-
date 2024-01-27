@@ -18,6 +18,7 @@ export const theme: ThemeType = {
       text: "#000000",
       background: "#eee",
       border: "#0d8c2f",
+      card: "#aaa",
     },
   },
   [THEMES.DARK]: {
@@ -25,8 +26,9 @@ export const theme: ThemeType = {
     colors: {
       ...DarkTheme.colors,
       text: "#ffffff",
-      background: "#474644",
+      background: "#222",
       border: "#ede02b",
+      card: "#444",
     },
   },
 };
