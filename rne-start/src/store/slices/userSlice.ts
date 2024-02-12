@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { User } from "../types";
+import { faker } from "@faker-js/faker";
 
 const initialState: User = {
   id: "001",
@@ -7,6 +8,7 @@ const initialState: User = {
   firstName: "Геннадий",
   secondName: "Бабушкин",
   age: "9",
+  avatar: faker.image.avatar(),
   location: "Беларусь",
   countOfFollowers: "45",
   countOfFollows: "32",
@@ -17,11 +19,13 @@ const userSlice = createSlice({
   name: "User",
   initialState,
   reducers: {
-    aaa() {},
+    changeUserName(state, { payload }: { payload: string }) {
+      state.firstName = payload;
+    },
   },
 });
 
 export const {
   reducer: userReducer,
-  actions: { aaa },
+  actions: { changeUserName },
 } = userSlice;

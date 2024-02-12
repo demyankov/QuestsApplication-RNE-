@@ -4,6 +4,7 @@ export interface User {
   firstName: string;
   secondName: string;
   age: string;
+  avatar: string;
   location: string;
   countOfFollowers: string;
   countOfFollows: string;

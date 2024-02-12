@@ -1,17 +1,43 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import {
   followersReducer,
   followsReducer,
   postsReducer,
   userReducer,
 } from "./slices";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
 
-export const store = configureStore({
-  reducer: {
-    user: userReducer,
-    followers: followersReducer,
-    follows: followsReducer,
-    posts: postsReducer,
-    
-  },
+const persistConfig = {
+  key: "user",
+  storage: AsyncStorage,
+};
+
+const persistedReducer = persistReducer(persistConfig, userReducer);
+
+const reducers = combineReducers({
+  user: persistedReducer,
+  followers: followersReducer,
+  follows: followsReducer,
+  posts: postsReducer,
 });
+export const store = configureStore({
+  reducer: reducers,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
+});
+
+export const persistor = persistStore(store);
