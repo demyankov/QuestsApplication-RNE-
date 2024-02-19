@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { User } from "../types";
 import { faker } from "@faker-js/faker";
+import { SettingProfileType } from "../../types";
 
 const initialState: User = {
   id: "001",
@@ -19,13 +20,16 @@ const userSlice = createSlice({
   name: "User",
   initialState,
   reducers: {
-    changeUserName(state, { payload }: { payload: string }) {
-      state.firstName = payload;
+    updateProfileSettings(state, { payload }: { payload: SettingProfileType }) {
+      state.firstName = payload.firstName;
+      state.secondName = payload.secondName;
+      state.age = payload.age;
+      state.location = payload.location;
     },
   },
 });
 
 export const {
   reducer: userReducer,
-  actions: { changeUserName },
+  actions: { updateProfileSettings },
 } = userSlice;

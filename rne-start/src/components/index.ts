@@ -5,6 +5,7 @@ import { User } from "./User/User";
 import { CustomButton } from "./CustomButton/CustomButton";
 import { Post } from "./Post/Post";
 import { LastPostsList } from "./LastPostsList/LastPostsList";
+import { CustomInput } from "./CustomInput/CustomInput";
 
 export {
   Avatar,
@@ -14,4 +15,5 @@ export {
   CustomButton,
   Post,
   LastPostsList,
+  CustomInput,
 };
