@@ -1,23 +1,29 @@
-import { Button, TextInput, View } from "react-native";
-import { styles } from "./styles";
+import { Button, Pressable, ScrollView, Text, View } from 'react-native';
+import { createStyles } from './styles';
 import {
   getUserSelector,
   updateProfileSettings,
   useAppDispatch,
   useAppSelector,
-} from "../../store";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
-import { SettingProfileType } from "../../types";
-import { settingsProfileScheme } from "../../shared/validationSchemes";
-import { CustomInput } from "../../components";
-import { PROFILE_SETTINGS } from "../../constants";
-import { inputs } from "./data";
+} from '../../store';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from 'react-hook-form';
+import { SettingProfileType } from '../../types';
+import { settingsProfileScheme } from '../../shared/validationSchemes';
+import { CustomInput, User } from '../../components';
+import { PROFILE_SETTINGS } from '../../constants';
+import { inputs } from './data';
+import { useTranslation } from 'react-i18next';
+import { useTheme } from '@react-navigation/native';
 
 export const Settings = () => {
   const dispatch = useAppDispatch();
-  const { firstName, secondName, age, location } =
+  const { firstName, secondName, age, phone, location } =
     useAppSelector(getUserSelector);
+
+  const theme = useTheme();
+  const styles = createStyles(theme);
+  const { t } = useTranslation();
 
   const {
     control,
@@ -26,29 +32,44 @@ export const Settings = () => {
     formState: { errors },
   } = useForm<SettingProfileType>({
     defaultValues: {
-      [PROFILE_SETTINGS.FIRST_NAME]: firstName,
-      [PROFILE_SETTINGS.SECOND_NAME]: secondName,
-      [PROFILE_SETTINGS.AGE]: age,
-      [PROFILE_SETTINGS.LOCATION]: location,
+      [PROFILE_SETTINGS.FIRST_NAME]: t(firstName),
+      [PROFILE_SETTINGS.SECOND_NAME]: t(secondName),
+      [PROFILE_SETTINGS.AGE]: t(age),
+      [PROFILE_SETTINGS.PHONE]: t(phone),
+      [PROFILE_SETTINGS.LOCATION]: t(location),
     },
     resolver: yupResolver(settingsProfileScheme),
-    mode: "onBlur",
+    mode: 'onBlur',
   });
 
-  const handleUpdateProfile = () =>
-    dispatch(updateProfileSettings(getValues()));
+  const handleUpdateProfile = () => console.log(getValues());
+  // dispatch(updateProfileSettings(getValues()));
 
   return (
-    <View style={styles.wrapper}>
-      {inputs.map(({ name, label }) => (
-        <CustomInput
-          control={control}
-          name={name}
-          label={label}
-          error={errors[name]?.message}
+    <ScrollView style={styles.wrapper}>
+      <User />
+      <Text style={styles.title}>{t('personalData')}</Text>
+      <View style={styles.inputsWrapper}>
+        {inputs.map(({ name, label }) => {
+          let errorMessage = errors[name]?.message;
+          return (
+            <CustomInput
+              key={name}
+              control={control}
+              name={name}
+              label={t(label)}
+              error={errorMessage && t(`errors.${errors[name]?.message}`)}
+            />
+          );
+        })}
+        <Button
+          title={t('buttons.save')}
+          onPress={handleSubmit(handleUpdateProfile)}
         />
-      ))}
-      <Button title="Submit" onPress={handleSubmit(handleUpdateProfile)} />
-    </View>
+      </View>
+      <Pressable onPress={handleUpdateProfile}>
+        <Text>123{errors.root?.message}</Text>
+      </Pressable>
+    </ScrollView>
   );
 };

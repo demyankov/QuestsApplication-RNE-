@@ -5,13 +5,13 @@ import {
   TouchableWithoutFeedback,
   TouchableOpacity,
   TouchableHighlight,
-} from "react-native";
-import { useTheme } from "@react-navigation/native";
-import { createStyles } from "./styles";
-import { getUserSelector, useAppSelector } from "../../store";
-import { getAge } from "../../utils";
-import { useState } from "react";
-import { Avatar } from "../Avatar/Avatar";
+} from 'react-native';
+import { useTheme } from '@react-navigation/native';
+import { createStyles } from './styles';
+import { getUserSelector, useAppSelector } from '../../store';
+import { getAge } from '../../utils';
+import { useState } from 'react';
+import { Avatar } from '../Avatar/Avatar';
 
 export const User = () => {
   const theme = useTheme();
@@ -20,7 +20,7 @@ export const User = () => {
   const [isAvatarIncrease, setIsAvatarIncrease] = useState(false);
 
   const toggleAvatar = () => setIsAvatarIncrease(!isAvatarIncrease);
-  console.log(user);
+
   return (
     <View style={styles.wrapper}>
       <Avatar onPress={toggleAvatar} img={user.avatar} transition={500} />

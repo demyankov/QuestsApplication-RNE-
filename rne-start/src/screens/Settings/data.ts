@@ -1,8 +1,9 @@
-import { PROFILE_SETTINGS } from "../../constants";
+import { PROFILE_SETTINGS } from '../../constants';
 
 export const inputs = [
-  { name: PROFILE_SETTINGS.FIRST_NAME, label: "Ваше имя" },
-  { name: PROFILE_SETTINGS.SECOND_NAME, label: "Ваша фамилия" },
-  { name: PROFILE_SETTINGS.AGE, label: "Ваш возраст" },
-  { name: PROFILE_SETTINGS.LOCATION, label: "Страна" },
+  { name: PROFILE_SETTINGS.FIRST_NAME, label: 'firstName' },
+  { name: PROFILE_SETTINGS.SECOND_NAME, label: 'secondName' },
+  { name: PROFILE_SETTINGS.AGE, label: 'age' },
+  { name: PROFILE_SETTINGS.PHONE, label: 'phone' },
+  { name: PROFILE_SETTINGS.LOCATION, label: 'location' },
 ];

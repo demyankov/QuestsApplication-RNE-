@@ -1,67 +1,61 @@
-import { StyleSheet } from "react-native";
-import { scaleSize } from "../../utils";
+import { StyleSheet } from 'react-native';
+import { scaleSize } from '../../utils';
+import { Theme } from '@react-navigation/native';
 
-export const styles = StyleSheet.create({
-  wrapper: {
-    flexDirection: "column",
-    gap: scaleSize(20),
-    width: "100%",
-  },
+export const createStyles = (theme: Theme) =>
+  StyleSheet.create({
+    inputWrapper: {
+      position: 'relative',
 
-  inputWrapper: {
-    position: "relative",
-    alignItems: "center",
-    // paddingHorizontal: 0 scaleSize(20),
-    fontSize: scaleSize(20),
-    // background-color: transparent,
-    // border: 1px solid var(--border-color-hover-input),
-    // border- radius: scaleSize(10)
+      //     &:hover {
+      //       border: 1px solid var(--background-color-button-secondary);
+      //     }
 
-    //     span: {
-    //       display: flex;
-    //       align-items: center;
-    //     }
+      //     &:active,
+      //     &:focus-within {
+      //       border: 1px solid var(--background-color-button-secondary);
+      //     }
 
-    //     &:hover {
-    //       border: 1px solid var(--background-color-button-secondary);
-    //     }
+      //     &:disabled input {
+      //       color: var(--font-color-disabled);
+      //     }
+      //   }
+    },
 
-    //     &:active,
-    //     &:focus-within {
-    //       border: 1px solid var(--background-color-button-secondary);
-    //     }
+    input: {
+      minWidth: '100%',
+      margin: 0,
+      paddingVertical: scaleSize(16),
+      paddingHorizontal: scaleSize(20),
+      backgroundColor: theme.colors.inputBackground,
+      borderRadius: scaleSize(10),
+      borderColor: theme.colors.inputBorder,
+      borderWidth: 1,
+      color: theme.colors.text,
+    },
 
-    //     &:disabled input {
-    //       color: var(--font-color-disabled);
-    //     }
-    //   }
-  },
+    label: {
+      color: theme.colors.text,
+      marginBottom: scaleSize(5),
+    },
 
-  input: {
-    width: "100%",
-    paddingVertical: scaleSize(16),
-    margin: 0,
-    backgroundColor: "white",
-    // outline: "none",
-  },
+    warningInput: {
+      backgroundColor: '#f8f1e4',
+      borderWidth: 1,
+      borderColor: '#FFAA00',
+    },
 
-  warningInput: {
-    // backgroundColor: "yellow",
-    // borderWidth: 1,
-    // borderColor: "yellow",
-    // border: 1px solid var(--border-color-warning),
-  },
-
-  warningText: {
-    // position: "absolute",
-    // bottom: calc(-1.25 * var(--spacing-7));
-    // left: "0",
-    display: "flex",
-    // gap: var(--spacing-9);
-    alignItems: "center",
-    // font-size: var(--smallRegular-font-size),
-    // line-height: var(--smallRegular-line-height),
-    color: "yellow",
-    // white-space: nowrap,
-  },
-});
+    warningText: {
+      position: 'absolute',
+      bottom: 0,
+      left: 0,
+      transform: [{ translateY: scaleSize(30) }],
+      zIndex: 10,
+      display: 'flex',
+      gap: scaleSize(10),
+      alignItems: 'center',
+      fontSize: scaleSize(25),
+      color: '#FFAA00',
+      // whiteSpace: 'nowrap',
+    },
+  });
