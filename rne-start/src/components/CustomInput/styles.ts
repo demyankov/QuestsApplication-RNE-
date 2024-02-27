@@ -31,8 +31,7 @@ export const createStyles = (theme: Theme) =>
       borderRadius: scaleSize(10),
       borderColor: theme.colors.inputBorder,
       borderWidth: 1,
-      color: theme.colors.text,
-    },
+      color: theme.colors.text,    },
 
     label: {
       color: theme.colors.text,
