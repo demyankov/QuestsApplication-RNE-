@@ -1,8 +1,8 @@
-import { DarkTheme, DefaultTheme, Theme } from '@react-navigation/native';
+import { DarkTheme, DefaultTheme, Theme } from "@react-navigation/native";
 
 export enum THEMES {
-  LIGHT = 'light',
-  DARK = 'dark',
+  LIGHT = "light",
+  DARK = "dark",
 }
 
 type ThemeType = {
@@ -15,24 +15,24 @@ export const theme: ThemeType = {
     ...DefaultTheme,
     colors: {
       ...DefaultTheme.colors,
-      text: '#000000',
-      background: '#eee',
-      border: '#0d8c2f',
-      card: '#aaa',
-      inputBorder: '#444444',
-      inputBackground: '#eee',
+      text: "#000000",
+      background: "#eee",
+      border: "#0d8c2f",
+      card: "#eee",
+      inputBorder: "#444444",
+      inputBackground: "#eee",
     },
   },
   [THEMES.DARK]: {
     ...DarkTheme,
     colors: {
       ...DarkTheme.colors,
-      text: '#ffffff',
-      background: '#222',
-      border: '#ede02b',
-      card: '#444',
-      inputBorder: '#ffffff',
-      inputBackground: '#222',
+      text: "#ffffff",
+      background: "#222",
+      border: "#ede02b",
+      card: "#444",
+      inputBorder: "#ffffff",
+      inputBackground: "#222",
     },
   },
 };

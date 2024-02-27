@@ -6,6 +6,7 @@ import { CustomButton } from "./CustomButton/CustomButton";
 import { Post } from "./Post/Post";
 import { LastPostsList } from "./LastPostsList/LastPostsList";
 import { CustomInput } from "./CustomInput/CustomInput";
+import { QuestCard } from "./QuestCard/QuestCard";
 
 export {
   Avatar,
@@ -16,4 +17,5 @@ export {
   Post,
   LastPostsList,
   CustomInput,
+  QuestCard,
 };

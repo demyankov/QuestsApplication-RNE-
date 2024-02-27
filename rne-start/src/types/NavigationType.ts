@@ -1,5 +1,5 @@
-import { NavigationProp } from '@react-navigation/native';
-import { SCREENS, STACKS } from '../constants/screens';
+import { NavigationProp } from "@react-navigation/native";
+import { SCREENS, STACKS } from "../constants/screens";
 
 export type MainStackParamsList = {
   [SCREENS.PROFILE]: undefined;
@@ -8,7 +8,7 @@ export type MainStackParamsList = {
   [SCREENS.FOLLOW]: undefined;
   [SCREENS.SETTINGS]: undefined;
   [SCREENS.QUESTS]: undefined;
-  [SCREENS.QUESTDETAILS]: { questId: string };
+  [SCREENS.QUESTDETAILS]?: { questId: string };
 };
 
 export type AppNavigatorParamList = {

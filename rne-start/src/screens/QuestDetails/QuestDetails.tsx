@@ -1,9 +1,16 @@
-import { Text, View } from 'react-native';
+import { useTheme } from "@react-navigation/native";
+import { Text, View } from "react-native";
+import { createStyles } from "../Profile/styles";
 
-export const QuestDetails = () => {
+export const QuestDetails = ({ route }: any) => {
+  const { questId } = route.params;
+
+  const theme = useTheme();
+  const styles = createStyles(theme);
+
   return (
     <View>
-      <Text>QuestDetails </Text>
+      <Text>{questId}</Text>
     </View>
   );
 };
