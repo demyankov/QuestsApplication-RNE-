@@ -3,7 +3,7 @@ import { scaleSize } from "../../utils";
 
 export const styles = StyleSheet.create({
   button: {
-    alignItems: "stretch",
+    alignItems: "center",
     justifyContent: "center",
     paddingVertical: scaleSize(20),
     paddingHorizontal: scaleSize(45),
@@ -14,6 +14,7 @@ export const styles = StyleSheet.create({
   text: {
     fontSize: scaleSize(32),
     lineHeight: scaleSize(36),
+    textAlign: "center",
     letterSpacing: 0.3,
     color: "#ffffff",
   },

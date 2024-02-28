@@ -4,6 +4,7 @@ import {
   followsReducer,
   postsReducer,
   userReducer,
+  questDetailsReducer,
 } from "./slices";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
@@ -29,6 +30,7 @@ const reducers = combineReducers({
   followers: followersReducer,
   follows: followsReducer,
   posts: postsReducer,
+  questDetails: questDetailsReducer,
 });
 export const store = configureStore({
   reducer: reducers,

@@ -7,14 +7,17 @@ import { MainStackType } from "../../types";
 interface CustomButtonProps {
   title: string;
   to?: SCREENS;
+  options?: { questId: string };
 }
 
 export const CustomButton = ({
   title,
-  to = SCREENS.QUESTS,
+  to = SCREENS.MAIN,
+  options,
 }: CustomButtonProps) => {
   const { navigate } = useNavigation<MainStackType>();
-  const navigateTo = () => navigate(to);
+  const navigateTo = () =>
+    to === SCREENS.QUESTDETAILS ? navigate(to, options) : navigate(to);
 
   return (
     <Pressable style={styles.button} onPress={navigateTo}>

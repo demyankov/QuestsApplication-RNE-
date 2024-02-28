@@ -5,7 +5,7 @@ import {
   Followers,
   Follow,
   Settings,
-  QuestsList,
+  Main,
   QuestDetails,
 } from "../screens";
 import { SCREENS } from "../constants/screens";
@@ -17,7 +17,7 @@ const Stack = createNativeStackNavigator<MainStackParamsList>();
 interface IStackList {
   name: SCREENS;
   component: any;
-  title: string;
+  title?: string;
 }
 
 const stackList: IStackList[] = [
@@ -26,7 +26,7 @@ const stackList: IStackList[] = [
   { name: SCREENS.FOLLOWERS, component: Followers, title: "followers" },
   { name: SCREENS.FOLLOW, component: Follow, title: "follows" },
   { name: SCREENS.SETTINGS, component: Settings, title: "settings" },
-  { name: SCREENS.QUESTS, component: QuestsList, title: "questsList" },
+  { name: SCREENS.MAIN, component: Main },
   {
     name: SCREENS.QUESTDETAILS,
     component: QuestDetails,
@@ -37,9 +37,14 @@ const stackList: IStackList[] = [
 export const MainStack = () => {
   const { t } = useTranslation();
 
+  const getOptions = (title?: string) => ({
+    title: title && t(title),
+    headerShown: !!title,
+  });
+
   return (
     <Stack.Navigator
-      initialRouteName={SCREENS.QUESTS}
+      initialRouteName={SCREENS.MAIN}
       screenOptions={{
         animation: "fade_from_bottom",
       }}
@@ -49,7 +54,7 @@ export const MainStack = () => {
           key={name}
           name={name}
           component={component}
-          options={{ title: t(title) }}
+          options={getOptions(title)}
         />
       ))}
     </Stack.Navigator>

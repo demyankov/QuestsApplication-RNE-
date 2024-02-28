@@ -7,8 +7,8 @@ export type MainStackParamsList = {
   [SCREENS.FOLLOWERS]: undefined;
   [SCREENS.FOLLOW]: undefined;
   [SCREENS.SETTINGS]: undefined;
-  [SCREENS.QUESTS]: undefined;
-  [SCREENS.QUESTDETAILS]?: { questId: string };
+  [SCREENS.MAIN]: undefined;
+  [SCREENS.QUESTDETAILS]: { questId: string } | undefined;
 };
 
 export type AppNavigatorParamList = {
