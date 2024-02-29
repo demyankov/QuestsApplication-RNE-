@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { questPageMock } from "../../constants/questPageMock";
 
-const initialState: any = { id: "initial" };
+const initialState: any = questPageMock;
 
 const postsSlice = createSlice({
   name: "QuestDetails",

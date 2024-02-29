@@ -3,7 +3,6 @@ import { scaleSize } from "../../utils";
 
 export const styles = StyleSheet.create({
   button: {
-    flex: 1,
     alignItems: "center",
     justifyContent: "center",
     paddingVertical: scaleSize(20),

@@ -2,7 +2,7 @@ import { View, Text } from "react-native";
 import { createStyles } from "./styles";
 import { useTheme } from "@react-navigation/native";
 import { IQuestCard } from "../../types";
-import { CustomButton } from "../CustomButton/CustomButton";
+import { CustomLink } from "../CustomLink/CustomLink";
 import { SCREENS } from "../../constants";
 import { Image } from "expo-image";
 import { useTranslation } from "react-i18next";
@@ -23,7 +23,7 @@ export const QuestCard = ({ card }: { card: IQuestCard }) => {
       </View>
       <Text style={styles.title}>{title}</Text>
       <Text style={styles.text}>{shortDescription}</Text>
-      <CustomButton
+      <CustomLink
         title={t("buttons.details")}
         to={SCREENS.QUESTDETAILS}
         options={{ questId: id }}
