@@ -10,7 +10,13 @@ export const styles = StyleSheet.create({
     paddingHorizontal: scaleSize(45),
     borderRadius: scaleSize(8),
     elevation: 3,
-    backgroundColor: "#2b9ced",
+    borderWidth: 1,
+    borderColor: "yellow",
+  },
+  wrapper: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: scaleSize(30),
   },
   text: {
     fontSize: scaleSize(32),
@@ -18,5 +24,8 @@ export const styles = StyleSheet.create({
     textAlign: "center",
     letterSpacing: 0.3,
     color: "#ffffff",
+  },
+  disabled: {
+    borderColor: "grey",
   },
 });

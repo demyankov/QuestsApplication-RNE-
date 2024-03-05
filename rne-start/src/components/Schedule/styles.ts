@@ -1,10 +1,18 @@
 import { StyleSheet } from "react-native";
 import { scaleSize } from "../../utils";
 import { Theme } from "@react-navigation/native";
-import { SLOT_STATUS } from "../../constants";
 
 export const createStyles = (theme: Theme) =>
   StyleSheet.create({
+    header: {
+      fontSize: scaleSize(35),
+      color: theme.colors.text,
+    },
+    buttonsWrapper: {
+      marginTop: scaleSize(30),
+      flexDirection: "row",
+      gap: scaleSize(25),
+    },
     dateWrapper: {
       flexDirection: "row",
       alignItems: "center",

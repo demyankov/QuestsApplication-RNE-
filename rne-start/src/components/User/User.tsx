@@ -1,17 +1,10 @@
-import {
-  View,
-  Text,
-  Modal,
-  TouchableWithoutFeedback,
-  TouchableOpacity,
-  TouchableHighlight,
-} from 'react-native';
-import { useTheme } from '@react-navigation/native';
-import { createStyles } from './styles';
-import { getUserSelector, useAppSelector } from '../../store';
-import { getAge } from '../../utils';
-import { useState } from 'react';
-import { Avatar } from '../Avatar/Avatar';
+import { View, Text, Modal, TouchableOpacity } from "react-native";
+import { useTheme } from "@react-navigation/native";
+import { createStyles } from "./styles";
+import { getUserSelector, useAppSelector } from "../../store";
+import { getAge } from "../../utils";
+import { useState } from "react";
+import { Avatar } from "../Avatar/Avatar";
 
 export const User = () => {
   const theme = useTheme();

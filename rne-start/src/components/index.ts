@@ -12,6 +12,7 @@ import { QuestsList } from "./QuestsList/QuestsList";
 import { QuestsDetailsStatistics } from "./QuestDetailsStatistics/QuestDetailsStatistics";
 import { ToggleButton } from "./ToggleButton/ToggleButton";
 import { Schedule } from "./Schedule/Schedule";
+import { BookingCard } from "./BookingCard/BookingCard";
 
 export {
   Avatar,
@@ -27,4 +28,5 @@ export {
   QuestsDetailsStatistics,
   ToggleButton,
   Schedule,
+  BookingCard,
 };

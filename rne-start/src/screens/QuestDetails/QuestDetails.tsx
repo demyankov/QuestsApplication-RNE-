@@ -4,7 +4,6 @@ import { MainStackParamsList } from "../../types";
 import { useAppSelector, getQuestDetails } from "../../store";
 import { createStyles } from "./styles";
 import {
-  CustomButton,
   QuestsDetailsStatistics,
   Schedule,
   ToggleButton,
@@ -94,10 +93,6 @@ export const QuestDetails = () => {
           iconName="book-edit-outline"
         />
         <Schedule />
-        <View style={styles.buttonsWrapper}>
-          <CustomButton title="Ранее" handleClick={() => {}} />
-          <CustomButton title="Далее" handleClick={() => {}} />
-        </View>
         <DetailsTitle
           title="Как добраться"
           familyIcon="Entypo"

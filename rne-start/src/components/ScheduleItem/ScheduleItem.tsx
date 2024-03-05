@@ -4,14 +4,28 @@ import { ISchedule } from "../../store";
 import { createStyles } from "./styles";
 import { SLOT_STATUS } from "../../constants";
 
-export const ScheduleItem = ({ item }: { item: ISchedule }) => {
+interface ScheduleItemProps {
+  item: ISchedule;
+  handleClick: (id: number) => void;
+  disabled?: boolean;
+}
+
+export const ScheduleItem = ({
+  item,
+  handleClick,
+  disabled = false,
+}: ScheduleItemProps) => {
   const theme = useTheme();
   const styles = createStyles(theme);
 
-  const { time, is_free, extraPrices } = item;
+  const { time, is_free, extraPrices, our_time_id } = item;
 
   return (
-    <Pressable style={[styles.slot, !is_free && styles[SLOT_STATUS.CLOSED]]}>
+    <Pressable
+      style={[styles.slot, !is_free && styles[SLOT_STATUS.CLOSED]]}
+      onPress={() => handleClick(our_time_id)}
+      disabled={disabled}
+    >
       <Text style={[styles.time, !is_free && styles[SLOT_STATUS.CLOSED]]}>
         {time}
       </Text>
