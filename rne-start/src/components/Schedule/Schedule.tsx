@@ -1,5 +1,5 @@
 import { RouteProp, useRoute, useTheme } from "@react-navigation/native";
-import { Pressable, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import { MainStackParamsList } from "../../types";
 import {
   useAppSelector,
@@ -10,6 +10,7 @@ import {
   setPrevPage,
   changeSchedule,
   clearSchedule,
+  ISchedule,
 } from "../../store";
 import { createStyles } from "./styles";
 import { useTranslation } from "react-i18next";
@@ -22,7 +23,7 @@ import { BookingCard } from "../BookingCard/BookingCard";
 
 export const Schedule = () => {
   const [isBookingModalOpen, setIsBookingModalOpen] = useState<boolean>(false);
-  const [activeSlotId, setActiveSlotId] = useState<number | null>(null);
+  const [activeSlot, setActiveSlot] = useState<ISchedule | null>(null);
   const { visibleSchedule, currentPage, countOfPages } =
     useAppSelector(getSchedule);
 
@@ -44,13 +45,13 @@ export const Schedule = () => {
     dispatch(setNextPage());
   };
 
-  const openModal = (id: number) => {
-    setActiveSlotId(id);
+  const openModal = (slot: ISchedule) => {
+    setActiveSlot(slot);
     setIsBookingModalOpen(true);
   };
 
   const closeModal = () => {
-    setActiveSlotId(null);
+    setActiveSlot(null);
     setIsBookingModalOpen(false);
   };
 
@@ -112,9 +113,9 @@ export const Schedule = () => {
                 ))}
               </View>
             </View>
-            {activeSlotId && (
+            {activeSlot && (
               <BookingCard
-                id={activeSlotId}
+                slot={activeSlot}
                 visible={isBookingModalOpen}
                 handleClose={closeModal}
               />

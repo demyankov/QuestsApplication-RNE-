@@ -5,6 +5,7 @@ import { createStyles } from "./styles";
 import { getUserSelector, useAppSelector } from "../../store";
 import { useTheme } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
+import { statistics } from "./config";
 
 export const ProfileStatistics = () => {
   const theme = useTheme();
@@ -14,12 +15,15 @@ export const ProfileStatistics = () => {
 
   return (
     <View style={styles.statisticsWrapper}>
-      <StatisticsItem
-        text={t("followers")}
-        iconColor="#f2440f"
-        count={user.countOfFollowers}
-        to={SCREENS.FOLLOWERS}
-      />
+      {statistics.map(({ text, iconColor, countName, to }) => (
+        <StatisticsItem
+          text={t(text)}
+          iconColor={iconColor}
+          count={user[countName]}
+          to={SCREENS.FOLLOWERS}
+        />
+      ))}
+
       <StatisticsItem
         text={t("follows")}
         iconColor="#81f20f"

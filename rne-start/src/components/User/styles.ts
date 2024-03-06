@@ -32,7 +32,7 @@ export const createStyles = (theme: Theme) =>
       flex: 1,
       justifyContent: "center",
       alignItems: "center",
-      marginTop: 22,
+      marginTop: scaleSize(22),
       backgroundColor: "rgba(200,200,200,0.5)",
       ...StyleSheet.absoluteFillObject,
     },
@@ -42,7 +42,7 @@ export const createStyles = (theme: Theme) =>
       borderRadius: scaleSize(250),
     },
     modalView: {
-      margin: 20,
+      margin: scaleSize(20),
       alignItems: "center",
       shadowColor: "#000",
       shadowOffset: {
