@@ -1,7 +1,13 @@
 import { Svg, G, Circle } from "react-native-svg";
+import { scaleSize } from "../../utils";
 
 export const CircleIcon = ({ color = "#c33" }: { color: string }) => (
-  <Svg width="30px" height="30px" viewBox="0 0 72 72" id="emoji">
+  <Svg
+    width={scaleSize(30)}
+    height={scaleSize(30)}
+    viewBox="0 0 72 72"
+    id="emoji"
+  >
     <G id="color" />
     <G id="line">
       <Circle
