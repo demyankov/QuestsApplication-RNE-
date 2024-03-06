@@ -6,7 +6,7 @@ import { SLOT_STATUS } from "../../constants";
 
 interface ScheduleItemProps {
   item: ISchedule;
-  handleClick: (id: number) => void;
+  handleClick: (item: ISchedule) => void;
   disabled?: boolean;
 }
 
@@ -18,12 +18,12 @@ export const ScheduleItem = ({
   const theme = useTheme();
   const styles = createStyles(theme);
 
-  const { time, is_free, extraPrices, our_time_id } = item;
+  const { time, is_free, extraPrices } = item;
 
   return (
     <Pressable
       style={[styles.slot, !is_free && styles[SLOT_STATUS.CLOSED]]}
-      onPress={() => handleClick(our_time_id)}
+      onPress={() => handleClick(item)}
       disabled={disabled}
     >
       <Text style={[styles.time, !is_free && styles[SLOT_STATUS.CLOSED]]}>

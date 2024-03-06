@@ -1,8 +1,9 @@
-import { Controller } from 'react-hook-form';
-import { createStyles } from './styles';
-import { Text, TextInput, View } from 'react-native';
-import { useTheme } from '@react-navigation/native';
-import { MaskedTextInput } from 'react-native-mask-text';
+import { Controller } from "react-hook-form";
+import { createStyles } from "./styles";
+import { Text, TextInput, View } from "react-native";
+import { useTheme } from "@react-navigation/native";
+import { MaskedTextInput } from "react-native-mask-text";
+import { AntDesign } from "@expo/vector-icons";
 
 interface CustomInputProps {
   label?: string;
@@ -13,11 +14,11 @@ interface CustomInputProps {
 }
 
 export const CustomInput = ({
-  label = '',
+  label = "",
   name,
   error,
   control,
-  placeholder = '',
+  placeholder = "",
   ...otherProps
 }: CustomInputProps) => {
   const theme = useTheme();
@@ -30,8 +31,7 @@ export const CustomInput = ({
         control={control}
         name={name}
         render={({ field: { onChange, onBlur, value } }) => (
-          <MaskedTextInput
-            mask="029 999-99-99"
+          <TextInput
             style={styles.input}
             placeholder={placeholder}
             onBlur={onBlur}
@@ -41,7 +41,12 @@ export const CustomInput = ({
           />
         )}
       />
-      {error && <Text style={styles.warningText}>{error}</Text>}
+      {error && (
+        <View style={styles.warningWrapper}>
+          <AntDesign name="warning" size={12} color="#FFAA00" />
+          <Text style={styles.warningText}>{error}</Text>
+        </View>
+      )}
     </View>
   );
 };

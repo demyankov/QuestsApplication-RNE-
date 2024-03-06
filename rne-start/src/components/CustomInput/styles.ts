@@ -1,11 +1,11 @@
-import { StyleSheet } from 'react-native';
-import { scaleSize } from '../../utils';
-import { Theme } from '@react-navigation/native';
+import { StyleSheet } from "react-native";
+import { scaleSize } from "../../utils";
+import { Theme } from "@react-navigation/native";
 
 export const createStyles = (theme: Theme) =>
   StyleSheet.create({
     inputWrapper: {
-      position: 'relative',
+      position: "relative",
 
       //     &:hover {
       //       border: 1px solid var(--background-color-button-secondary);
@@ -23,7 +23,7 @@ export const createStyles = (theme: Theme) =>
     },
 
     input: {
-      minWidth: '100%',
+      minWidth: "100%",
       margin: 0,
       paddingVertical: scaleSize(16),
       paddingHorizontal: scaleSize(20),
@@ -31,7 +31,8 @@ export const createStyles = (theme: Theme) =>
       borderRadius: scaleSize(10),
       borderColor: theme.colors.inputBorder,
       borderWidth: 1,
-      color: theme.colors.text,    },
+      color: theme.colors.text,
+    },
 
     label: {
       color: theme.colors.text,
@@ -39,22 +40,24 @@ export const createStyles = (theme: Theme) =>
     },
 
     warningInput: {
-      backgroundColor: '#f8f1e4',
+      backgroundColor: "#f8f1e4",
       borderWidth: 1,
-      borderColor: '#FFAA00',
+      borderColor: "#FFAA00",
+    },
+    warningWrapper: {
+      flexDirection: "row",
+      gap: scaleSize(10),
+      position: "absolute",
+      bottom: 0,
+      left: 0,
+      transform: [{ translateY: scaleSize(36) }],
+      zIndex: 10,
+      alignItems: "center",
     },
 
     warningText: {
-      position: 'absolute',
-      bottom: 0,
-      left: 0,
-      transform: [{ translateY: scaleSize(30) }],
-      zIndex: 10,
-      display: 'flex',
-      gap: scaleSize(10),
-      alignItems: 'center',
       fontSize: scaleSize(25),
-      color: '#FFAA00',
+      color: "#FFAA00",
       // whiteSpace: 'nowrap',
     },
   });

@@ -3,5 +3,6 @@ export interface SettingProfileType {
   secondName: string;
   age: string;
   phone?: string;
+  email?: string;
   location: string;
 }
