@@ -4,6 +4,7 @@ import { MainStackParamsList } from "../../types";
 import { useAppSelector, getQuestDetails } from "../../store";
 import { createStyles } from "./styles";
 import {
+  CustomSelect,
   QuestsDetailsStatistics,
   Schedule,
   ToggleButton,

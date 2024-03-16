@@ -10,6 +10,7 @@ interface CustomInputProps {
   name: string;
   error: string | undefined;
   control: any;
+  numberOfLines?: number;
   placeholder?: string;
 }
 
@@ -19,10 +20,13 @@ export const CustomInput = ({
   error,
   control,
   placeholder = "",
+  numberOfLines = 1,
   ...otherProps
 }: CustomInputProps) => {
   const theme = useTheme();
   const styles = createStyles(theme);
+
+  const inputStyles = [styles.input, numberOfLines > 1 && styles.teatArea];
 
   return (
     <View style={styles.inputWrapper}>
@@ -32,11 +36,13 @@ export const CustomInput = ({
         name={name}
         render={({ field: { onChange, onBlur, value } }) => (
           <TextInput
-            style={styles.input}
+            style={inputStyles}
             placeholder={placeholder}
             onBlur={onBlur}
             onChangeText={onChange}
             value={value}
+            multiline={numberOfLines > 1}
+            numberOfLines={numberOfLines}
             {...otherProps}
           />
         )}

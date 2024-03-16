@@ -4,6 +4,7 @@ import { ProfileStatistics } from "./ProfileStatistics/ProfileStatistics";
 import { User } from "./User/User";
 import { CustomLink } from "./CustomLink/CustomLink";
 import { CustomButton } from "./CustomButton/CustomButton";
+import { CustomButtonSecondary } from "./CustomButtonSecondary/CustomButtonSecondary";
 import { Post } from "./Post/Post";
 import { LastPostsList } from "./LastPostsList/LastPostsList";
 import { CustomInput } from "./CustomInput/CustomInput";
@@ -13,6 +14,7 @@ import { QuestsDetailsStatistics } from "./QuestDetailsStatistics/QuestDetailsSt
 import { ToggleButton } from "./ToggleButton/ToggleButton";
 import { Schedule } from "./Schedule/Schedule";
 import { BookingCard } from "./BookingCard/BookingCard";
+import { CustomSelect } from "./CustomSelect/CustomSelect";
 
 export {
   Avatar,
@@ -29,4 +31,7 @@ export {
   ToggleButton,
   Schedule,
   BookingCard,
+  CustomLink,
+  CustomSelect,
+  CustomButtonSecondary,
 };

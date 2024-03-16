@@ -1,28 +1,18 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 import { scaleSize } from "../../utils";
 import { Theme } from "@react-navigation/native";
 
 export const createStyles = (theme: Theme) =>
   StyleSheet.create({
-    inputWrapper: {
+    selectWrapper: {
       position: "relative",
-
-      //     &:hover {
-      //       border: 1px solid var(--background-color-button-secondary);
-      //     }
-
-      //     &:active,
-      //     &:focus-within {
-      //       border: 1px solid var(--background-color-button-secondary);
-      //     }
-
-      //     &:disabled input {
-      //       color: var(--font-color-disabled);
-      //     }
-      //   }
     },
-
-    input: {
+    selectTitle: {
+      color: theme.colors.text,
+      fontSize: scaleSize(28),
+      marginBottom: scaleSize(5),
+    },
+    select: {
       minWidth: "100%",
       margin: 0,
       paddingVertical: scaleSize(10),
@@ -31,22 +21,30 @@ export const createStyles = (theme: Theme) =>
       borderRadius: scaleSize(10),
       borderColor: theme.colors.inputBorder,
       borderWidth: 1,
+      alignItems: "center",
+    },
+    selectText: {
       color: theme.colors.text,
       fontSize: scaleSize(28),
+      textAlign: "left",
+      padding: 0,
     },
-    teatArea: {
-      textAlignVertical: "top",
-    },
-    label: {
-      color: theme.colors.text,
-      marginBottom: scaleSize(5),
-      fontSize: scaleSize(30),
-    },
-
-    warningInput: {
-      backgroundColor: "#f8f1e4",
+    selectDropdown: {
+      backgroundColor: theme.colors.inputBackground,
+      borderRadius: scaleSize(10),
+      borderColor: "rgba(255,255,255,0.3)",
       borderWidth: 1,
-      borderColor: "#FFAA00",
+    },
+    selectRow: {
+      justifyContent: "flex-end",
+      paddingVertical: scaleSize(10),
+      borderColor: "rgba(255,255,255,0.3)",
+    },
+    selectRowText: {
+      textAlign: "left",
+      fontSize: scaleSize(28),
+      paddingVertical: scaleSize(10),
+      color: theme.colors.text,
     },
 
     warningWrapper: {
@@ -63,6 +61,5 @@ export const createStyles = (theme: Theme) =>
     warningText: {
       fontSize: scaleSize(25),
       color: "#FFAA00",
-      // whiteSpace: 'nowrap',
     },
   });

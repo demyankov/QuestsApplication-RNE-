@@ -3,15 +3,13 @@ import { scaleSize } from "../../utils";
 
 export const styles = StyleSheet.create({
   button: {
-    // flex: 1,
     alignItems: "center",
     justifyContent: "center",
     paddingVertical: scaleSize(20),
     paddingHorizontal: scaleSize(45),
     borderRadius: scaleSize(8),
     elevation: 3,
-    borderWidth: 1,
-    borderColor: "yellow",
+    backgroundColor: "#2b9ced",
   },
   wrapper: {
     flexDirection: "row",
@@ -19,6 +17,8 @@ export const styles = StyleSheet.create({
     gap: scaleSize(30),
   },
   text: {
+    position: "relative",
+    zIndex: 1000000,
     fontSize: scaleSize(32),
     lineHeight: scaleSize(36),
     textAlign: "center",
@@ -27,5 +27,6 @@ export const styles = StyleSheet.create({
   },
   disabled: {
     borderColor: "grey",
+    backgroundColor: "grey",
   },
 });

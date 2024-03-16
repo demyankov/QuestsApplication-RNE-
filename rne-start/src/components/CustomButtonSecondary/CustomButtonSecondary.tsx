@@ -4,7 +4,9 @@ import { IconComponentMap, IconNameMap } from "../../types";
 import { AntDesign } from "@expo/vector-icons";
 import { useTheme } from "@react-navigation/native";
 
-export type CustomButtonProps<F extends keyof typeof IconComponentMap> = {
+export type CustomButtonSecondaryProps<
+  F extends keyof typeof IconComponentMap
+> = {
   title: string;
   handleClick: () => void;
   familyIcon?: F;
@@ -15,7 +17,7 @@ export type CustomButtonProps<F extends keyof typeof IconComponentMap> = {
   disabled?: boolean;
 };
 
-export const CustomButton = <F extends keyof typeof IconComponentMap>({
+export const CustomButtonSecondary = <F extends keyof typeof IconComponentMap>({
   title,
   handleClick,
   familyIcon,
@@ -24,7 +26,7 @@ export const CustomButton = <F extends keyof typeof IconComponentMap>({
   iconStart = false,
   iconEnd = false,
   disabled = false,
-}: CustomButtonProps<F>) => {
+}: CustomButtonSecondaryProps<F>) => {
   const theme = useTheme();
 
   const Icon: JSX.ElementType =
