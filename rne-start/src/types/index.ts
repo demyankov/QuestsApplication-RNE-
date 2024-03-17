@@ -9,6 +9,7 @@ import { SettingProfileType } from "./SettingProfileType";
 import { BookingFormType } from "./BookingFormType";
 
 import { type IQuestCard } from "./IQuestCard";
+import { type IBooking } from "./IBooking";
 
 import { IconComponentMap, type IconNameMap } from "./iconsTypes";
 
@@ -18,6 +19,7 @@ export {
   type IQuestCard,
   type IconNameMap,
   type BookingFormType,
+  type IBooking,
   MainStackParamsList,
   AppNavigatorParamList,
   SettingProfileType,

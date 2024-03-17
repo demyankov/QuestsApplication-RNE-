@@ -1,32 +1,32 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { bookingMock } from "../../constants/bookingMock";
 import { ISchedule } from "../types";
 import { formatScheduleData } from "../../services";
+import { getScheduleAction } from "../actions/getScheduleAction";
 
 const daysPerPage = 4;
-
-const initialState: IScheduleSlice = {
-  schedule: [],
-  visibleSchedule: [],
-  currentPage: 1,
-  countOfPages: 1,
-};
 
 interface IScheduleSlice {
   schedule: ISchedule[][];
   visibleSchedule: ISchedule[][];
   currentPage: number;
   countOfPages: number;
+  isLoaderVisible: boolean;
+  loadingMessage: string;
 }
+
+const initialState: IScheduleSlice = {
+  schedule: [],
+  visibleSchedule: [],
+  currentPage: 1,
+  countOfPages: 1,
+  isLoaderVisible: true,
+  loadingMessage: "",
+};
 
 const scheduleSlice = createSlice({
   name: "Schedule",
   initialState,
   reducers: {
-    setSchedule(state) {
-      state.schedule = formatScheduleData(bookingMock);
-      state.countOfPages = Math.ceil(state.schedule.length / daysPerPage);
-    },
     changeSchedule(state) {
       // ПРИВОДИМ ДАННЫЕ В ТРЕБУЕМЫЙ ВИД
       const start = (state.currentPage - 1) * daysPerPage;
@@ -53,15 +53,29 @@ const scheduleSlice = createSlice({
       state.countOfPages = 1;
     },
   },
+  extraReducers(builder) {
+    builder
+      .addCase(getScheduleAction.pending, (state, action) => {
+        state.isLoaderVisible = true;
+        state.loadingMessage = "";
+      })
+      .addCase(getScheduleAction.fulfilled, (state, { payload }) => {
+        state.isLoaderVisible = false;
+        if (payload.length === 0) {
+          state.loadingMessage = "Расписание отсутствует";
+        }
+        state.schedule = formatScheduleData(payload);
+        state.countOfPages = Math.ceil(state.schedule.length / daysPerPage);
+        state.visibleSchedule = state.schedule.slice(0, daysPerPage);
+      })
+      .addCase(getScheduleAction.rejected, (state, { error }) => {
+        state.isLoaderVisible = false;
+        state.loadingMessage = error.message || "Ошибка запроса";
+      });
+  },
 });
 
 export const {
   reducer: scheduleReducer,
-  actions: {
-    setSchedule,
-    changeSchedule,
-    setNextPage,
-    setPrevPage,
-    clearSchedule,
-  },
+  actions: { changeSchedule, setNextPage, setPrevPage, clearSchedule },
 } = scheduleSlice;

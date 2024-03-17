@@ -1,5 +1,6 @@
 // Временные моковые данные
 export const questPageMock = {
+  apiPath: "https://blackroom.by/api/er/quests/1/schedule.php/",
   name: "Запертые души",
   mainGenre: "Перформанс, мистика",
   location: "г. Минск, пер. Северный, 13",

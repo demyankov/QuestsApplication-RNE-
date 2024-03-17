@@ -1,7 +1,7 @@
 export enum BOOKING_FORM {
-  FIRST_NAME = "firstName",
+  FIRST_NAME = "name",
   EMAIL = "email",
   PHONE = "phone",
-  TARIFF = "tariff",
+  TARIFF = "players_num",
   COMMENT = "comment",
 }

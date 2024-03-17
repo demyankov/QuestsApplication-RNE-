@@ -43,7 +43,7 @@ export const BookingCard = ({
     players_num: "",
     option: "",
   });
-  const [idsabled, setIsDisabled] = useState(true);
+  const [isDsabled, setIsDisabled] = useState(true);
 
   const { t } = useTranslation();
   const { firstName, phone, email } = useAppSelector(getUserSelector);
@@ -116,7 +116,7 @@ export const BookingCard = ({
             <Controller
               name={BOOKING_FORM.TARIFF}
               control={control}
-              render={({ field: { onChange, value } }) => {
+              render={({ field: { onChange } }) => {
                 const selectPrice = (option: string) => {
                   onChange(option);
                   const selectedPrice = convertedPrices.find(
@@ -151,8 +151,19 @@ export const BookingCard = ({
               iconName="check"
               iconEnd
               handleClick={handleSubmit(() => {
-                console.log("Забронирована игра ", our_time_id);
+                const params = {
+                  ...getValues(),
+                  // дата и время игры в формате "Y-m-d H:i:s"
+                  datetime: `${date} ${time}`,
+                  price: selectedPrice.price,
+                  signature: "fhfnjffjnjnyjf",
+                  source: "BR Application",
+                  uid: "12345",
+                };
+
+                console.log("Забронирована игра ", params);
                 console.log(errors);
+
                 reset();
               })}
             />

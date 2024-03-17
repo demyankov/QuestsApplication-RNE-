@@ -1,11 +1,10 @@
 import { RouteProp, useRoute, useTheme } from "@react-navigation/native";
-import { Text, View } from "react-native";
+import { ActivityIndicator, Text, View } from "react-native";
 import { MainStackParamsList } from "../../types";
 import {
   useAppSelector,
   getSchedule,
   useAppDispatch,
-  setSchedule,
   setNextPage,
   setPrevPage,
   changeSchedule,
@@ -20,12 +19,18 @@ import { useEffect, useState } from "react";
 import { ScheduleItem } from "../ScheduleItem/ScheduleItem";
 import { CustomButton } from "../CustomButton/CustomButton";
 import { BookingCard } from "../BookingCard/BookingCard";
+import { getScheduleAction } from "../../store/actions/getScheduleAction";
 
-export const Schedule = () => {
+export const Schedule = ({ apiPath }: { apiPath: string }) => {
   const [isBookingModalOpen, setIsBookingModalOpen] = useState<boolean>(false);
   const [activeSlot, setActiveSlot] = useState<ISchedule | null>(null);
-  const { visibleSchedule, currentPage, countOfPages } =
-    useAppSelector(getSchedule);
+  const {
+    visibleSchedule,
+    currentPage,
+    countOfPages,
+    isLoaderVisible,
+    loadingMessage,
+  } = useAppSelector(getSchedule);
 
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
@@ -56,7 +61,8 @@ export const Schedule = () => {
   };
 
   useEffect(() => {
-    dispatch(setSchedule());
+    dispatch(getScheduleAction({ apiPath: apiPath }));
+
     return () => {
       dispatch(clearSchedule());
     };
@@ -90,7 +96,14 @@ export const Schedule = () => {
           disabled={nextBtnDisabled}
         />
       </View>
+      {isLoaderVisible && (
+        <View style={styles.loaderWrapper}>
+          <ActivityIndicator size="large" color="yellow" />
+        </View>
+      )}
+      {loadingMessage && <Text style={styles.message}>{loadingMessage}</Text>}
       {visibleSchedule?.length > 0 &&
+        !isLoaderVisible &&
         visibleSchedule.map((day, i) => (
           <View key={i}>
             <View>
