@@ -25,6 +25,10 @@ export const createStyles = (theme: Theme) =>
       fontSize: scaleSize(35),
       gap: scaleSize(25),
     },
+    message: {
+      fontSize: scaleSize(35),
+      color: theme.colors.text,
+    },
     day: {
       fontSize: scaleSize(35),
       color: theme.colors.text,
@@ -34,5 +38,9 @@ export const createStyles = (theme: Theme) =>
       flexWrap: "wrap",
       gap: scaleSize(25),
       marginBottom: scaleSize(20),
+    },
+    loaderWrapper: {
+      alignItems: "center",
+      gap: scaleSize(20),
     },
   });

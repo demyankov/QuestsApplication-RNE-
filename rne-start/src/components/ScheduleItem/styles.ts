@@ -20,7 +20,7 @@ export const createStyles = (theme: Theme) =>
     },
     description: {
       color: theme.colors.background,
-      fontSize: scaleSize(30),
+      fontSize: scaleSize(26),
       textAlign: "center",
     },
     [SLOT_STATUS.CLOSED]: {

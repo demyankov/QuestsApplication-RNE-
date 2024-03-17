@@ -4,7 +4,6 @@ import { MainStackParamsList } from "../../types";
 import { useAppSelector, getQuestDetails } from "../../store";
 import { createStyles } from "./styles";
 import {
-  CustomSelect,
   QuestsDetailsStatistics,
   Schedule,
   ToggleButton,
@@ -26,6 +25,7 @@ export const QuestDetails = () => {
     description,
     additionalDescription,
     modes,
+    apiPath,
   } = quest;
 
   const { params } = useRoute<RouteProp<MainStackParamsList>>();
@@ -93,12 +93,13 @@ export const QuestDetails = () => {
           familyIcon="MaterialCommunityIcons"
           iconName="book-edit-outline"
         />
-        <Schedule />
+        <Schedule apiPath={apiPath} />
         <DetailsTitle
           title="Как добраться"
           familyIcon="Entypo"
           iconName="address"
         />
+        <Text style={styles.text}>{location}</Text>
       </View>
     </ScrollView>
   );
