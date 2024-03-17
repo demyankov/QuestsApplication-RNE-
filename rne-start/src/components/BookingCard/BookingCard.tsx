@@ -120,7 +120,7 @@ export const BookingCard = ({
                 const selectPrice = (option: string) => {
                   onChange(option);
                   const selectedPrice = convertedPrices.find(
-                    (item) => item.option === getValues().tariff
+                    (item) => item.option === getValues()[BOOKING_FORM.TARIFF]
                   );
                   selectedPrice && setSelectedPrice(selectedPrice);
                 };
