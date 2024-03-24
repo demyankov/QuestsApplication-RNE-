@@ -1,23 +1,37 @@
 import { RouteProp, useRoute, useTheme } from "@react-navigation/native";
 import { ScrollView, Text, View } from "react-native";
 import { MainStackParamsList } from "../../types";
-import { useAppSelector, getQuestDetails } from "../../store";
+import {
+  useAppSelector,
+  getQuestDetails,
+  useAppDispatch,
+  setCurrentQuest,
+  clearCurrentQuest,
+  toggleFavorite,
+} from "../../store";
 import { createStyles } from "./styles";
 import {
   QuestsDetailsStatistics,
   Schedule,
   ToggleButton,
+  DetailsTitle,
+  Loader,
 } from "../../components";
-import { DetailsTitle } from "../../components/DetailsTitle/DetailsTitle";
+import {} from "../../components";
 import { Image } from "expo-image";
 import { useTranslation } from "react-i18next";
+import { useEffect } from "react";
+import { getFavoritesSelector } from "../../store";
 
 export const QuestDetails = () => {
+  const dispatch = useAppDispatch();
   const quest = useAppSelector(getQuestDetails);
+  const favorites = useAppSelector(getFavoritesSelector);
 
   const { t } = useTranslation();
 
   const {
+    id,
     name,
     mainGenre,
     location,
@@ -28,12 +42,24 @@ export const QuestDetails = () => {
     apiPath,
   } = quest;
 
+  const isFavorite = favorites.includes(id);
+
   const { params } = useRoute<RouteProp<MainStackParamsList>>();
   const theme = useTheme();
   const styles = createStyles(theme);
 
+  const handleToggleFavorite = () => dispatch(toggleFavorite(id));
+
+  useEffect(() => {
+    dispatch(setCurrentQuest(params.questId));
+    return () => {
+      dispatch(clearCurrentQuest());
+    };
+  }, [params.questId]);
+
   return (
     <ScrollView>
+      <Loader />
       <View style={styles.header}>
         <Image source={banner} style={styles.banner} />
         <Text style={styles.name}>{name}</Text>
@@ -56,10 +82,11 @@ export const QuestDetails = () => {
             clicked
           />
           <ToggleButton
+            clicked={isFavorite}
             title="Избранное"
             familyIcon="Fontisto"
             iconName="favorite"
-            handleClick={() => {}}
+            handleClick={handleToggleFavorite}
           />
         </View>
         <DetailsTitle
@@ -67,13 +94,13 @@ export const QuestDetails = () => {
           familyIcon="MaterialIcons"
           iconName="description"
         />
-        {description.map((item: string, i: number) => (
+        {description?.map((item: string, i: number) => (
           <Text style={styles.text} key={i}>
             {item}
           </Text>
         ))}
         <Text style={styles.title}>Дополнительные условия</Text>
-        {additionalDescription.map((item: string, i: number) => (
+        {additionalDescription?.map((item: string, i: number) => (
           <Text style={styles.text} key={i}>
             {item}
           </Text>
@@ -83,7 +110,7 @@ export const QuestDetails = () => {
           familyIcon="FontAwesome5"
           iconName="fist-raised"
         />
-        {modes.map((item: string, i: number) => (
+        {modes?.map((item: string, i: number) => (
           <Text style={styles.text} key={i}>
             {item}
           </Text>
@@ -93,7 +120,7 @@ export const QuestDetails = () => {
           familyIcon="MaterialCommunityIcons"
           iconName="book-edit-outline"
         />
-        <Schedule apiPath={apiPath} />
+        {apiPath && <Schedule apiPath={apiPath} />}
         <DetailsTitle
           title="Как добраться"
           familyIcon="Entypo"

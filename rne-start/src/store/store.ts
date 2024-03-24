@@ -6,6 +6,7 @@ import {
   userReducer,
   questDetailsReducer,
   scheduleReducer,
+  favoriteQuestsReducer,
 } from "./slices";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
@@ -24,15 +25,20 @@ const persistConfig = {
   storage: AsyncStorage,
 };
 
-const persistedReducer = persistReducer(persistConfig, userReducer);
+const persistedUserReducer = persistReducer(persistConfig, userReducer);
+const persistedFavoriteReducer = persistReducer(
+  persistConfig,
+  favoriteQuestsReducer
+);
 
 const reducers = combineReducers({
-  user: persistedReducer,
+  user: persistedUserReducer,
   followers: followersReducer,
   follows: followsReducer,
   posts: postsReducer,
   questDetails: questDetailsReducer,
   schedule: scheduleReducer,
+  favorites: persistedFavoriteReducer,
 });
 export const store = configureStore({
   reducer: reducers,

@@ -15,6 +15,9 @@ import { ToggleButton } from "./ToggleButton/ToggleButton";
 import { Schedule } from "./Schedule/Schedule";
 import { BookingCard } from "./BookingCard/BookingCard";
 import { CustomSelect } from "./CustomSelect/CustomSelect";
+import { Header } from "./Header/Header";
+import { Loader } from "./Loader/Loader";
+import { DetailsTitle } from "./DetailsTitle/DetailsTitle";
 
 export {
   Avatar,
@@ -34,4 +37,7 @@ export {
   CustomLink,
   CustomSelect,
   CustomButtonSecondary,
+  Header,
+  Loader,
+  DetailsTitle,
 };

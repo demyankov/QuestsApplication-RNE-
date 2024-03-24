@@ -22,7 +22,7 @@ import { BOOKING_FORM } from "../../constants";
 import { BookingFormType } from "../../types";
 import { bookingFormScheme } from "../../shared/validationSchemes";
 import { CustomSelect } from "../CustomSelect/CustomSelect";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { IConvertPrice } from "../../services/convertPrices";
 
 interface BookingCardProps {
@@ -43,7 +43,6 @@ export const BookingCard = ({
     players_num: "",
     option: "",
   });
-  const [isDsabled, setIsDisabled] = useState(true);
 
   const { t } = useTranslation();
   const { firstName, phone, email } = useAppSelector(getUserSelector);
