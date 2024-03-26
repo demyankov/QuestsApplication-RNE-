@@ -8,6 +8,8 @@ import {
   setCurrentQuest,
   clearCurrentQuest,
   toggleFavorite,
+  toggleVisited,
+  getVisitedSelector,
 } from "../../store";
 import { createStyles } from "./styles";
 import {
@@ -27,6 +29,7 @@ export const QuestDetails = () => {
   const dispatch = useAppDispatch();
   const quest = useAppSelector(getQuestDetails);
   const favorites = useAppSelector(getFavoritesSelector);
+  const visited = useAppSelector(getVisitedSelector);
 
   const { t } = useTranslation();
 
@@ -43,12 +46,14 @@ export const QuestDetails = () => {
   } = quest;
 
   const isFavorite = favorites.includes(id);
+  const isVisited = visited.includes(id);
 
   const { params } = useRoute<RouteProp<MainStackParamsList>>();
   const theme = useTheme();
   const styles = createStyles(theme);
 
   const handleToggleFavorite = () => dispatch(toggleFavorite(id));
+  const handleToggleVisited = () => dispatch(toggleVisited(id));
 
   useEffect(() => {
     dispatch(setCurrentQuest(params.questId));
@@ -79,7 +84,7 @@ export const QuestDetails = () => {
             familyIcon="Entypo"
             iconName="check"
             handleClick={() => {}}
-            clicked
+            clicked={isVisited}
           />
           <ToggleButton
             clicked={isFavorite}

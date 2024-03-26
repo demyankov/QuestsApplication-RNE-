@@ -1,5 +1,4 @@
 import { StyleSheet } from "react-native";
-import { scaleSize } from "../../utils";
 
 export const styles = StyleSheet.create({
   container: {

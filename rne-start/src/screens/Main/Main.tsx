@@ -1,4 +1,4 @@
-import { useNavigation, useTheme } from "@react-navigation/native";
+import { useTheme } from "@react-navigation/native";
 import { createStyles } from "./styles";
 import { Header, QuestsList } from "../../components";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -10,7 +10,6 @@ export const Main = () => {
   const theme = useTheme();
   const styles = createStyles(theme);
   const { t } = useTranslation();
-
   return (
     <SafeAreaView style={styles.wrapper}>
       <Header />
