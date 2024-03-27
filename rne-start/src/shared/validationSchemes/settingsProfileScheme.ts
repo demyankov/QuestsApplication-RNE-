@@ -1,11 +1,11 @@
-import * as Yup from 'yup';
+import * as Yup from "yup";
 import {
   ageValidation,
   countryValidation,
   nameValidation,
-} from '../validationRules';
+} from "../validationRules";
 
-import { PROFILE_SETTINGS } from '../../constants';
+import { PROFILE_SETTINGS } from "../../constants";
 
 export const settingsProfileScheme = Yup.object().shape({
   [PROFILE_SETTINGS.FIRST_NAME]: nameValidation,

@@ -5,7 +5,7 @@ import { useTheme } from "@react-navigation/native";
 import { createStyles } from "./styles";
 import { useTranslation } from "react-i18next";
 
-export const LastPostsList = () => {
+export const FavoritesQuestsList = () => {
   const posts = useAppSelector(postsSelector);
   const theme = useTheme();
   const styles = createStyles(theme);
@@ -13,7 +13,7 @@ export const LastPostsList = () => {
 
   return (
     <>
-      <Text style={styles.title}>{t("lastPosts")}</Text>
+      <Text style={styles.title}>{t("favoritesQuests")}</Text>
       <FlatList
         contentContainerStyle={styles.postsWrapper}
         data={posts}

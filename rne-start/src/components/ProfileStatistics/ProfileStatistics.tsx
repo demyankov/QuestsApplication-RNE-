@@ -1,6 +1,5 @@
 import { View } from "react-native";
 import { StatisticsItem } from "../StatisticsItem/StatisticsItem";
-import { SCREENS } from "../../constants/screens";
 import { createStyles } from "./styles";
 import { getUserSelector, useAppSelector } from "../../store";
 import { useTheme } from "@react-navigation/native";
@@ -15,27 +14,19 @@ export const ProfileStatistics = () => {
 
   return (
     <View style={styles.statisticsWrapper}>
-      {statistics.map(({ text, iconColor, countName, to }) => (
-        <StatisticsItem
-          text={t(text)}
-          iconColor={iconColor}
-          count={user[countName]}
-          to={SCREENS.FOLLOWERS}
-        />
-      ))}
+      {statistics.map(({ text, iconColor, selector, to }) => {
+        const count = useAppSelector(selector);
 
-      <StatisticsItem
-        text={t("follows")}
-        iconColor="#81f20f"
-        count={user.countOfFollows}
-        to={SCREENS.FOLLOW}
-      />
-      <StatisticsItem
-        text={t("posts")}
-        iconColor="#ee0ff2"
-        count={user.countOfPosts}
-        to={SCREENS.POSTS}
-      />
+        return (
+          <StatisticsItem
+            key={to}
+            text={t(text)}
+            iconColor={iconColor}
+            count={count}
+            to={to}
+          />
+        );
+      })}
     </View>
   );
 };

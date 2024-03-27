@@ -1,4 +1,4 @@
-import { GENRES } from '../constants';
+import { GENRES } from "../constants";
 
 export interface IQuestCard {
   id: string;
@@ -14,4 +14,5 @@ export interface IQuestCard {
   duration: string;
   interactive: boolean;
   location: string;
+  isActive: boolean;
 }

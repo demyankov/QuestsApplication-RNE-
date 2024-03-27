@@ -2,7 +2,7 @@ import { IQuestCard } from "../types";
 import { GENRES } from "./genres";
 import { LANGUAGES } from "./languages";
 
-type QuestCardListType = Record<LANGUAGES, IQuestCard[]>;
+export type QuestCardListType = Record<LANGUAGES, IQuestCard[]>;
 
 export const questCardList: QuestCardListType = {
   [LANGUAGES.RU]: [
@@ -26,6 +26,7 @@ export const questCardList: QuestCardListType = {
       duration: "60 минут",
       interactive: false,
       location: "Минск, пер. Северный, 13",
+      isActive: true,
     },
     {
       id: "002",
@@ -47,6 +48,7 @@ export const questCardList: QuestCardListType = {
       duration: "60 минут",
       interactive: false,
       location: "Минск, пер. Северный, 13",
+      isActive: true,
     },
     {
       id: "003",
@@ -69,6 +71,7 @@ export const questCardList: QuestCardListType = {
       duration: "60 минут",
       interactive: true,
       location: "Минск, ул. 3-е Сентября, 21",
+      isActive: true,
     },
     {
       id: "004",
@@ -90,6 +93,7 @@ export const questCardList: QuestCardListType = {
       duration: "60 минут",
       interactive: true,
       location: "Минск, ул. 3-е Сентября, 21",
+      isActive: true,
     },
     {
       id: "005",
@@ -112,6 +116,7 @@ export const questCardList: QuestCardListType = {
       duration: "70 минут",
       interactive: true,
       location: "Минск, ул. 3-е Сентября, 21",
+      isActive: true,
     },
     {
       id: "006",
@@ -133,6 +138,7 @@ export const questCardList: QuestCardListType = {
       duration: "60 минут",
       interactive: true,
       location: "Минск, ул. 3-е Сентября, 21",
+      isActive: true,
     },
   ],
   [LANGUAGES.EN]: [
@@ -156,6 +162,7 @@ export const questCardList: QuestCardListType = {
       duration: "60 minutes",
       interactive: false,
       location: "Minsk, per. Severny, 13",
+      isActive: true,
     },
     {
       id: "002",
@@ -177,6 +184,7 @@ export const questCardList: QuestCardListType = {
       duration: "60 minutes",
       interactive: false,
       location: "Minsk, per. Severny, 13",
+      isActive: true,
     },
     {
       id: "003",
@@ -199,6 +207,7 @@ export const questCardList: QuestCardListType = {
       duration: "60 minutes",
       interactive: true,
       location: "Minsk, st. September 3rd, 21",
+      isActive: true,
     },
     {
       id: "004",
@@ -220,6 +229,7 @@ export const questCardList: QuestCardListType = {
       duration: "60 minutes",
       interactive: true,
       location: "Minsk, st. September 3rd, 21",
+      isActive: true,
     },
     {
       id: "005",
@@ -242,6 +252,7 @@ export const questCardList: QuestCardListType = {
       duration: "70 minutes",
       interactive: true,
       location: "Minsk, st. September 3rd, 21",
+      isActive: true,
     },
     {
       id: "006",
@@ -263,6 +274,7 @@ export const questCardList: QuestCardListType = {
       duration: "60 minutes",
       interactive: true,
       location: "Minsk, st. September 3rd, 21",
+      isActive: true,
     },
   ],
 };

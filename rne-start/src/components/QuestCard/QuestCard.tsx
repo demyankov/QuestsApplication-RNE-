@@ -1,12 +1,15 @@
-import { View, Text } from "react-native";
-import { createStyles } from "./styles";
-import { useTheme } from "@react-navigation/native";
-import { IQuestCard } from "../../types";
-import { CustomLink } from "../CustomLink/CustomLink";
-import { SCREENS } from "../../constants";
 import { Image } from "expo-image";
 import { useTranslation } from "react-i18next";
+import { View, Text } from "react-native";
+import { useTheme } from "@react-navigation/native";
+
+import { createStyles } from "./styles";
+
+import { CustomLink } from "../CustomLink/CustomLink";
 import { QuestsCardStatistics } from "../QuestCardStatistics/QuestCardStatistics";
+
+import { IQuestCard } from "../../types";
+import { SCREENS } from "../../constants";
 
 export const QuestCard = ({ card }: { card: IQuestCard }) => {
   const { id, title, shortDescription, image } = card;

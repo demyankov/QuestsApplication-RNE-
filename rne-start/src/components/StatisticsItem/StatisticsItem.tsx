@@ -7,7 +7,7 @@ import { MainStackType } from "../../types";
 import { SCREENS } from "../../constants/screens";
 
 export interface StatisticsItemProps {
-  count?: string;
+  count?: string | number;
   iconColor: string;
   text: string;
   to: SCREENS;

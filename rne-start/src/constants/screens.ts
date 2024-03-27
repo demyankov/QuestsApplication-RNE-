@@ -10,4 +10,7 @@ export enum SCREENS {
   SETTINGS = "Settings",
   MAIN = "Main",
   QUESTDETAILS = "questDetails",
+  FAVORITES = "Favorites",
+  VISITED = "Visited",
+  FEEDBACKS = "Feedbacks",
 }

@@ -3,6 +3,7 @@ import { createStyles } from "./styles";
 import { useTheme } from "@react-navigation/native";
 import { AntDesign } from "@expo/vector-icons";
 import { IconComponentMap, IconNameMap } from "../../types";
+import { LinearGradient } from "expo-linear-gradient";
 
 export type ToggleButtonProps<F extends keyof typeof IconComponentMap> = {
   title: string;
@@ -27,17 +28,24 @@ export const ToggleButton = <F extends keyof typeof IconComponentMap>({
   const Icon: JSX.ElementType =
     (familyIcon && IconComponentMap[familyIcon]) || AntDesign;
 
+  const gradient = clicked
+    ? ["#7409d8", "#44077c", "#44077c", "#7409d8"]
+    : ["transparent", "transparent"];
+
   return (
-    <TouchableHighlight
-      style={[styles.button, clicked && styles.clicked]}
-      onPress={handleClick}
+    <LinearGradient
+      colors={gradient}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 1 }}
     >
-      <View style={styles.wrapper}>
-        <Icon name={iconName} size={size} color="yellow" />
-        <Text style={[styles.text, clicked && styles.clickedText]}>
-          {title}
-        </Text>
-      </View>
-    </TouchableHighlight>
+      <TouchableHighlight style={styles.button} onPress={handleClick}>
+        <View style={styles.wrapper}>
+          <Icon name={iconName} size={size} color="yellow" />
+          <Text style={[styles.text, clicked && styles.clickedText]}>
+            {title}
+          </Text>
+        </View>
+      </TouchableHighlight>
+    </LinearGradient>
   );
 };

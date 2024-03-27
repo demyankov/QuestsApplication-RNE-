@@ -6,7 +6,7 @@ import { CustomLink } from "./CustomLink/CustomLink";
 import { CustomButton } from "./CustomButton/CustomButton";
 import { CustomButtonSecondary } from "./CustomButtonSecondary/CustomButtonSecondary";
 import { Post } from "./Post/Post";
-import { LastPostsList } from "./LastPostsList/LastPostsList";
+import { FavoritesQuestsList } from "./FavoritesQuestsList/FavoritesQuestsList";
 import { CustomInput } from "./CustomInput/CustomInput";
 import { QuestCard } from "./QuestCard/QuestCard";
 import { QuestsList } from "./QuestsList/QuestsList";
@@ -26,7 +26,7 @@ export {
   User,
   CustomButton,
   Post,
-  LastPostsList,
+  FavoritesQuestsList,
   CustomInput,
   QuestCard,
   QuestsList,

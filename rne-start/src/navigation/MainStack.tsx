@@ -7,6 +7,9 @@ import {
   Settings,
   Main,
   QuestDetails,
+  Favorites,
+  Feedbacks,
+  Visited,
 } from "../screens";
 import { SCREENS } from "../constants/screens";
 import { MainStackParamsList } from "../types";
@@ -26,6 +29,9 @@ const stackList: IStackList[] = [
   { name: SCREENS.FOLLOWERS, component: Followers, title: "followers" },
   { name: SCREENS.FOLLOW, component: Follow, title: "follows" },
   { name: SCREENS.SETTINGS, component: Settings, title: "settings" },
+  { name: SCREENS.FAVORITES, component: Favorites, title: "favorites" },
+  { name: SCREENS.FEEDBACKS, component: Feedbacks, title: "feedbacks" },
+  { name: SCREENS.VISITED, component: Visited, title: "visited" },
   { name: SCREENS.MAIN, component: Main },
   {
     name: SCREENS.QUESTDETAILS,

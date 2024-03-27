@@ -8,6 +8,9 @@ export type MainStackParamsList = {
   [SCREENS.FOLLOW]: undefined;
   [SCREENS.SETTINGS]: undefined;
   [SCREENS.MAIN]: undefined;
+  [SCREENS.FAVORITES]: undefined;
+  [SCREENS.FEEDBACKS]: undefined;
+  [SCREENS.VISITED]: undefined;
   [SCREENS.QUESTDETAILS]: { questId: string } | undefined;
 };
 

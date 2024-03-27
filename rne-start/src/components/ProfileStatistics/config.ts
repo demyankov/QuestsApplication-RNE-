@@ -1,30 +1,36 @@
 import { SCREENS } from "../../constants";
-import { User } from "../../store";
+import {
+  RootState,
+  getFavoritesCountSelector,
+  getFavoritesSelector,
+  getVisitedCountSelector,
+  getVisitedSelector,
+} from "../../store";
 
 interface IStatistics {
   text: string;
   iconColor: string;
-  countName: "countOfFollowers" | "countOfFollows" | "countOfPosts";
+  selector: (state: RootState) => number;
   to: SCREENS;
 }
 
 export const statistics: IStatistics[] = [
   {
-    text: "followers",
+    text: "visited",
     iconColor: "#f2440f",
-    countName: "countOfFollowers",
-    to: SCREENS.FOLLOWERS,
+    selector: getVisitedCountSelector,
+    to: SCREENS.VISITED,
   },
   {
-    text: "follows",
+    text: "feedbacks",
     iconColor: "#81f20f",
-    countName: "countOfFollows",
-    to: SCREENS.FOLLOWERS,
+    selector: () => 0,
+    to: SCREENS.FEEDBACKS,
   },
   {
-    text: "posts",
+    text: "favorites",
     iconColor: "#ee0ff2",
-    countName: "countOfPosts",
-    to: SCREENS.FOLLOWERS,
+    selector: getFavoritesCountSelector,
+    to: SCREENS.FAVORITES,
   },
 ];

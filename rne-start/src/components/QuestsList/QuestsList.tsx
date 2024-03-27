@@ -1,23 +1,18 @@
-import * as Localization from "expo-localization";
 import Animated from "react-native-reanimated";
 import { useTheme } from "@react-navigation/native";
 
 import { createStyles } from "./styles";
-
-import { LANGUAGES } from "../../constants/languages";
-import { questCardList } from "../../constants/questCardsList";
 import { QuestCard } from "../QuestCard/QuestCard";
+import { IQuestCard } from "../../types";
 
-export const QuestsList = () => {
+export const QuestsList = ({ list }: { list: IQuestCard[] }) => {
   const theme = useTheme();
   const styles = createStyles(theme);
-
-  const language = Localization.locale.substring(0, 2);
 
   return (
     <Animated.FlatList
       contentContainerStyle={styles.wrapper}
-      data={questCardList[language as LANGUAGES]}
+      data={list}
       renderItem={({ item }) => <QuestCard card={item} />}
     />
   );

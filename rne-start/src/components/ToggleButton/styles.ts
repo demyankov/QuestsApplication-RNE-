@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
 import { scaleSize } from "../../utils";
 import { Theme } from "@react-navigation/native";
+import { Platform } from "react-native";
 
 export const createStyles = (theme: Theme) =>
   StyleSheet.create({
@@ -24,8 +25,9 @@ export const createStyles = (theme: Theme) =>
       color: theme.colors.text,
     },
     clicked: {
-      backgroundColor: "green",
-      borderColor: "green",
+      backgroundColor: "#8300FF",
+      // borderColor: "green",
+      // borderWidth: 0,
     },
     clickedText: {
       color: "white",
