@@ -13,9 +13,6 @@ const initialState: User = {
   avatar: faker.image.avatar(),
   phone: "",
   location: "Беларусь",
-  countOfFollowers: "45",
-  countOfFollows: "32",
-  countOfPosts: "18",
 };
 
 const userSlice = createSlice({
@@ -29,7 +26,6 @@ const userSlice = createSlice({
       state.email = payload.email || "";
       state.phone = payload.phone || "";
       state.location = payload.location;
-      console.log(payload);
     },
   },
 });

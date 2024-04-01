@@ -1,4 +1,4 @@
-import { Text, TouchableHighlight, View } from "react-native";
+import { Pressable, Text, View } from "react-native";
 import { createStyles } from "./styles";
 import { useTheme } from "@react-navigation/native";
 import { AntDesign } from "@expo/vector-icons";
@@ -29,7 +29,7 @@ export const ToggleButton = <F extends keyof typeof IconComponentMap>({
     (familyIcon && IconComponentMap[familyIcon]) || AntDesign;
 
   const gradient = clicked
-    ? ["#7409d8", "#44077c", "#44077c", "#7409d8"]
+    ? ["#666668", "#3e3e40", "#3e3e40", "#666668"]
     : ["transparent", "transparent"];
 
   return (
@@ -37,15 +37,20 @@ export const ToggleButton = <F extends keyof typeof IconComponentMap>({
       colors={gradient}
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
+      style={styles.button}
     >
-      <TouchableHighlight style={styles.button} onPress={handleClick}>
+      <Pressable onPress={handleClick} style={{ width: "100%" }}>
         <View style={styles.wrapper}>
-          <Icon name={iconName} size={size} color="yellow" />
+          <Icon
+            name={iconName}
+            size={size}
+            color={clicked ? "yellow" : "#cdcbd1"}
+          />
           <Text style={[styles.text, clicked && styles.clickedText]}>
             {title}
           </Text>
         </View>
-      </TouchableHighlight>
+      </Pressable>
     </LinearGradient>
   );
 };

@@ -8,6 +8,6 @@ export const createStyles = (theme: Theme) =>
       flexDirection: "row",
       justifyContent: "flex-end",
       marginRight: scaleSize(20),
-      marginVertical: scaleSize(20),
+      marginVertical: scaleSize(10),
     },
   });

@@ -1,12 +1,10 @@
 import { FlatList, Text, View } from "react-native";
-import { postsSelector, useAppSelector } from "../../store";
-import { Post } from "../Post/Post";
+import { useAppSelector } from "../../store";
 import { useTheme } from "@react-navigation/native";
 import { createStyles } from "./styles";
 import { useTranslation } from "react-i18next";
 
 export const FavoritesQuestsList = () => {
-  const posts = useAppSelector(postsSelector);
   const theme = useTheme();
   const styles = createStyles(theme);
   const { t } = useTranslation();
@@ -14,14 +12,14 @@ export const FavoritesQuestsList = () => {
   return (
     <>
       <Text style={styles.title}>{t("favoritesQuests")}</Text>
-      <FlatList
+      {/* <FlatList
         contentContainerStyle={styles.postsWrapper}
         data={posts}
         renderItem={({ item }) => <Post post={item} />}
         keyExtractor={(post) => post.id}
         horizontal
         nestedScrollEnabled
-      />
+      /> */}
     </>
   );
 };

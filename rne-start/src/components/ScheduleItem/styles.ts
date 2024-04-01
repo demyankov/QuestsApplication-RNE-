@@ -2,6 +2,7 @@ import { StyleSheet } from "react-native";
 import { scaleSize } from "../../utils";
 import { Theme } from "@react-navigation/native";
 import { SLOT_STATUS } from "../../constants";
+import { generateBoxShadowStyle } from "../../services";
 
 export const createStyles = (theme: Theme) =>
   StyleSheet.create({
@@ -11,6 +12,7 @@ export const createStyles = (theme: Theme) =>
       backgroundColor: "yellow",
       padding: scaleSize(10),
     },
+    shadow: generateBoxShadowStyle(-2, 4, "#fff", 0.3, 3, 10, "#fff"),
     time: {
       color: theme.colors.background,
       fontSize: scaleSize(40),

@@ -12,7 +12,7 @@ export const createStyles = (theme: Theme) =>
       justifyContent: "center",
       paddingVertical: scaleSize(20),
       paddingHorizontal: scaleSize(45),
-      borderColor: theme.colors.border,
+      borderColor: "#999",
       borderRadius: scaleSize(8),
       borderWidth: 1,
     },

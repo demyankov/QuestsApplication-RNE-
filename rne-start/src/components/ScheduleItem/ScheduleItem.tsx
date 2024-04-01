@@ -1,10 +1,5 @@
 import { useTheme } from "@react-navigation/native";
-import {
-  Pressable,
-  Text,
-  TouchableHighlight,
-  TouchableOpacity,
-} from "react-native";
+import { Pressable, Text } from "react-native";
 import { ISchedule } from "../../store";
 import { createStyles } from "./styles";
 import { SLOT_STATUS } from "../../constants";
@@ -33,9 +28,12 @@ export const ScheduleItem = ({
   return (
     <LinearGradient
       colors={gradient}
-      style={[styles.slot, !is_free && styles[SLOT_STATUS.CLOSED]]}
+      style={[
+        styles.slot,
+        !is_free ? styles[SLOT_STATUS.CLOSED] : styles.shadow,
+      ]}
     >
-      <TouchableHighlight onPress={() => handleClick(item)} disabled={disabled}>
+      <Pressable onPress={() => handleClick(item)} disabled={disabled}>
         <>
           <Text style={[styles.time, !is_free && styles[SLOT_STATUS.CLOSED]]}>
             {time}
@@ -48,7 +46,7 @@ export const ScheduleItem = ({
               : "закрыто"}
           </Text>
         </>
-      </TouchableHighlight>
+      </Pressable>
     </LinearGradient>
   );
 };

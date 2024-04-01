@@ -65,19 +65,18 @@ export const QuestDetails = () => {
   return (
     <ScrollView>
       <ImageBackground
-        source={{
-          // uri: "https://i.pinimg.com/originals/f7/96/d0/f796d024fc5f066a1c4707bedbb0c2ea.jpg",
+        source={{         
           uri: "https://i.pinimg.com/originals/ad/b7/fe/adb7fe55390b917de8d3670babd0d4ff.jpg",
         }}
         resizeMode="cover"
         style={{ flex: 1 }}
-        imageStyle={{ resizeMode: "repeat", opacity: 0.6 }}
+        imageStyle={{ resizeMode: "repeat", opacity: 0.4 }}
       >
         <View style={styles.header}>
           <Image source={banner} style={styles.banner} />
-          <Text style={styles.name}>{name}</Text>
-          <Text style={styles.genre}>{mainGenre}</Text>
-          <Text style={styles.address}>{location}</Text>
+          <Text style={[styles.name, styles.textShadow]}>{name}</Text>
+          <Text style={[styles.genre, styles.textShadow]}>{mainGenre}</Text>
+          <Text style={[styles.address, styles.textShadow]}>{location}</Text>
         </View>
         <View style={styles.container}>
           <DetailsTitle

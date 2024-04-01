@@ -1,8 +1,5 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import {
-  followersReducer,
-  followsReducer,
-  postsReducer,
   userReducer,
   questDetailsReducer,
   scheduleReducer,
@@ -47,9 +44,6 @@ const persistedVisitedReducer = persistReducer(
 
 const reducers = combineReducers({
   user: persistedUserReducer,
-  followers: followersReducer,
-  follows: followsReducer,
-  posts: postsReducer,
   questDetails: questDetailsReducer,
   schedule: scheduleReducer,
   favorites: persistedFavoriteReducer,

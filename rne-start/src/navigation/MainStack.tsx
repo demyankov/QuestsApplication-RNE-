@@ -1,9 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import {
   Profile,
-  Posts,
-  Followers,
-  Follow,
   Settings,
   Main,
   QuestDetails,
@@ -25,9 +22,7 @@ interface IStackList {
 
 const stackList: IStackList[] = [
   { name: SCREENS.PROFILE, component: Profile, title: "profile" },
-  { name: SCREENS.POSTS, component: Posts, title: "posts" },
-  { name: SCREENS.FOLLOWERS, component: Followers, title: "followers" },
-  { name: SCREENS.FOLLOW, component: Follow, title: "follows" },
+
   { name: SCREENS.SETTINGS, component: Settings, title: "settings" },
   { name: SCREENS.FAVORITES, component: Favorites, title: "favorites" },
   { name: SCREENS.FEEDBACKS, component: Feedbacks, title: "feedbacks" },

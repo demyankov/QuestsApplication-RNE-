@@ -19,10 +19,9 @@ export const Favorites = () => {
     <SafeAreaView style={styles.wrapper}>
       <ImageBackground
         source={{
-          uri: "https://bogatyr.club/uploads/posts/2024-03/1709693770_bogatyr-club-f44i-p-fon-dlya-prilozheniya-15.jpg",
+          uri: "https://avatars.mds.yandex.net/i?id=4f56b40839b746aa5ec7fccaaa462303_l-8230897-images-thumbs&ref=rim&n=13&w=1680&h=1050",
         }}
-        resizeMode="cover"
-        style={{ flex: 1 }}
+        imageStyle={{ resizeMode: "cover", opacity: 0.4 }}
       >
         <QuestsList list={list} />
       </ImageBackground>

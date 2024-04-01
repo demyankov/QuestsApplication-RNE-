@@ -1,12 +1,16 @@
 import { StyleSheet } from "react-native";
 import { scaleSize } from "../../utils";
 import { Theme } from "@react-navigation/native";
-import { SLOT_STATUS } from "../../constants";
 
 export const createStyles = (theme: Theme) =>
   StyleSheet.create({
     container: {
       paddingHorizontal: scaleSize(15),
+    },
+    textShadow: {
+      textShadowColor: "#000",
+      textShadowOffset: { width: 1, height: 1 },
+      textShadowRadius: 3,
     },
     text: {
       color: theme.colors.text,

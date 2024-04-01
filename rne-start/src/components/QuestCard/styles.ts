@@ -1,15 +1,17 @@
 import { StyleSheet } from "react-native";
 import { type Theme } from "@react-navigation/native";
 import { scaleSize } from "../../utils";
+import { generateBoxShadowStyle } from "../../services";
 
 export const createStyles = (theme: Theme) =>
   StyleSheet.create({
     wrapper: {
       flex: 1,
       backgroundColor: theme.colors.card,
-      borderRadius: scaleSize(8),
+      borderRadius: scaleSize(12),
       padding: scaleSize(25),
     },
+    shadow: generateBoxShadowStyle(-2, 4, "#4a4a4a", 0.3, 3, 15, "#4a4a4a"),
     title: {
       color: theme.colors.text,
       fontSize: scaleSize(40),
@@ -41,7 +43,6 @@ export const createStyles = (theme: Theme) =>
     statisticsGroup: {
       gap: scaleSize(15),
     },
-
     statisticsItem: {
       flex: 1,
       flexDirection: "row",

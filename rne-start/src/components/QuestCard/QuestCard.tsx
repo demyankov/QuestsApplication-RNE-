@@ -10,6 +10,7 @@ import { QuestsCardStatistics } from "../QuestCardStatistics/QuestCardStatistics
 
 import { IQuestCard } from "../../types";
 import { SCREENS } from "../../constants";
+import { LinearGradient } from "expo-linear-gradient";
 
 export const QuestCard = ({ card }: { card: IQuestCard }) => {
   const { id, title, shortDescription, image } = card;
@@ -18,8 +19,15 @@ export const QuestCard = ({ card }: { card: IQuestCard }) => {
   const styles = createStyles(theme);
   const { t } = useTranslation();
 
+  const gradient = ["#6d6c70", "#39383b", "#39383b", "#5b5a5c"];
+
   return (
-    <View style={styles.wrapper}>
+    <LinearGradient
+      colors={gradient}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 1 }}
+      style={[styles.wrapper, styles.shadow]}
+    >
       <View style={styles.imageWrapper}>
         <Image source={image} style={styles.image} />
         <QuestsCardStatistics card={card} />
@@ -31,6 +39,6 @@ export const QuestCard = ({ card }: { card: IQuestCard }) => {
         to={SCREENS.QUESTDETAILS}
         options={{ questId: id }}
       />
-    </View>
+    </LinearGradient>
   );
 };

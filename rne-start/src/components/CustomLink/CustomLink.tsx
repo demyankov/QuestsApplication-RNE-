@@ -3,6 +3,7 @@ import { styles } from "./styles";
 import { SCREENS } from "../../constants/screens";
 import { useNavigation } from "@react-navigation/native";
 import { MainStackType } from "../../types";
+import { LinearGradient } from "expo-linear-gradient";
 
 interface CustomButtonProps {
   title: string;
@@ -19,9 +20,18 @@ export const CustomLink = ({
   const navigateTo = () =>
     to === SCREENS.QUESTDETAILS ? navigate(to, options) : navigate(to);
 
+  const gradient = ["#414042", "#1e1e1f", "#1e1e1f", "#414042"];
+
   return (
-    <Pressable style={styles.button} onPress={navigateTo}>
-      <Text style={styles.text}>{title}</Text>
+    <Pressable onPress={navigateTo}>
+      <LinearGradient
+        colors={gradient}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={styles.button}
+      >
+        <Text style={styles.text}>{title}</Text>
+      </LinearGradient>
     </Pressable>
   );
 };

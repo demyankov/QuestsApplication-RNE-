@@ -4,9 +4,6 @@ export enum STACKS {
 
 export enum SCREENS {
   PROFILE = "Profile",
-  POSTS = "Posts",
-  FOLLOWERS = "Followers",
-  FOLLOW = "Follow",
   SETTINGS = "Settings",
   MAIN = "Main",
   QUESTDETAILS = "questDetails",
