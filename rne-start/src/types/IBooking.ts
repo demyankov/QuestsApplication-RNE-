@@ -1,4 +1,4 @@
-export interface iBooking {
+export interface IBooking {
   comment?: string;
   // дата и время игры в формате "Y-m-d H:i:s"
   datetime: string;

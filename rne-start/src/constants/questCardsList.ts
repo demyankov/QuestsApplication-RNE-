@@ -51,7 +51,7 @@ export const questCardList: QuestCardListType = {
       isActive: true,
     },
     {
-      id: "003",
+      id: "004",
       title: "Носферату: Завещание",
       image: "https://blackroom.by/images/quest4/promo-nosfertu.webp",
       shortDescription:
@@ -74,7 +74,7 @@ export const questCardList: QuestCardListType = {
       isActive: true,
     },
     {
-      id: "004",
+      id: "005",
       title: "Убийца из Уайтчепела",
       image: "https://blackroom.by/images/quest5/uiu1.jpg",
       shortDescription:
@@ -96,7 +96,7 @@ export const questCardList: QuestCardListType = {
       isActive: true,
     },
     {
-      id: "005",
+      id: "003",
       title: "Байки из склепа",
       image: "https://blackroom.by/Image/bayki-iz-sklepa-promo.jpg",
       shortDescription:

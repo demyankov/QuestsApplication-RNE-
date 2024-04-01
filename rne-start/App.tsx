@@ -10,7 +10,7 @@ import { THEMES, theme } from "./src/constants/theme";
 import { PersistGate } from "redux-persist/integration/react";
 
 export default function App() {
-  const systemColorTheme = useColorScheme() || THEMES.LIGHT;
+  const systemColorTheme = useColorScheme() || THEMES.DARK;
 
   return (
     <I18nextProvider i18n={i18n}>

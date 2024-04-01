@@ -1,24 +1,68 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { questPageMock } from "../../constants/questPageMock";
+import { getQuestDetailsAction } from "../actions";
+import { IQuestDetails } from "../../types";
+import { boolean } from "yup";
 
-const initialState: any = {
-  currentQuest: {},
-  isLoading: true,
+interface IQuestDetailsSlice {
+  currentQuest: IQuestDetails;
+  isLoading: boolean;
+  loadingMessage: string;
+}
+
+const initialQuest = {
+  id: "",
+  apiPath: "",
+  name: "",
+  mainGenre: "",
+  location: "",
+  banner: "",
+  levelOfFear: "",
+  difficultyLevel: "",
+  contactLevel: "",
+  teamSize: "",
+  ageFrom: "",
+  duration: "",
+  interactive: false,
+  description: [],
+  additionalDescription: [],
+  modes: [],
 };
+
+const initialState: IQuestDetailsSlice = {
+  currentQuest: initialQuest,
+  isLoading: true,
+  loadingMessage: "",
+};
+
 const questDetailsSlice = createSlice({
   name: "QuestDetails",
   initialState,
   reducers: {
-    setCurrentQuest(state, { payload }: { payload: string }) {
-      state.currentQuest = questPageMock.find(({ id }) => id === payload);
-    },
     clearCurrentQuest(state) {
-      state.currentQuest = {};
+      state.currentQuest = initialQuest;
     },
+  },
+  extraReducers(builder) {
+    builder
+      .addCase(getQuestDetailsAction.pending, (state, action) => {
+        state.loadingMessage = "";
+        state.isLoading = true;
+      })
+      .addCase(getQuestDetailsAction.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        if (payload) {
+          state.loadingMessage = "Информация о выбранном квесте отсутствует";
+        }
+        state.currentQuest = payload;
+      })
+      .addCase(getQuestDetailsAction.rejected, (state, { error }) => {
+        state.isLoading = false;
+        state.loadingMessage = error.message || "Ошибка запроса";
+      });
   },
 });
 
 export const {
   reducer: questDetailsReducer,
-  actions: { setCurrentQuest, clearCurrentQuest },
+  actions: { clearCurrentQuest },
 } = questDetailsSlice;

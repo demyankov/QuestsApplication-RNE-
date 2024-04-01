@@ -1,4 +1,4 @@
-import { Button, Pressable, ScrollView, Text, View } from "react-native";
+import { View, Text, KeyboardAvoidingView, Platform } from "react-native";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -15,9 +15,10 @@ import {
 } from "../../store";
 import { SettingProfileType } from "../../types";
 import { settingsProfileScheme } from "../../shared/validationSchemes";
-import { CustomInput, User } from "../../components";
+import { CustomButton, CustomInput, User } from "../../components";
 import { PROFILE_SETTINGS } from "../../constants";
 import { ImageBackground } from "expo-image";
+import { scaleSize } from "../../utils";
 
 export const Settings = () => {
   const dispatch = useAppDispatch();
@@ -40,25 +41,32 @@ export const Settings = () => {
     control,
     handleSubmit,
     getValues,
-    formState: { errors },
+    formState: { errors, isDirty, isValid },
   } = useForm<SettingProfileType>({
     defaultValues,
     resolver: yupResolver(settingsProfileScheme),
     mode: "onBlur",
   });
 
-  const handleUpdateProfile = () => console.log(getValues());
-  // dispatch(updateProfileSettings(getValues()));
+  const disabled = !isDirty || !isValid;
+
+  const handleUpdateProfile = () =>
+    dispatch(updateProfileSettings(getValues()));
 
   return (
-    <ScrollView style={styles.wrapper}>
+    <View>
       <ImageBackground
         source={require("../../assets/bg.jpg")}
         imageStyle={{ resizeMode: "cover", opacity: 0.4 }}
+        style={styles.wrapper}
       >
         <User />
         <Text style={styles.title}>{t("personalData")}</Text>
-        <View style={styles.inputsWrapper}>
+        <KeyboardAvoidingView
+          style={styles.inputsWrapper}
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          keyboardVerticalOffset={scaleSize(10)}
+        >
           {inputs.map(({ name, label }) => {
             let errorMessage = errors[name]?.message;
             return (
@@ -71,15 +79,14 @@ export const Settings = () => {
               />
             );
           })}
-          <Button
+          <CustomButton
             title={t("buttons.save")}
-            onPress={handleSubmit(handleUpdateProfile)}
+            handleClick={handleSubmit(handleUpdateProfile)}
+            disabled={disabled}
           />
-        </View>
-        <Pressable onPress={handleUpdateProfile}>
-          <Text>123{errors.root?.message}</Text>
-        </Pressable>
+        </KeyboardAvoidingView>
+        <Text>{errors.root?.message}</Text>
       </ImageBackground>
-    </ScrollView>
+    </View>
   );
 };

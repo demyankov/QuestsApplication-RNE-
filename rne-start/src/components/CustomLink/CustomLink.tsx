@@ -16,7 +16,6 @@ export const CustomLink = ({
   title,
   to = SCREENS.MAIN,
   options,
-  width,
 }: CustomButtonProps) => {
   const { navigate } = useNavigation<MainStackType>();
   const navigateTo = () =>

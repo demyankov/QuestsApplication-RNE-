@@ -5,11 +5,12 @@ import {
   useAppSelector,
   getQuestDetails,
   useAppDispatch,
-  setCurrentQuest,
   clearCurrentQuest,
   toggleFavorite,
   toggleVisited,
   getVisitedSelector,
+  getQuestDetailsAction,
+  getIsLoadingQuestDetails,
 } from "../../store";
 import { createStyles } from "./styles";
 import {
@@ -21,7 +22,6 @@ import {
 } from "../../components";
 import {} from "../../components";
 import { Image } from "expo-image";
-import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
 import { getFavoritesSelector } from "../../store";
 
@@ -30,8 +30,7 @@ export const QuestDetails = () => {
   const quest = useAppSelector(getQuestDetails);
   const favorites = useAppSelector(getFavoritesSelector);
   const visited = useAppSelector(getVisitedSelector);
-
-  const { t } = useTranslation();
+  const isLoading = useAppSelector(getIsLoadingQuestDetails);
 
   const {
     id,
@@ -56,13 +55,21 @@ export const QuestDetails = () => {
   const handleToggleVisited = () => dispatch(toggleVisited(id));
 
   useEffect(() => {
-    dispatch(setCurrentQuest(params.questId));
+    dispatch(
+      getQuestDetailsAction({
+        collectionName: "questsDetails",
+        id: params.questId,
+      })
+    );
+
     return () => {
       dispatch(clearCurrentQuest());
     };
-  }, [params.questId]);
+  }, []);
 
-  return (
+  return isLoading ? (
+    <Loader />
+  ) : (
     <ScrollView>
       <ImageBackground
         source={{
