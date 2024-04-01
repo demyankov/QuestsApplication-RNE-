@@ -3,7 +3,7 @@ import {
   userReducer,
   questDetailsReducer,
   scheduleReducer,
-  favoriteQuestsReducer,
+  favoritesReducer,
   visitedQuestsReducer,
   questsReducer,
 } from "./slices";
@@ -33,10 +33,10 @@ const persistVisitedConfig = {
   key: "visited",
   storage: AsyncStorage,
 };
-const persistedUserReducer = persistReducer(persistConfig, userReducer);
+// const persistedUserReducer = persistReducer(persistConfig, userReducer);
 const persistedFavoriteReducer = persistReducer(
   persistFavoriteConfig,
-  favoriteQuestsReducer
+  favoritesReducer
 );
 const persistedVisitedReducer = persistReducer(
   persistVisitedConfig,
@@ -44,7 +44,8 @@ const persistedVisitedReducer = persistReducer(
 );
 
 const reducers = combineReducers({
-  user: persistedUserReducer,
+  // user: persistedUserReducer,
+  user: userReducer,
   questDetails: questDetailsReducer,
   quests: questsReducer,
   schedule: scheduleReducer,
@@ -55,9 +56,8 @@ export const store = configureStore({
   reducer: reducers,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
+      immutableCheck: false,
+      serializableCheck: false,
     }),
 });
 

@@ -1,7 +1,16 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { getCollection } from "../../api";
+import { getDocByName } from "../../api";
 
-export const getFavoritesAction = createAsyncThunk<string[], string>(
-  "Favorites/getFavoritesAction",
-  async (collectionName) => getCollection(collectionName)
-);
+interface getFavoritesActionProps {
+  collectionName: string;
+  docName: string;
+}
+
+export const getFavoritesAction = createAsyncThunk<
+  string[],
+  getFavoritesActionProps
+>("Favorites/getFavoritesAction", async ({ collectionName, docName }) => {
+  const document = await getDocByName(collectionName, docName);
+
+  return document.id;
+});

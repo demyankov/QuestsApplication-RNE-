@@ -1,4 +1,5 @@
-const booking = async (params: iBooking) => {
+import { IBooking } from "../types";
+
+const booking = async (params: IBooking) => {
   //здесь будет запрос на бронирование квеста
-  console.log(params);
 };

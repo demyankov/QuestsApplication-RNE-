@@ -1,6 +1,13 @@
 import { ImageBackground, SafeAreaView } from "react-native";
 import { styles } from "./styles";
-import { getFavoritesSelector, getQuests, useAppSelector } from "../../store";
+import {
+  getFavoritesAction,
+  getFavoritesSelector,
+  getQuests,
+  getUserSelector,
+  useAppDispatch,
+  useAppSelector,
+} from "../../store";
 import { QuestsList } from "../../components";
 
 import { filteredByArray } from "../../services";

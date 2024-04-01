@@ -9,11 +9,24 @@ import {
 } from "../../components";
 import { SCREENS } from "../../constants/screens";
 import { useTranslation } from "react-i18next";
+import {
+  getFavoritesAction,
+  getUserSelector,
+  useAppDispatch,
+  useAppSelector,
+} from "../../store";
+import { useEffect } from "react";
 
 export const Profile = () => {
   const theme = useTheme();
   const styles = createStyles(theme);
   const { t } = useTranslation();
+  const { id } = useAppSelector(getUserSelector);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getFavoritesAction({ collectionName: "favorites", docName: id }));
+  }, []);
 
   return (
     <ImageBackground

@@ -6,11 +6,13 @@ import {
   getQuestDetails,
   useAppDispatch,
   clearCurrentQuest,
-  toggleFavorite,
   toggleVisited,
   getVisitedSelector,
   getQuestDetailsAction,
   getIsLoadingQuestDetails,
+  getUserSelector,
+  getFavoritesAction,
+  clearFavorites,
 } from "../../store";
 import { createStyles } from "./styles";
 import {
@@ -24,6 +26,7 @@ import {} from "../../components";
 import { Image } from "expo-image";
 import { useEffect } from "react";
 import { getFavoritesSelector } from "../../store";
+import { toggleFavoritesAction } from "../../store/actions/toggleFavoritesAction";
 
 export const QuestDetails = () => {
   const dispatch = useAppDispatch();
@@ -31,6 +34,7 @@ export const QuestDetails = () => {
   const favorites = useAppSelector(getFavoritesSelector);
   const visited = useAppSelector(getVisitedSelector);
   const isLoading = useAppSelector(getIsLoadingQuestDetails);
+  const user = useAppSelector(getUserSelector);
 
   const {
     id,
@@ -51,7 +55,17 @@ export const QuestDetails = () => {
   const theme = useTheme();
   const styles = createStyles(theme);
 
-  const handleToggleFavorite = () => dispatch(toggleFavorite(id));
+  const handleToggleFavorite = () => {
+    dispatch(
+      toggleFavoritesAction({
+        collectionName: "favorites",
+        docName: user.id,
+        id,
+        isInclude: isFavorite,
+      })
+    );
+  };
+
   const handleToggleVisited = () => dispatch(toggleVisited(id));
 
   useEffect(() => {
@@ -61,11 +75,19 @@ export const QuestDetails = () => {
         id: params.questId,
       })
     );
-
     return () => {
       dispatch(clearCurrentQuest());
     };
   }, []);
+
+  useEffect(() => {
+    dispatch(
+      getFavoritesAction({ collectionName: "favorites", docName: user.id })
+    );
+    return () => {
+      dispatch(clearFavorites());
+    };
+  }, [user.id]);
 
   return isLoading ? (
     <Loader />

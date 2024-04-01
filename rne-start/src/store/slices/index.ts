@@ -1,5 +1,5 @@
 export * from "./userSlice";
-export * from "./favoriteQuestsSlice";
+export * from "./favoritesSlice";
 export * from "./scheduleSlice";
 export * from "./questDetailsSlice";
 export * from "./visitedQuestsSlice";

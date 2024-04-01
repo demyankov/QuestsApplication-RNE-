@@ -160,9 +160,6 @@ export const BookingCard = ({
                   uid: "12345",
                 };
 
-                console.log("Забронирована игра ", params);
-                console.log(errors);
-
                 reset();
               })}
             />
