@@ -9,9 +9,9 @@ import { Text, View } from "react-native";
 import { createStyles } from "./styles";
 import { useTheme } from "@react-navigation/native";
 import { customQuestOptions } from "../../services";
-import { IQuestCard } from "../../types";
+import { IQuest } from "../../types";
 
-export const QuestsCardStatistics = ({ card }: { card: IQuestCard }) => {
+export const QuestsCardStatistics = ({ card }: { card: IQuest }) => {
   const theme = useTheme();
   const styles = createStyles(theme);
   const { t } = useTranslation();

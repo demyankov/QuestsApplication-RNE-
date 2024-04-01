@@ -2,8 +2,7 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../firebase";
 
 export const getDocById = async (collectionName: string, id: string) => {
-  if (!id) {
-    console.log("нет id");
+  if (!id || !collectionName) {
     return;
   }
   const q = query(collection(db, collectionName), where("id", "==", id));

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { getDocById } from "../../api";
-import { IQuestDetails } from "../../types";
+import { IQuest } from "../../types";
 
 interface GetQuestDetailsProps {
   collectionName: string;
@@ -8,7 +8,7 @@ interface GetQuestDetailsProps {
 }
 
 export const getQuestDetailsAction = createAsyncThunk<
-  IQuestDetails,
+  IQuest,
   GetQuestDetailsProps
 >("QuestDetails/getQuestDetailsAction", async ({ collectionName, id }) =>
   getDocById(collectionName, id)

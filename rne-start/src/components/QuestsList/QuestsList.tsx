@@ -3,9 +3,9 @@ import { useTheme } from "@react-navigation/native";
 
 import { createStyles } from "./styles";
 import { QuestCard } from "../QuestCard/QuestCard";
-import { IQuestCard } from "../../types";
+import { IQuest } from "../../types";
 
-export const QuestsList = ({ list }: { list: IQuestCard[] }) => {
+export const QuestsList = ({ list }: { list: IQuest[] }) => {
   const theme = useTheme();
   const styles = createStyles(theme);
 

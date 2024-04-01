@@ -6,6 +6,7 @@ export const createStyles = (theme: Theme) =>
   StyleSheet.create({
     wrapper: {
       paddingTop: scaleSize(15),
+      flex: 1,
     },
     title: {
       fontSize: scaleSize(45),

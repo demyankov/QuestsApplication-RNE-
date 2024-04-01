@@ -1,21 +1,14 @@
-import * as Localization from "expo-localization";
-import { ImageBackground, SafeAreaView, Text } from "react-native";
+import { ImageBackground, SafeAreaView } from "react-native";
 import { styles } from "./styles";
-import { getVisitedSelector, useAppSelector } from "../../store";
+import { getQuests, getVisitedSelector, useAppSelector } from "../../store";
 import { QuestsList } from "../../components";
-import { questCardList } from "../../constants/questCardsList";
-import { IQuestCard } from "../../types";
-import { useTranslation } from "react-i18next";
+import { filteredByArray } from "../../services";
 
 export const Visited = () => {
   const visited = useAppSelector(getVisitedSelector);
-  const language = Localization.locale.substring(0, 2);
-  const { t } = useTranslation();
+  const quests = useAppSelector(getQuests);
 
-  const filteredByArray = (objArray: IQuestCard[], filterArray: string[]) => {
-    return objArray.filter(({ id }) => filterArray.includes(id));
-  };
-  const list = filteredByArray(questCardList[language], visited);
+  const list = filteredByArray(quests, visited);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>

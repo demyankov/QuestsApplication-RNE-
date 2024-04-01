@@ -6,7 +6,7 @@ export const createStyles = (theme: Theme) =>
   StyleSheet.create({
     wrapper: {
       flexDirection: "row",
-      justifyContent: "flex-end",
+      justifyContent: "space-between",
       marginRight: scaleSize(20),
       marginVertical: scaleSize(10),
     },

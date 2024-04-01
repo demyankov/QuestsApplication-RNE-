@@ -49,6 +49,7 @@ i18n
           location: "Location",
           personalData: "Personal data",
           interactive: "Interactive",
+          closed: "Closed",
           notChosen: "Not chosen",
           сomment: "Your comment",
           errors: {
@@ -120,6 +121,7 @@ i18n
           location: "Местоположение",
           personalData: "Личные данные",
           interactive: "Интерактивный",
+          closed: "Закрыт",
           notChosen: "Не выбрано",
           сomment: "Ваш комментарий",
           errors: {

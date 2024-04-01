@@ -10,6 +10,7 @@ export const createStyles = (theme: Theme) =>
       backgroundColor: theme.colors.card,
       borderRadius: scaleSize(12),
       padding: scaleSize(25),
+      position: "relative",
     },
     shadow: generateBoxShadowStyle(-2, 4, "#4a4a4a", 0.3, 3, 15, "#4a4a4a"),
     title: {
@@ -64,5 +65,12 @@ export const createStyles = (theme: Theme) =>
       fontSize: scaleSize(35),
       marginBottom: scaleSize(35),
       color: theme.colors.text,
+    },
+    closed: {
+      ...StyleSheet.absoluteFillObject,
+      backgroundColor: "rgba(0,0,0, 0.5)",
+      alignItems: "center",
+      justifyContent: "flex-end",
+      padding: scaleSize(30),
     },
   });

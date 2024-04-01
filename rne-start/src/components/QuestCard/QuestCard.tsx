@@ -8,12 +8,12 @@ import { createStyles } from "./styles";
 import { CustomLink } from "../CustomLink/CustomLink";
 import { QuestsCardStatistics } from "../QuestCardStatistics/QuestCardStatistics";
 
-import { IQuestCard } from "../../types";
+import { IQuest } from "../../types";
 import { SCREENS } from "../../constants";
 import { LinearGradient } from "expo-linear-gradient";
 
-export const QuestCard = ({ card }: { card: IQuestCard }) => {
-  const { id, title, shortDescription, image } = card;
+export const QuestCard = ({ card }: { card: IQuest }) => {
+  const { id, name, shortDescription, banner, isActive } = card;
 
   const theme = useTheme();
   const styles = createStyles(theme);
@@ -29,10 +29,15 @@ export const QuestCard = ({ card }: { card: IQuestCard }) => {
       style={[styles.wrapper, styles.shadow]}
     >
       <View style={styles.imageWrapper}>
-        <Image source={image} style={styles.image} />
+        <Image source={banner} style={styles.image} />
         <QuestsCardStatistics card={card} />
+        {!isActive && (
+          <View style={styles.closed}>
+            <Text style={styles.title}>{t("closed")}</Text>
+          </View>
+        )}
       </View>
-      <Text style={styles.title}>{title}</Text>
+      <Text style={styles.title}>{name}</Text>
       <Text style={styles.text}>{shortDescription}</Text>
       <CustomLink
         title={t("buttons.details")}

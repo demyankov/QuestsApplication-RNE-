@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getQuestDetailsAction } from "../actions";
-import { IQuestDetails } from "../../types";
-import { boolean } from "yup";
+import { IQuest } from "../../types";
+import { GENRES } from "../../constants";
 
 interface IQuestDetailsSlice {
-  currentQuest: IQuestDetails;
+  currentQuest: IQuest;
   isLoading: boolean;
   loadingMessage: string;
 }
@@ -14,6 +14,7 @@ const initialQuest = {
   apiPath: "",
   name: "",
   mainGenre: "",
+  genres: [],
   location: "",
   banner: "",
   levelOfFear: "",
@@ -24,8 +25,10 @@ const initialQuest = {
   duration: "",
   interactive: false,
   description: [],
+  shortDescription: "",
   additionalDescription: [],
   modes: [],
+  isActive: true,
 };
 
 const initialState: IQuestDetailsSlice = {
