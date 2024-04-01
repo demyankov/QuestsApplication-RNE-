@@ -10,4 +10,5 @@ export enum SCREENS {
   FAVORITES = "Favorites",
   VISITED = "Visited",
   FEEDBACKS = "Feedbacks",
+  HISTORY = "History",
 }

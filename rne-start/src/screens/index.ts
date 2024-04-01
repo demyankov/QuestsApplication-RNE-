@@ -5,5 +5,15 @@ import { QuestDetails } from "./QuestDetails/QuestDetails";
 import { Visited } from "./Visited/Visited";
 import { Favorites } from "./Favorites/Favorites";
 import { Feedbacks } from "./Feedbacks/Feedbacks";
+import { History } from "./History/History";
 
-export { Main, Profile, Settings, QuestDetails, Visited, Favorites, Feedbacks };
+export {
+  Main,
+  Profile,
+  Settings,
+  QuestDetails,
+  Visited,
+  Favorites,
+  Feedbacks,
+  History,
+};

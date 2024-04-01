@@ -9,12 +9,14 @@ interface CustomButtonProps {
   title: string;
   to?: SCREENS;
   options?: { questId: string };
+  width?: string;
 }
 
 export const CustomLink = ({
   title,
   to = SCREENS.MAIN,
   options,
+  width,
 }: CustomButtonProps) => {
   const { navigate } = useNavigation<MainStackType>();
   const navigateTo = () =>

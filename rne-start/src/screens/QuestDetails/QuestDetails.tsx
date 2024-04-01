@@ -65,7 +65,7 @@ export const QuestDetails = () => {
   return (
     <ScrollView>
       <ImageBackground
-        source={{         
+        source={{
           uri: "https://i.pinimg.com/originals/ad/b7/fe/adb7fe55390b917de8d3670babd0d4ff.jpg",
         }}
         resizeMode="cover"

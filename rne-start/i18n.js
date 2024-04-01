@@ -15,7 +15,6 @@ const languageDetector = {
   },
 
   init: () => {},
-
   cacheUserLanguage: () => {},
 };
 
@@ -30,11 +29,16 @@ i18n
         translation: {
           main: "Main page",
           settings: "Profile settings",
+          history: "Booking history",
           feedbacks: "Feedbacks",
           visited: "Visited",
+          visitedQuests: "Visited quests",
           favorites: "Favorites",
-          averageRating: "Average rating",
+          favoritesQuests: "Favorites quests",
           playerRating: "Player rating",
+          maxRating: "Maximum rating according to reviews",
+          minRating: "Minimum rating according to reviews",
+          averageRating: "Average rating according to reviews",
           profile: "Profile",
           questsList: "Quests list",
           questDetails: "Quest description",
@@ -95,9 +99,16 @@ i18n
         translation: {
           main: "Главная страница",
           settings: "Настройки профиля",
+          history: "История бронирований",
           feedbacks: "Отзывы",
           visited: "Посещенные",
+          visitedQuests: "Посещенные квесты",
           favorites: "Избранные",
+          favoritesQuests: "Избранные квесты",
+          playerRating: "Рейтинг игрока",
+          maxRating: "Максимальная оценка по отзывам",
+          minRating: "Минимальная оценка по отзывам",
+          averageRating: "Средняя оценка по отзывам",
           profile: "Профиль",
           questsList: "Список квестов",
           questDetails: "Описание квеста",

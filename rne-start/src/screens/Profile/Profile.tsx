@@ -1,4 +1,4 @@
-import { ImageBackground, View } from "react-native";
+import { ImageBackground } from "react-native";
 import { createStyles } from "./styles";
 import { useTheme } from "@react-navigation/native";
 import {
@@ -17,15 +17,14 @@ export const Profile = () => {
 
   return (
     <ImageBackground
-      source={{
-        uri: "https://i.pinimg.com/originals/ad/b7/fe/adb7fe55390b917de8d3670babd0d4ff.jpg",
-      }}
+      source={require("../../assets/bg.jpg")}
       style={styles.wrapper}
       imageStyle={{ resizeMode: "stretch", opacity: 0.4 }}
     >
       <User />
       <ProfileStatistics />
       <CustomLink title={t("settings")} to={SCREENS.SETTINGS} />
+      <CustomLink title={t("history")} to={SCREENS.HISTORY} />
       <FavoritesQuestsList />
     </ImageBackground>
   );

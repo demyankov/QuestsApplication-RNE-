@@ -9,4 +9,13 @@ export const createStyles = (theme: Theme) =>
       flexDirection: "row",
       justifyContent: "space-between",
     },
+    statisticsReviews: {
+      gap: scaleSize(15),
+      paddingHorizontal: scaleSize(35),
+      marginVertical: scaleSize(35),
+    },
+    text: {
+      fontSize: scaleSize(35),
+      color: theme.colors.text,
+    },
   });

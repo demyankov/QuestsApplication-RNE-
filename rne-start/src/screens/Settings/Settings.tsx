@@ -17,6 +17,7 @@ import { SettingProfileType } from "../../types";
 import { settingsProfileScheme } from "../../shared/validationSchemes";
 import { CustomInput, User } from "../../components";
 import { PROFILE_SETTINGS } from "../../constants";
+import { ImageBackground } from "expo-image";
 
 export const Settings = () => {
   const dispatch = useAppDispatch();
@@ -51,29 +52,34 @@ export const Settings = () => {
 
   return (
     <ScrollView style={styles.wrapper}>
-      <User />
-      <Text style={styles.title}>{t("personalData")}</Text>
-      <View style={styles.inputsWrapper}>
-        {inputs.map(({ name, label }) => {
-          let errorMessage = errors[name]?.message;
-          return (
-            <CustomInput
-              key={name}
-              control={control}
-              name={name}
-              label={t(label)}
-              error={errorMessage && t(`errors.${errors[name]?.message}`)}
-            />
-          );
-        })}
-        <Button
-          title={t("buttons.save")}
-          onPress={handleSubmit(handleUpdateProfile)}
-        />
-      </View>
-      <Pressable onPress={handleUpdateProfile}>
-        <Text>123{errors.root?.message}</Text>
-      </Pressable>
+      <ImageBackground
+        source={require("../../assets/bg.jpg")}
+        imageStyle={{ resizeMode: "cover", opacity: 0.4 }}
+      >
+        <User />
+        <Text style={styles.title}>{t("personalData")}</Text>
+        <View style={styles.inputsWrapper}>
+          {inputs.map(({ name, label }) => {
+            let errorMessage = errors[name]?.message;
+            return (
+              <CustomInput
+                key={name}
+                control={control}
+                name={name}
+                label={t(label)}
+                error={errorMessage && t(`errors.${errors[name]?.message}`)}
+              />
+            );
+          })}
+          <Button
+            title={t("buttons.save")}
+            onPress={handleSubmit(handleUpdateProfile)}
+          />
+        </View>
+        <Pressable onPress={handleUpdateProfile}>
+          <Text>123{errors.root?.message}</Text>
+        </Pressable>
+      </ImageBackground>
     </ScrollView>
   );
 };
