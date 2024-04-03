@@ -5,7 +5,7 @@ import {
   Main,
   QuestDetails,
   Favorites,
-  Feedbacks,
+  Reviews,
   Visited,
   History,
 } from "../screens";
@@ -25,7 +25,7 @@ const stackList: IStackList[] = [
   { name: SCREENS.PROFILE, component: Profile, title: "profile" },
   { name: SCREENS.SETTINGS, component: Settings, title: "settings" },
   { name: SCREENS.FAVORITES, component: Favorites, title: "favoritesQuests" },
-  { name: SCREENS.FEEDBACKS, component: Feedbacks, title: "feedbacks" },
+  { name: SCREENS.REVIEWS, component: Reviews, title: "reviews" },
   { name: SCREENS.VISITED, component: Visited, title: "visitedQuests" },
   { name: SCREENS.HISTORY, component: History, title: "history" },
   { name: SCREENS.MAIN, component: Main },

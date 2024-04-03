@@ -4,7 +4,7 @@ import { Main } from "./Main/Main";
 import { QuestDetails } from "./QuestDetails/QuestDetails";
 import { Visited } from "./Visited/Visited";
 import { Favorites } from "./Favorites/Favorites";
-import { Feedbacks } from "./Feedbacks/Feedbacks";
+import { Reviews } from "./Reviews/Reviews";
 import { History } from "./History/History";
 
 export {
@@ -14,6 +14,6 @@ export {
   QuestDetails,
   Visited,
   Favorites,
-  Feedbacks,
+  Reviews,
   History,
 };

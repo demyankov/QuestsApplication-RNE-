@@ -24,7 +24,7 @@ export const toggleArray = async (
 
   let docRef = doc(db, collectionName, docName);
 
-  // получаем документ и проверяем на существование документа с для данного пользователя
+  // получаем документ и проверяем на существование документа для данного пользователя
   let querySnapshot = await getDoc(docRef);
 
   // если документ не существует, то создаем его

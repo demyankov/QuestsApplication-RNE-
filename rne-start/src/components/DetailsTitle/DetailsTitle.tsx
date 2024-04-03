@@ -3,6 +3,7 @@ import { createStyles } from "./styles";
 import { useTheme } from "@react-navigation/native";
 import { AntDesign } from "@expo/vector-icons";
 import { IconComponentMap, IconNameMap } from "../../types";
+import { useTranslation } from "react-i18next";
 
 export type DetailsTitleProps<F extends keyof typeof IconComponentMap> = {
   title: string;
@@ -19,6 +20,7 @@ export const DetailsTitle = <F extends keyof typeof IconComponentMap>({
 }: DetailsTitleProps<F>) => {
   const theme = useTheme();
   const styles = createStyles(theme);
+  const { t } = useTranslation();
 
   const Icon: JSX.ElementType =
     (familyIcon && IconComponentMap[familyIcon]) || AntDesign;
@@ -26,7 +28,7 @@ export const DetailsTitle = <F extends keyof typeof IconComponentMap>({
   return (
     <View style={styles.titleItem}>
       <Icon name={iconName} size={size} color={theme.colors.text} />
-      <Text style={styles.title}>{title}</Text>
+      <Text style={styles.title}>{t(title)}</Text>
     </View>
   );
 };

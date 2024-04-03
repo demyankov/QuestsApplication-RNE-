@@ -3,22 +3,37 @@ import { styles } from "./styles";
 import {
   getFavoritesAction,
   getFavoritesSelector,
+  getIsFavoritesLoadingSelector,
   getQuests,
   getUserSelector,
   useAppDispatch,
   useAppSelector,
 } from "../../store";
-import { QuestsList } from "../../components";
+import { Loader, QuestsList } from "../../components";
+import { useFocusEffect } from "@react-navigation/native";
 
 import { filteredByArray } from "../../services";
+import { useCallback } from "react";
 
 export const Favorites = () => {
   const favorites = useAppSelector(getFavoritesSelector);
   const quests = useAppSelector(getQuests);
-
+  const isLoading = useAppSelector(getIsFavoritesLoadingSelector);
+  const dispatch = useAppDispatch();
   const list = filteredByArray(quests, favorites);
+  const { id } = useAppSelector(getUserSelector);
 
-  return (
+  useFocusEffect(
+    useCallback(() => {
+      dispatch(
+        getFavoritesAction({ collectionName: "favorites", docName: id })
+      );
+    }, [])
+  );
+
+  return isLoading ? (
+    <Loader />
+  ) : (
     <SafeAreaView style={{ flex: 1 }}>
       <ImageBackground
         style={styles.wrapper}

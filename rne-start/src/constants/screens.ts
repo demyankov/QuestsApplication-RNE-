@@ -9,6 +9,6 @@ export enum SCREENS {
   QUESTDETAILS = "questDetails",
   FAVORITES = "Favorites",
   VISITED = "Visited",
-  FEEDBACKS = "Feedbacks",
+  REVIEWS = "Reviews",
   HISTORY = "History",
 }

@@ -4,7 +4,6 @@ import { formatScheduleData } from "./formatScheduleData";
 import { convertPrices } from "./convertPrices";
 import { generateBoxShadowStyle } from "./generateBoxShadowStyle";
 import { filteredByArray } from "./filteredByArray";
-import { isDocumentExists } from "./isDocumentExists";
 
 export {
   customQuestOptions,
@@ -13,5 +12,4 @@ export {
   convertPrices,
   generateBoxShadowStyle,
   filteredByArray,
-  isDocumentExists,
 };

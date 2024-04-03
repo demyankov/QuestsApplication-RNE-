@@ -1,15 +1,10 @@
-import {
-  Pressable,
-  Text,
-  TouchableHighlight,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import { styles } from "./styles";
 import { IconComponentMap, IconNameMap } from "../../types";
 import { AntDesign } from "@expo/vector-icons";
 import { useTheme } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
+import { useTranslation } from "react-i18next";
 
 export type CustomButtonProps<F extends keyof typeof IconComponentMap> = {
   title: string;
@@ -33,6 +28,7 @@ export const CustomButton = <F extends keyof typeof IconComponentMap>({
   disabled = false,
 }: CustomButtonProps<F>) => {
   const theme = useTheme();
+  const { t } = useTranslation();
 
   const Icon: JSX.ElementType =
     (familyIcon && IconComponentMap[familyIcon]) || AntDesign;
@@ -51,7 +47,7 @@ export const CustomButton = <F extends keyof typeof IconComponentMap>({
           {iconStart && (
             <Icon name={iconName} size={size} color={theme.colors.text} />
           )}
-          <Text style={styles.text}>{title}</Text>
+          <Text style={styles.text}>{t(title)}</Text>
           {iconEnd && (
             <Icon name={iconName} size={size} color={theme.colors.text} />
           )}

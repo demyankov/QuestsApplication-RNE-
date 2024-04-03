@@ -4,7 +4,7 @@ import {
   questDetailsReducer,
   scheduleReducer,
   favoritesReducer,
-  visitedQuestsReducer,
+  visitedReducer,
   questsReducer,
 } from "./slices";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -40,7 +40,7 @@ const persistedFavoriteReducer = persistReducer(
 );
 const persistedVisitedReducer = persistReducer(
   persistVisitedConfig,
-  visitedQuestsReducer
+  visitedReducer
 );
 
 const reducers = combineReducers({

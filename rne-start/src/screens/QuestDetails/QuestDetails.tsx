@@ -6,7 +6,7 @@ import {
   getQuestDetails,
   useAppDispatch,
   clearCurrentQuest,
-  toggleVisited,
+  toggleVisitedAction,
   getVisitedSelector,
   getQuestDetailsAction,
   getIsLoadingQuestDetails,
@@ -21,6 +21,7 @@ import {
   ToggleButton,
   DetailsTitle,
   Loader,
+  CustomButton,
 } from "../../components";
 import {} from "../../components";
 import { Image } from "expo-image";
@@ -66,7 +67,15 @@ export const QuestDetails = () => {
     );
   };
 
-  const handleToggleVisited = () => dispatch(toggleVisited(id));
+  const handleToggleVisited = () =>
+    dispatch(
+      toggleVisitedAction({
+        collectionName: "visited",
+        docName: user.id,
+        id,
+        isInclude: isVisited,
+      })
+    );
 
   useEffect(() => {
     dispatch(
@@ -168,6 +177,22 @@ export const QuestDetails = () => {
             iconName="address"
           />
           <Text style={styles.text}>{location}</Text>
+          <DetailsTitle
+            title="reviews"
+            familyIcon="MaterialIcons"
+            iconName="reviews"
+          />
+          <View>
+            <Text style={styles.text}>Тут будут отзывы</Text>
+          </View>
+          {user.id && (
+            <CustomButton
+              title="leaveReview"
+              familyIcon="Fontisto"
+              iconName="favorite"
+              handleClick={() => {}}
+            />
+          )}
         </View>
       </ImageBackground>
     </ScrollView>

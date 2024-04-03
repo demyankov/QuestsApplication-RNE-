@@ -22,10 +22,10 @@ export const statistics: IStatistics[] = [
     to: SCREENS.VISITED,
   },
   {
-    text: "feedbacks",
+    text: "reviews",
     iconColor: "#81f20f",
     selector: () => 0,
-    to: SCREENS.FEEDBACKS,
+    to: SCREENS.REVIEWS,
   },
   {
     text: "favorites",

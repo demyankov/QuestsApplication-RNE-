@@ -1,21 +1,25 @@
 import { ImageBackground } from "react-native";
 import { createStyles } from "./styles";
-import { useTheme } from "@react-navigation/native";
+import { useFocusEffect, useTheme } from "@react-navigation/native";
 import {
   ProfileStatistics,
   User,
   FavoritesQuestsList,
   CustomLink,
+  Loader,
 } from "../../components";
 import { SCREENS } from "../../constants/screens";
 import { useTranslation } from "react-i18next";
 import {
   getFavoritesAction,
+  getIsFavoritesLoadingSelector,
+  getIsVisitedLoadingSelector,
   getUserSelector,
+  getVisitedAction,
   useAppDispatch,
   useAppSelector,
 } from "../../store";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 
 export const Profile = () => {
   const theme = useTheme();
@@ -24,11 +28,23 @@ export const Profile = () => {
   const { id } = useAppSelector(getUserSelector);
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    dispatch(getFavoritesAction({ collectionName: "favorites", docName: id }));
-  }, []);
+  const isLoadingFavorites = useAppSelector(getIsFavoritesLoadingSelector);
+  const isLoadingVisited = useAppSelector(getIsVisitedLoadingSelector);
 
-  return (
+  const isLoading = isLoadingFavorites || isLoadingVisited;
+
+  useFocusEffect(
+    useCallback(() => {
+      dispatch(
+        getFavoritesAction({ collectionName: "favorites", docName: id })
+      );
+      dispatch(getVisitedAction({ collectionName: "visited", docName: id }));
+    }, [])
+  );
+
+  return isLoading ? (
+    <Loader />
+  ) : (
     <ImageBackground
       source={require("../../assets/bg.jpg")}
       style={styles.wrapper}

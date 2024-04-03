@@ -6,7 +6,7 @@ export type MainStackParamsList = {
   [SCREENS.SETTINGS]: undefined;
   [SCREENS.MAIN]: undefined;
   [SCREENS.FAVORITES]: undefined;
-  [SCREENS.FEEDBACKS]: undefined;
+  [SCREENS.REVIEWS]: undefined;
   [SCREENS.VISITED]: undefined;
   [SCREENS.HISTORY]: undefined;
   [SCREENS.QUESTDETAILS]: { questId: string } | undefined;
