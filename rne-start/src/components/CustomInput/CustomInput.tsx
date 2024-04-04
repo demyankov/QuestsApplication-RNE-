@@ -4,6 +4,7 @@ import { Text, TextInput, View } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { MaskedTextInput } from "react-native-mask-text";
 import { AntDesign } from "@expo/vector-icons";
+import { LinearGradient } from "expo-linear-gradient";
 
 interface CustomInputProps {
   label?: string;
@@ -27,6 +28,7 @@ export const CustomInput = ({
   const styles = createStyles(theme);
 
   const inputStyles = [styles.input, numberOfLines > 1 && styles.teatArea];
+  const gradient = ["#414042", "#1e1e1f", "#1e1e1f", "#414042"];
 
   return (
     <View style={styles.inputWrapper}>
@@ -35,16 +37,22 @@ export const CustomInput = ({
         control={control}
         name={name}
         render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput
-            style={inputStyles}
-            placeholder={placeholder}
-            onBlur={onBlur}
-            onChangeText={onChange}
-            value={value}
-            multiline={numberOfLines > 1}
-            numberOfLines={numberOfLines}
-            {...otherProps}
-          />
+          <LinearGradient
+            colors={gradient}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+          >
+            <TextInput
+              style={inputStyles}
+              placeholder={placeholder}
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
+              multiline={numberOfLines > 1}
+              numberOfLines={numberOfLines}
+              {...otherProps}
+            />
+          </LinearGradient>
         )}
       />
       {error && (

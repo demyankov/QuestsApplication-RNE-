@@ -4,6 +4,9 @@ import { formatScheduleData } from "./formatScheduleData";
 import { convertPrices } from "./convertPrices";
 import { generateBoxShadowStyle } from "./generateBoxShadowStyle";
 import { filteredByArray } from "./filteredByArray";
+import { getRateArray } from "./getRateArray";
+import { isFuture } from "./isFuture";
+import { isOld } from "./isOld";
 
 export {
   customQuestOptions,
@@ -12,4 +15,7 @@ export {
   convertPrices,
   generateBoxShadowStyle,
   filteredByArray,
+  getRateArray,
+  isFuture,
+  isOld,
 };

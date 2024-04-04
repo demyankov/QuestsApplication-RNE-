@@ -25,6 +25,6 @@ export const styles = StyleSheet.create({
     color: "#ffffff",
   },
   disabled: {
-    borderColor: "grey",
+    borderColor: "#535255",
   },
 });

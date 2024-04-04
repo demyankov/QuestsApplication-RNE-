@@ -1,18 +1,12 @@
 import {
   QueryFieldFilterConstraint,
-  WhereFilterOp,
   collection,
   getDocs,
   query,
   where,
 } from "firebase/firestore";
 import { db } from "../firebase";
-
-interface IFbFilter {
-  field: string;
-  operator: WhereFilterOp;
-  value: string | number;
-}
+import { IFbFilter } from "../types";
 
 export const getFilteredCollection = async (
   collectionName: string,

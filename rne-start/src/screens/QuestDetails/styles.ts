@@ -6,6 +6,7 @@ export const createStyles = (theme: Theme) =>
   StyleSheet.create({
     container: {
       paddingHorizontal: scaleSize(15),
+      paddingBottom: scaleSize(30),
     },
     textShadow: {
       textShadowColor: "#000",

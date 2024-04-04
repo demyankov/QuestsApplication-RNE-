@@ -3,6 +3,7 @@ import { styles } from "./styles";
 import { IconComponentMap, IconNameMap } from "../../types";
 import { AntDesign } from "@expo/vector-icons";
 import { useTheme } from "@react-navigation/native";
+import { useTranslation } from "react-i18next";
 
 export type CustomButtonSecondaryProps<
   F extends keyof typeof IconComponentMap
@@ -28,6 +29,7 @@ export const CustomButtonSecondary = <F extends keyof typeof IconComponentMap>({
   disabled = false,
 }: CustomButtonSecondaryProps<F>) => {
   const theme = useTheme();
+  const { t } = useTranslation();
 
   const Icon: JSX.ElementType =
     (familyIcon && IconComponentMap[familyIcon]) || AntDesign;
@@ -42,7 +44,7 @@ export const CustomButtonSecondary = <F extends keyof typeof IconComponentMap>({
         {iconStart && (
           <Icon name={iconName} size={size} color={theme.colors.text} />
         )}
-        <Text style={styles.text}>{title}</Text>
+        <Text style={styles.text}>{t(title)}</Text>
         {iconEnd && (
           <Icon name={iconName} size={size} color={theme.colors.text} />
         )}

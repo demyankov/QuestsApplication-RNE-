@@ -13,6 +13,10 @@ import {
   getUserSelector,
   getFavoritesAction,
   clearFavorites,
+  getUserReviewsAction,
+  getQuestReviewsAction,
+  clearReviews,
+  getQuestReviewsSelector,
 } from "../../store";
 import { createStyles } from "./styles";
 import {
@@ -22,20 +26,24 @@ import {
   DetailsTitle,
   Loader,
   CustomButton,
+  ReviewsList,
 } from "../../components";
 import {} from "../../components";
 import { Image } from "expo-image";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getFavoritesSelector } from "../../store";
 import { toggleFavoritesAction } from "../../store/actions/toggleFavoritesAction";
+import { ReviewForm } from "../../components";
 
 export const QuestDetails = () => {
   const dispatch = useAppDispatch();
   const quest = useAppSelector(getQuestDetails);
   const favorites = useAppSelector(getFavoritesSelector);
   const visited = useAppSelector(getVisitedSelector);
+  const reviews = useAppSelector(getQuestReviewsSelector);
   const isLoading = useAppSelector(getIsLoadingQuestDetails);
   const user = useAppSelector(getUserSelector);
+  const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
 
   const {
     id,
@@ -67,6 +75,11 @@ export const QuestDetails = () => {
     );
   };
 
+  const handleToggleReviewModal = () => {
+    setIsReviewModalOpen(!isReviewModalOpen);
+    console.log(isReviewModalOpen);
+  };
+
   const handleToggleVisited = () =>
     dispatch(
       toggleVisitedAction({
@@ -84,10 +97,18 @@ export const QuestDetails = () => {
         id: params.questId,
       })
     );
+
     return () => {
       dispatch(clearCurrentQuest());
     };
   }, []);
+
+  useEffect(() => {
+    dispatch(getQuestReviewsAction({ collectionName: "reviews", questId: id }));
+    return () => {
+      dispatch(clearReviews());
+    };
+  }, [id]);
 
   useEffect(() => {
     dispatch(
@@ -139,32 +160,40 @@ export const QuestDetails = () => {
               handleClick={handleToggleFavorite}
             />
           </View>
-          <DetailsTitle
-            title="Описание"
-            familyIcon="MaterialIcons"
-            iconName="description"
-          />
-          {description?.map((item: string, i: number) => (
-            <Text style={styles.text} key={i}>
-              {item}
-            </Text>
-          ))}
-          <Text style={styles.title}>Дополнительные условия</Text>
-          {additionalDescription?.map((item: string, i: number) => (
-            <Text style={styles.text} key={i}>
-              {item}
-            </Text>
-          ))}
-          <DetailsTitle
-            title="Режимы игры"
-            familyIcon="FontAwesome5"
-            iconName="fist-raised"
-          />
-          {modes?.map((item: string, i: number) => (
-            <Text style={styles.text} key={i}>
-              {item}
-            </Text>
-          ))}
+          {(!!description.length || !!additionalDescription.length) && (
+            <>
+              <DetailsTitle
+                title="Описание"
+                familyIcon="MaterialIcons"
+                iconName="description"
+              />
+              {description?.map((item: string, i: number) => (
+                <Text style={styles.text} key={i}>
+                  {item}
+                </Text>
+              ))}
+              <Text style={styles.title}>Дополнительные условия</Text>
+              {additionalDescription?.map((item: string, i: number) => (
+                <Text style={styles.text} key={i}>
+                  {item}
+                </Text>
+              ))}
+            </>
+          )}
+          {!!modes.length && (
+            <>
+              <DetailsTitle
+                title="Режимы игры"
+                familyIcon="FontAwesome5"
+                iconName="fist-raised"
+              />
+              {modes?.map((item: string, i: number) => (
+                <Text style={styles.text} key={i}>
+                  {item}
+                </Text>
+              ))}
+            </>
+          )}
           <DetailsTitle
             title="Забронировать квест"
             familyIcon="MaterialCommunityIcons"
@@ -177,21 +206,31 @@ export const QuestDetails = () => {
             iconName="address"
           />
           <Text style={styles.text}>{location}</Text>
-          <DetailsTitle
-            title="reviews"
-            familyIcon="MaterialIcons"
-            iconName="reviews"
-          />
-          <View>
-            <Text style={styles.text}>Тут будут отзывы</Text>
-          </View>
-          {user.id && (
-            <CustomButton
-              title="leaveReview"
-              familyIcon="Fontisto"
-              iconName="favorite"
-              handleClick={() => {}}
-            />
+          {!!reviews.length && (
+            <>
+              <DetailsTitle
+                title="reviews"
+                familyIcon="MaterialIcons"
+                iconName="reviews"
+              />
+              <ReviewsList reviews={reviews} />
+              {user.id && (
+                <>
+                  <CustomButton
+                    title="leaveReview"
+                    familyIcon="Fontisto"
+                    iconName="favorite"
+                    handleClick={handleToggleReviewModal}
+                  />
+                  <ReviewForm
+                    user={user}
+                    quest={quest}
+                    visible={isReviewModalOpen}
+                    handleClose={handleToggleReviewModal}
+                  />
+                </>
+              )}
+            </>
           )}
         </View>
       </ImageBackground>

@@ -33,7 +33,9 @@ export const CustomButton = <F extends keyof typeof IconComponentMap>({
   const Icon: JSX.ElementType =
     (familyIcon && IconComponentMap[familyIcon]) || AntDesign;
 
-  const gradient = ["#414042", "#1e1e1f", "#1e1e1f", "#414042"];
+  const gradient = disabled
+    ? ["#535255", "#535255"]
+    : ["#414042", "#1e1e1f", "#1e1e1f", "#414042"];
 
   return (
     <TouchableOpacity onPress={handleClick} disabled={disabled}>

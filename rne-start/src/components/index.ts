@@ -5,7 +5,7 @@ import { User } from "./User/User";
 import { CustomLink } from "./CustomLink/CustomLink";
 import { CustomButton } from "./CustomButton/CustomButton";
 import { CustomButtonSecondary } from "./CustomButtonSecondary/CustomButtonSecondary";
-import { FavoritesQuestsList } from "./FavoritesQuestsList/FavoritesQuestsList";
+import { ReviewsList } from "./ReviewsList/ReviewsList";
 import { CustomInput } from "./CustomInput/CustomInput";
 import { QuestCard } from "./QuestCard/QuestCard";
 import { QuestsList } from "./QuestsList/QuestsList";
@@ -17,6 +17,7 @@ import { CustomSelect } from "./CustomSelect/CustomSelect";
 import { Header } from "./Header/Header";
 import { Loader } from "./Loader/Loader";
 import { DetailsTitle } from "./DetailsTitle/DetailsTitle";
+import { ReviewForm } from "./ReviewForm/ReviewForm";
 
 export {
   Avatar,
@@ -24,7 +25,7 @@ export {
   ProfileStatistics,
   User,
   CustomButton,
-  FavoritesQuestsList,
+  ReviewsList,
   CustomInput,
   QuestCard,
   QuestsList,
@@ -37,5 +38,6 @@ export {
   CustomButtonSecondary,
   Header,
   Loader,
+  ReviewForm,
   DetailsTitle,
 };

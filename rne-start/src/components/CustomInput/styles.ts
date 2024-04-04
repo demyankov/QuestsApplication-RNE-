@@ -6,20 +6,6 @@ export const createStyles = (theme: Theme) =>
   StyleSheet.create({
     inputWrapper: {
       position: "relative",
-
-      //     &:hover {
-      //       border: 1px solid var(--background-color-button-secondary);
-      //     }
-
-      //     &:active,
-      //     &:focus-within {
-      //       border: 1px solid var(--background-color-button-secondary);
-      //     }
-
-      //     &:disabled input {
-      //       color: var(--font-color-disabled);
-      //     }
-      //   }
     },
 
     input: {
@@ -29,7 +15,7 @@ export const createStyles = (theme: Theme) =>
       paddingHorizontal: scaleSize(20),
       backgroundColor: theme.colors.inputBackground,
       borderRadius: scaleSize(10),
-      borderColor: theme.colors.inputBorder,
+      borderColor: "#b1b1b3",
       borderWidth: 1,
       color: theme.colors.text,
       fontSize: scaleSize(28),
@@ -63,6 +49,5 @@ export const createStyles = (theme: Theme) =>
     warningText: {
       fontSize: scaleSize(25),
       color: "#FFAA00",
-      // whiteSpace: 'nowrap',
     },
   });

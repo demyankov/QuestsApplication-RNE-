@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getVisitedAction, toggleVisitedAction } from "../actions";
+import { IReview } from "../../types";
+import { getQuestReviewsAction, getUserReviewsAction } from "../actions";
 
 interface IRewiewsSlice {
-  reviews: string[];
-  userReviews: string[];
+  reviews: IReview[];
+  userReviews: IReview[];
   isLoading: boolean;
   loadingMessage: string;
 }
@@ -16,31 +17,45 @@ const initialState: IRewiewsSlice = {
 };
 
 const reviewsSlice = createSlice({
-  name: "Visited",
+  name: "Reviews",
   initialState,
   reducers: {
-    deleteAllUserReviews(state) {
+    clearReviews(state) {
       state.userReviews = [];
     },
   },
   extraReducers(builder) {
-    builder;
-    // .addCase(getReviewsAction.pending, (state, { payload }) => {
-    //   state.isLoading = false;
-    // })
-    // .addCase(getReviewsAction.fulfilled, (state, { payload }) => {
-    //   state.reviews = payload;
-    //   state.loadingMessage = "";
-    //   state.isLoading = false;
-    // })
-    // .addCase(getReviewsAction.rejected, (state, { error }) => {
-    //   state.isLoading = false;
-    //   state.loadingMessage = error.message || "Ошибка запроса";
-    // });
+    builder
+      .addCase(getQuestReviewsAction.pending, (state, { payload }) => {
+        state.isLoading = true;
+      })
+      .addCase(getQuestReviewsAction.fulfilled, (state, { payload }) => {
+        state.reviews = payload;
+        state.loadingMessage = "";
+        state.isLoading = false;
+        console.log("reviews", payload);
+      })
+      .addCase(getQuestReviewsAction.rejected, (state, { error }) => {
+        state.isLoading = false;
+        state.loadingMessage = error.message || "Ошибка запроса";
+      })
+      .addCase(getUserReviewsAction.pending, (state, { payload }) => {
+        state.isLoading = true;
+      })
+      .addCase(getUserReviewsAction.fulfilled, (state, { payload }) => {
+        state.userReviews = payload;
+        state.loadingMessage = "";
+        state.isLoading = false;
+        console.log("userReviews", payload);
+      })
+      .addCase(getUserReviewsAction.rejected, (state, { error }) => {
+        state.isLoading = false;
+        state.loadingMessage = error.message || "Ошибка запроса";
+      });
   },
 });
 
 export const {
-  reducer: rewiewsReducer,
-  actions: { deleteAllUserReviews },
+  reducer: reviewsReducer,
+  actions: { clearReviews },
 } = reviewsSlice;
