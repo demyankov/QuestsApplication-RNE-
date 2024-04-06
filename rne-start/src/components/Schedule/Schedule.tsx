@@ -80,7 +80,7 @@ export const Schedule = ({ apiPath }: { apiPath: string }) => {
       </Text>
       <View style={styles.buttonsWrapper}>
         <CustomButton
-          title="Ранее"
+          title="previously"
           handleClick={showPrevPage}
           familyIcon="AntDesign"
           iconName="arrowleft"
@@ -88,7 +88,7 @@ export const Schedule = ({ apiPath }: { apiPath: string }) => {
           disabled={prevBtnDisabled}
         />
         <CustomButton
-          title="Далее"
+          title="next"
           handleClick={showNextPage}
           familyIcon="AntDesign"
           iconName="arrowright"

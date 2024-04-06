@@ -4,6 +4,7 @@ import { ISchedule } from "../../store";
 import { createStyles } from "./styles";
 import { SLOT_STATUS } from "../../constants";
 import { LinearGradient } from "expo-linear-gradient";
+import { useTranslation } from "react-i18next";
 
 interface ScheduleItemProps {
   item: ISchedule;
@@ -18,6 +19,7 @@ export const ScheduleItem = ({
 }: ScheduleItemProps) => {
   const theme = useTheme();
   const styles = createStyles(theme);
+  const { t } = useTranslation();
 
   const { time, is_free, extraPrices } = item;
 
@@ -42,8 +44,10 @@ export const ScheduleItem = ({
             style={[styles.description, !is_free && styles[SLOT_STATUS.CLOSED]]}
           >
             {is_free
-              ? `от ${Math.min(Number(...Object.values(extraPrices)))} руб.`
-              : "закрыто"}
+              ? `${t("from")} ${Math.min(
+                  Number(...Object.values(extraPrices))
+                )} ${t("rub")}.`
+              : t("closed")}
           </Text>
         </>
       </Pressable>

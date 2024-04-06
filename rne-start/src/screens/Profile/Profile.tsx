@@ -1,31 +1,26 @@
 import { ImageBackground } from "react-native";
 import { createStyles } from "./styles";
 import { useFocusEffect, useTheme } from "@react-navigation/native";
-import {
-  ProfileStatistics,
-  User,
-  FavoritesQuestsList,
-  CustomLink,
-  Loader,
-} from "../../components";
+import { ProfileStatistics, User, CustomLink, Loader } from "../../components";
 import { SCREENS } from "../../constants/screens";
 import { useTranslation } from "react-i18next";
 import {
   getFavoritesAction,
   getIsFavoritesLoadingSelector,
   getIsVisitedLoadingSelector,
-  getUserSelector,
+  getUserIdSelector,
+  getUserReviewsAction,
   getVisitedAction,
   useAppDispatch,
   useAppSelector,
 } from "../../store";
-import { useCallback, useEffect } from "react";
+import { useCallback } from "react";
 
 export const Profile = () => {
   const theme = useTheme();
   const styles = createStyles(theme);
   const { t } = useTranslation();
-  const { id } = useAppSelector(getUserSelector);
+  const userId = useAppSelector(getUserIdSelector);
   const dispatch = useAppDispatch();
 
   const isLoadingFavorites = useAppSelector(getIsFavoritesLoadingSelector);
@@ -36,9 +31,12 @@ export const Profile = () => {
   useFocusEffect(
     useCallback(() => {
       dispatch(
-        getFavoritesAction({ collectionName: "favorites", docName: id })
+        getFavoritesAction({ collectionName: "favorites", docName: userId })
       );
-      dispatch(getVisitedAction({ collectionName: "visited", docName: id }));
+      dispatch(
+        getVisitedAction({ collectionName: "visited", docName: userId })
+      );
+      dispatch(getUserReviewsAction({ collectionName: "reviews", userId }));
     }, [])
   );
 
@@ -54,7 +52,6 @@ export const Profile = () => {
       <ProfileStatistics />
       <CustomLink title={t("settings")} to={SCREENS.SETTINGS} />
       <CustomLink title={t("history")} to={SCREENS.HISTORY} />
-      <FavoritesQuestsList />
     </ImageBackground>
   );
 };

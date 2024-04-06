@@ -4,6 +4,7 @@ import { useTheme } from "@react-navigation/native";
 import { AntDesign } from "@expo/vector-icons";
 import { IconComponentMap, IconNameMap } from "../../types";
 import { LinearGradient } from "expo-linear-gradient";
+import { useTranslation } from "react-i18next";
 
 export type ToggleButtonProps<F extends keyof typeof IconComponentMap> = {
   title: string;
@@ -24,6 +25,7 @@ export const ToggleButton = <F extends keyof typeof IconComponentMap>({
 }: ToggleButtonProps<F>) => {
   const theme = useTheme();
   const styles = createStyles(theme);
+  const { t } = useTranslation();
 
   const Icon: JSX.ElementType =
     (familyIcon && IconComponentMap[familyIcon]) || AntDesign;
@@ -47,7 +49,7 @@ export const ToggleButton = <F extends keyof typeof IconComponentMap>({
             color={clicked ? "yellow" : "#cdcbd1"}
           />
           <Text style={[styles.text, clicked && styles.clickedText]}>
-            {title}
+            {t(`buttons.${title}`)}
           </Text>
         </View>
       </Pressable>

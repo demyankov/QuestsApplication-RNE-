@@ -32,7 +32,7 @@ const stackList: IStackList[] = [
   {
     name: SCREENS.QUESTDETAILS,
     component: QuestDetails,
-    title: "questDetails",
+    title: "questDetailsTitle",
   },
 ];
 

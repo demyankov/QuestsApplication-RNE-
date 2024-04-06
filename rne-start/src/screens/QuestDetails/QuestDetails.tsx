@@ -13,10 +13,11 @@ import {
   getUserSelector,
   getFavoritesAction,
   clearFavorites,
-  getUserReviewsAction,
   getQuestReviewsAction,
   clearReviews,
   getQuestReviewsSelector,
+  getIsReviewsLoadingMessage,
+  getIsLoadinQuestDetailsMessage,
 } from "../../store";
 import { createStyles } from "./styles";
 import {
@@ -34,8 +35,13 @@ import { useEffect, useState } from "react";
 import { getFavoritesSelector } from "../../store";
 import { toggleFavoritesAction } from "../../store/actions/toggleFavoritesAction";
 import { ReviewForm } from "../../components";
+import { ToastOptions, useToast } from "react-native-toast-notifications";
+import { useTranslation } from "react-i18next";
+import { FontAwesome } from "@expo/vector-icons";
+import { SCREENS } from "../../constants";
 
 export const QuestDetails = () => {
+  const toast = useToast();
   const dispatch = useAppDispatch();
   const quest = useAppSelector(getQuestDetails);
   const favorites = useAppSelector(getFavoritesSelector);
@@ -43,7 +49,10 @@ export const QuestDetails = () => {
   const reviews = useAppSelector(getQuestReviewsSelector);
   const isLoading = useAppSelector(getIsLoadingQuestDetails);
   const user = useAppSelector(getUserSelector);
+  const { t } = useTranslation();
   const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
+  const errorReviewsMessage = useAppSelector(getIsReviewsLoadingMessage);
+  const errorMessage = useAppSelector(getIsLoadinQuestDetailsMessage);
 
   const {
     id,
@@ -64,6 +73,14 @@ export const QuestDetails = () => {
   const theme = useTheme();
   const styles = createStyles(theme);
 
+  const showMessage = (text: string, type: ToastOptions["type"]) =>
+    toast.show(t(text), {
+      type: type,
+      placement: "top",
+      animationType: "slide-in",
+      icon: <FontAwesome name="hand-stop-o" size={24} color="#fff" />,
+    });
+
   const handleToggleFavorite = () => {
     dispatch(
       toggleFavoritesAction({
@@ -78,7 +95,7 @@ export const QuestDetails = () => {
   const handleToggleReviewModal = () => {
     const isAlreadyRated = reviews.find(({ userId }) => userId === user.id);
     isAlreadyRated
-      ? alert("Вы уже оставляли отзыв на данный квест")
+      ? showMessage("reviewExist", "danger")
       : setIsReviewModalOpen(!isReviewModalOpen);
   };
 
@@ -121,6 +138,12 @@ export const QuestDetails = () => {
     };
   }, [user.id]);
 
+  useEffect(() => {
+    if (errorReviewsMessage || errorMessage) {
+      showMessage(errorReviewsMessage || errorMessage, "danger");
+    }
+  }, [errorReviewsMessage, errorMessage]);
+
   return isLoading ? (
     <Loader />
   ) : (
@@ -141,14 +164,14 @@ export const QuestDetails = () => {
         </View>
         <View style={styles.container}>
           <DetailsTitle
-            title="Кратко о квесте"
+            title="aboutQuest"
             familyIcon="AntDesign"
             iconName="tagso"
           />
           <QuestsDetailsStatistics quest={quest} />
           <View style={styles.buttonsWrapper}>
             <ToggleButton
-              title="Квест пройден"
+              title="passed"
               familyIcon="Entypo"
               iconName="check"
               handleClick={handleToggleVisited}
@@ -156,7 +179,7 @@ export const QuestDetails = () => {
             />
             <ToggleButton
               clicked={isFavorite}
-              title="Избранное"
+              title="favorite"
               familyIcon="Fontisto"
               iconName="favorite"
               handleClick={handleToggleFavorite}
@@ -165,7 +188,7 @@ export const QuestDetails = () => {
           {(!!description.length || !!additionalDescription.length) && (
             <>
               <DetailsTitle
-                title="Описание"
+                title="description"
                 familyIcon="MaterialIcons"
                 iconName="description"
               />
@@ -174,7 +197,9 @@ export const QuestDetails = () => {
                   {item}
                 </Text>
               ))}
-              <Text style={styles.title}>Дополнительные условия</Text>
+              <Text style={styles.title}>
+                {t(`${SCREENS.QUESTDETAILS}.additionalTerms`)}
+              </Text>
               {additionalDescription?.map((item: string, i: number) => (
                 <Text style={styles.text} key={i}>
                   {item}
@@ -185,7 +210,7 @@ export const QuestDetails = () => {
           {!!modes.length && (
             <>
               <DetailsTitle
-                title="Режимы игры"
+                title="gameModes"
                 familyIcon="FontAwesome5"
                 iconName="fist-raised"
               />
@@ -197,13 +222,13 @@ export const QuestDetails = () => {
             </>
           )}
           <DetailsTitle
-            title="Забронировать квест"
+            title="bookedQuest"
             familyIcon="MaterialCommunityIcons"
             iconName="book-edit-outline"
           />
           {apiPath && <Schedule apiPath={apiPath} />}
           <DetailsTitle
-            title="Как добраться"
+            title="address"
             familyIcon="Entypo"
             iconName="address"
           />

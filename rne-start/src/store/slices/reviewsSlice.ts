@@ -56,7 +56,6 @@ const reviewsSlice = createSlice({
       })
       .addCase(sendReviewAction.rejected, (state, { error }) => {
         state.loadingMessage = error.message || "Ошибка запроса";
-        console.log(error);
       });
   },
 });

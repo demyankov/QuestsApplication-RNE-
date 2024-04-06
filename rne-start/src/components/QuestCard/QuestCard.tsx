@@ -1,14 +1,14 @@
 import { Image } from "expo-image";
 import { useTranslation } from "react-i18next";
-import { View, Text } from "react-native";
-import { useTheme } from "@react-navigation/native";
+import { View, Text, Pressable } from "react-native";
+import { useNavigation, useTheme } from "@react-navigation/native";
 
 import { createStyles } from "./styles";
 
 import { CustomLink } from "../CustomLink/CustomLink";
 import { QuestsCardStatistics } from "../QuestCardStatistics/QuestCardStatistics";
 
-import { IQuest } from "../../types";
+import { IQuest, MainStackType } from "../../types";
 import { SCREENS } from "../../constants";
 import { LinearGradient } from "expo-linear-gradient";
 
@@ -18,6 +18,7 @@ export const QuestCard = ({ card }: { card: IQuest }) => {
   const theme = useTheme();
   const styles = createStyles(theme);
   const { t } = useTranslation();
+  const { navigate } = useNavigation<MainStackType>();
 
   const gradient = ["#6d6c70", "#39383b", "#39383b", "#5b5a5c"];
 
@@ -28,7 +29,10 @@ export const QuestCard = ({ card }: { card: IQuest }) => {
       end={{ x: 1, y: 1 }}
       style={[styles.wrapper, styles.shadow]}
     >
-      <View style={styles.imageWrapper}>
+      <Pressable
+        style={styles.imageWrapper}
+        onPress={() => navigate(SCREENS.QUESTDETAILS, { questId: id })}
+      >
         <Image source={banner} style={styles.image} />
         <QuestsCardStatistics card={card} />
         {!isActive && (
@@ -36,7 +40,7 @@ export const QuestCard = ({ card }: { card: IQuest }) => {
             <Text style={styles.title}>{t("closed")}</Text>
           </View>
         )}
-      </View>
+      </Pressable>
       <Text style={styles.title}>{name}</Text>
       <Text style={styles.text}>{shortDescription}</Text>
       <CustomLink

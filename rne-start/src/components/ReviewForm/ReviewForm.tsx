@@ -24,6 +24,8 @@ import { CustomInput } from "../CustomInput/CustomInput";
 import { CustomButton } from "../CustomButton/CustomButton";
 import { configureUserName, isFuture, isOld } from "../../services";
 import { RateQuest } from "../RateQuest/RateQuest";
+import { useToast } from "react-native-toast-notifications";
+import { FontAwesome6 } from "@expo/vector-icons";
 
 interface ReviewFormProps {
   user: User;
@@ -39,6 +41,7 @@ export const ReviewForm = ({
   handleClose,
 }: ReviewFormProps) => {
   const dispatch = useAppDispatch();
+  const toast = useToast();
   const theme = useTheme();
   const styles = createStyles(theme);
   const [date, setDate] = useState(new Date());
@@ -100,6 +103,13 @@ export const ReviewForm = ({
       await dispatch(
         getQuestReviewsAction({ collectionName: "reviews", questId })
       );
+
+      toast.show(t("sendReviewSuccessfully"), {
+        type: "success",
+        placement: "top",
+        animationType: "slide-in",
+        icon: <FontAwesome6 name="face-smile-wink" size={24} color="#fff" />,
+      });
     } catch (e) {
       alert(e);
     }

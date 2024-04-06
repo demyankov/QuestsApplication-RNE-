@@ -8,8 +8,10 @@ export const createStyles = (theme: Theme) =>
       backgroundColor: theme.colors.card,
       borderRadius: scaleSize(8),
       padding: scaleSize(20),
-      width: scaleSize(620),
+      width: scaleSize(750),
+      maxWidth: "100%",
       minHeight: scaleSize(450),
+      position: "relative",
     },
     title: {
       color: theme.colors.text,
@@ -47,5 +49,12 @@ export const createStyles = (theme: Theme) =>
     statisticsText: {
       gap: scaleSize(25),
       color: theme.colors.text,
+    },
+    deleteIcon: {
+      position: "absolute",
+      width: scaleSize(50),
+      height: scaleSize(50),
+      top: scaleSize(30),
+      right: scaleSize(30),
     },
   });

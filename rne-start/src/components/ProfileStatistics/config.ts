@@ -2,9 +2,8 @@ import { SCREENS } from "../../constants";
 import {
   RootState,
   getFavoritesCountSelector,
-  getFavoritesSelector,
+  getCoutOfUserReviewsSelector,
   getVisitedCountSelector,
-  getVisitedSelector,
 } from "../../store";
 
 interface IStatistics {
@@ -24,7 +23,7 @@ export const statistics: IStatistics[] = [
   {
     text: "reviews",
     iconColor: "#81f20f",
-    selector: () => 0,
+    selector: getCoutOfUserReviewsSelector,
     to: SCREENS.REVIEWS,
   },
   {

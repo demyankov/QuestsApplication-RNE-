@@ -8,3 +8,4 @@ export * from "./toggleVisitedAction";
 export * from "./getQuestReviewsAction";
 export * from "./sendReviewAction";
 export * from "./getUserReviewsAction";
+export * from "./deleteReviewAction";

@@ -85,7 +85,7 @@ export const BookingCard = ({
       <ScrollView contentContainerStyle={styles.centeredView}>
         <View style={[styles.card, styles.cardShadow]}>
           <View style={styles.header}>
-            <Text style={styles.title}>Бронирование квеста</Text>
+            <Text style={styles.title}>{t("booking")}</Text>
             <Text style={styles.name}>{name}</Text>
             <View style={styles.dateWrapper}>
               <Text style={styles.date}>{formatDate(date)}</Text>
@@ -97,7 +97,7 @@ export const BookingCard = ({
             </TouchableOpacity>
           </View>
           <Text style={styles.price}>
-            Итого к оплате: {selectedPrice.price} руб.
+            {t("summary")}: {selectedPrice.price} {t("rub")}.
           </Text>
           <View style={styles.form}>
             {inputs.map(({ name, label }) => {
@@ -136,7 +136,7 @@ export const BookingCard = ({
               key={BOOKING_FORM.COMMENT}
               control={control}
               name={BOOKING_FORM.COMMENT}
-              label={t("сomment")}
+              label={"сomment"}
               numberOfLines={3}
               error={
                 errors[BOOKING_FORM.COMMENT] &&
@@ -144,7 +144,7 @@ export const BookingCard = ({
               }
             />
             <CustomButtonSecondary
-              title="Забронировать"
+              title="book"
               disabled={isDisabled}
               familyIcon="AntDesign"
               iconName="check"

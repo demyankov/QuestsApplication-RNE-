@@ -53,7 +53,7 @@ const questDetailsSlice = createSlice({
       })
       .addCase(getQuestDetailsAction.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        if (payload) {
+        if (!payload) {
           state.loadingMessage = "Информация о выбранном квесте отсутствует";
         }
         state.currentQuest = payload;

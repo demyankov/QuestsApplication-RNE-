@@ -5,6 +5,7 @@ import { useTheme } from "@react-navigation/native";
 import { MaskedTextInput } from "react-native-mask-text";
 import { AntDesign } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
+import { useTranslation } from "react-i18next";
 
 interface CustomInputProps {
   label?: string;
@@ -26,13 +27,14 @@ export const CustomInput = ({
 }: CustomInputProps) => {
   const theme = useTheme();
   const styles = createStyles(theme);
+  const { t } = useTranslation();
 
   const inputStyles = [styles.input, numberOfLines > 1 && styles.teatArea];
   const gradient = ["#414042", "#1e1e1f", "#1e1e1f", "#414042"];
 
   return (
     <View style={styles.inputWrapper}>
-      {label && <Text style={styles.label}>{label}</Text>}
+      {label && <Text style={styles.label}>{t(label)}</Text>}
       <Controller
         control={control}
         name={name}

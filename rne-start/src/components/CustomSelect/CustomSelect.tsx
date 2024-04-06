@@ -23,7 +23,7 @@ export const CustomSelect = ({
 
   return (
     <View style={styles.selectWrapper}>
-      <Text style={styles.selectTitle}>Выберите тариф</Text>
+      <Text style={styles.selectTitle}>{t("chooseTariff")}</Text>
       <SelectDropdown
         data={options}
         onSelect={(selectedItem) => {
