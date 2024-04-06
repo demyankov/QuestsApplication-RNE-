@@ -6,4 +6,5 @@ export * from "./getVisitedAction";
 export * from "./toggleFavoritesAction";
 export * from "./toggleVisitedAction";
 export * from "./getQuestReviewsAction";
+export * from "./sendReviewAction";
 export * from "./getUserReviewsAction";

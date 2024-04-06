@@ -14,7 +14,11 @@ export const ReviewsList = ({ reviews }: IReviewsList) => {
   const styles = createStyles(theme);
   const { t } = useTranslation();
 
-  return (
+  const isEmpty = !reviews.length;
+
+  return isEmpty ? (
+    <Text style={styles.text}>{t("noReviews")}</Text>
+  ) : (
     <FlatList
       contentContainerStyle={styles.wrapper}
       data={reviews}

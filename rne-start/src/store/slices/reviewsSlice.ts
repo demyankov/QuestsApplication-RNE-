@@ -1,6 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { IReview } from "../../types";
-import { getQuestReviewsAction, getUserReviewsAction } from "../actions";
+import {
+  getQuestReviewsAction,
+  getUserReviewsAction,
+  sendReviewAction,
+} from "../actions";
 
 interface IRewiewsSlice {
   reviews: IReview[];
@@ -33,7 +37,6 @@ const reviewsSlice = createSlice({
         state.reviews = payload;
         state.loadingMessage = "";
         state.isLoading = false;
-        console.log("reviews", payload);
       })
       .addCase(getQuestReviewsAction.rejected, (state, { error }) => {
         state.isLoading = false;
@@ -46,11 +49,14 @@ const reviewsSlice = createSlice({
         state.userReviews = payload;
         state.loadingMessage = "";
         state.isLoading = false;
-        console.log("userReviews", payload);
       })
       .addCase(getUserReviewsAction.rejected, (state, { error }) => {
         state.isLoading = false;
         state.loadingMessage = error.message || "Ошибка запроса";
+      })
+      .addCase(sendReviewAction.rejected, (state, { error }) => {
+        state.loadingMessage = error.message || "Ошибка запроса";
+        console.log(error);
       });
   },
 });

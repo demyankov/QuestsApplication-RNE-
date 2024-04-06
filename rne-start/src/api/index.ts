@@ -4,3 +4,4 @@ export * from "./getCollection";
 export * from "./getDocByName";
 export * from "./toggleArray";
 export * from "./getFilteredCollection";
+export * from "./addDoc";

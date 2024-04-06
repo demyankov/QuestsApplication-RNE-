@@ -7,6 +7,7 @@ import { filteredByArray } from "./filteredByArray";
 import { getRateArray } from "./getRateArray";
 import { isFuture } from "./isFuture";
 import { isOld } from "./isOld";
+import { configureUserName } from "./configureUserName";
 
 export {
   customQuestOptions,
@@ -18,4 +19,5 @@ export {
   getRateArray,
   isFuture,
   isOld,
+  configureUserName,
 };

@@ -8,7 +8,7 @@ export const createStyles = (theme: Theme) =>
       backgroundColor: theme.colors.card,
       borderRadius: scaleSize(8),
       padding: scaleSize(20),
-      width: "100%",
+      width: scaleSize(620),
       minHeight: scaleSize(450),
     },
     title: {

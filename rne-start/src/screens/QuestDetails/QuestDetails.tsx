@@ -76,8 +76,10 @@ export const QuestDetails = () => {
   };
 
   const handleToggleReviewModal = () => {
-    setIsReviewModalOpen(!isReviewModalOpen);
-    console.log(isReviewModalOpen);
+    const isAlreadyRated = reviews.find(({ userId }) => userId === user.id);
+    isAlreadyRated
+      ? alert("Вы уже оставляли отзыв на данный квест")
+      : setIsReviewModalOpen(!isReviewModalOpen);
   };
 
   const handleToggleVisited = () =>
@@ -206,32 +208,30 @@ export const QuestDetails = () => {
             iconName="address"
           />
           <Text style={styles.text}>{location}</Text>
-          {!!reviews.length && (
-            <>
-              <DetailsTitle
-                title="reviews"
-                familyIcon="MaterialIcons"
-                iconName="reviews"
-              />
-              <ReviewsList reviews={reviews} />
-              {user.id && (
-                <>
-                  <CustomButton
-                    title="leaveReview"
-                    familyIcon="Fontisto"
-                    iconName="favorite"
-                    handleClick={handleToggleReviewModal}
-                  />
-                  <ReviewForm
-                    user={user}
-                    quest={quest}
-                    visible={isReviewModalOpen}
-                    handleClose={handleToggleReviewModal}
-                  />
-                </>
-              )}
-            </>
-          )}
+          <>
+            <DetailsTitle
+              title="reviews"
+              familyIcon="MaterialIcons"
+              iconName="reviews"
+            />
+            <ReviewsList reviews={reviews} />
+            {user.id && (
+              <>
+                <CustomButton
+                  title="leaveReview"
+                  familyIcon="Fontisto"
+                  iconName="favorite"
+                  handleClick={handleToggleReviewModal}
+                />
+                <ReviewForm
+                  user={user}
+                  quest={quest}
+                  visible={isReviewModalOpen}
+                  handleClose={handleToggleReviewModal}
+                />
+              </>
+            )}
+          </>
         </View>
       </ImageBackground>
     </ScrollView>

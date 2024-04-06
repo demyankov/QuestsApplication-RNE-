@@ -4,11 +4,10 @@ import { scaleSize } from "../../utils";
 
 export const createStyles = (theme: Theme) =>
   StyleSheet.create({
-    title: {
+    text: {
       color: theme.colors.text,
       fontSize: scaleSize(30),
-      fontWeight: "bold",
-      textTransform: "uppercase",
+      marginBottom: scaleSize(40),
     },
     wrapper: {
       gap: scaleSize(20),

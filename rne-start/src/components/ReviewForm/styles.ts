@@ -65,10 +65,6 @@ export const createStyles = (theme: Theme) =>
       color: theme.colors.text,
       fontSize: scaleSize(30),
     },
-    rateWrapper: {
-      flexDirection: "row",
-      justifyContent: "space-between",
-    },
     dateWrapper: {
       position: "relative",
     },
