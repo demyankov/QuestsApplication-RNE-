@@ -1,5 +1,5 @@
-import { ImageBackground, SafeAreaView } from "react-native";
-import { styles } from "./styles";
+import { ImageBackground, SafeAreaView, Text } from "react-native";
+import { createStyles } from "./styles";
 import {
   getFavoritesAction,
   getFavoritesSelector,
@@ -10,10 +10,11 @@ import {
   useAppSelector,
 } from "../../store";
 import { Loader, QuestsList } from "../../components";
-import { useFocusEffect } from "@react-navigation/native";
+import { useFocusEffect, useTheme } from "@react-navigation/native";
 
 import { filteredByArray } from "../../services";
 import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 
 export const Favorites = () => {
   const favorites = useAppSelector(getFavoritesSelector);
@@ -22,6 +23,12 @@ export const Favorites = () => {
   const dispatch = useAppDispatch();
   const list = filteredByArray(quests, favorites);
   const { id } = useAppSelector(getUserSelector);
+  const { t } = useTranslation();
+
+  const theme = useTheme();
+  const styles = createStyles(theme);
+
+  const isNoFavorites = !list.length;
 
   useFocusEffect(
     useCallback(() => {
@@ -41,6 +48,7 @@ export const Favorites = () => {
         imageStyle={{ resizeMode: "cover", opacity: 0.4 }}
       >
         <QuestsList list={list} />
+        {isNoFavorites && <Text style={styles.text}>{t("noFavorites")}</Text>}
       </ImageBackground>
     </SafeAreaView>
   );

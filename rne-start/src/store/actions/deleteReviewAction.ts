@@ -1,12 +1,13 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { deleteDocumentById, getFilteredCollection } from "../../api";
-import { IFbFilter, IReview } from "../../types";
+import { deleteDocumentById } from "../../api";
 import { getUserReviewsAction } from "./getUserReviewsAction";
+import { getQuestReviewsAction } from "./getQuestReviewsAction";
 
 interface deleteReviewActionProps {
   collectionName: string;
   id: string;
-  userId;
+  userId: string;
+  questId?: string;
 }
 
 export const deleteReviewAction = createAsyncThunk<
@@ -14,10 +15,5 @@ export const deleteReviewAction = createAsyncThunk<
   deleteReviewActionProps
 >(
   "Reviews/deleteReviewAction",
-  async ({ collectionName, id, userId }, { dispatch }) => {
-    await deleteDocumentById(collectionName, id);
-
-    //ДОДЕЛАТЬ НОРМАЛЬНО УДАЛЕНИЕ ()ОБНОВЛЕНИЕ ПОСЛЕ УДАЛЕНИЯ
-    await dispatch(getUserReviewsAction({ collectionName: "reviews", userId }));
-  }
+  async ({ collectionName, id }) => await deleteDocumentById(collectionName, id)
 );

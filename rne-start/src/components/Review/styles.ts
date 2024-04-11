@@ -8,6 +8,7 @@ export const createStyles = (theme: Theme) =>
       backgroundColor: theme.colors.card,
       borderRadius: scaleSize(8),
       padding: scaleSize(20),
+      paddingRight: scaleSize(80),
       width: scaleSize(750),
       maxWidth: "100%",
       minHeight: scaleSize(450),
@@ -54,7 +55,7 @@ export const createStyles = (theme: Theme) =>
       position: "absolute",
       width: scaleSize(50),
       height: scaleSize(50),
-      top: scaleSize(30),
-      right: scaleSize(30),
+      top: scaleSize(28),
+      right: scaleSize(28),
     },
   });

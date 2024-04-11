@@ -9,9 +9,10 @@ import uuid from "react-native-uuid";
 import { createStyles } from "./styles";
 import {
   User,
-  getQuestReviewsAction,
+  getIsReviewsLoadingSelector,
   sendReviewAction,
   useAppDispatch,
+  useAppSelector,
 } from "../../store";
 import { IQuest, IReview, ReviewFormType } from "../../types";
 import { reviewFormScheme } from "../../shared/validationSchemes";
@@ -26,6 +27,7 @@ import { configureUserName, isFuture, isOld } from "../../services";
 import { RateQuest } from "../RateQuest/RateQuest";
 import { useToast } from "react-native-toast-notifications";
 import { FontAwesome6 } from "@expo/vector-icons";
+import { Loader } from "../Loader/Loader";
 
 interface ReviewFormProps {
   user: User;
@@ -50,6 +52,7 @@ export const ReviewForm = ({
   const { t } = useTranslation();
   const { firstName, secondName, id: userId } = user;
   const { name: questName, id: questId } = quest;
+  const isLoadingReviews = useAppSelector(getIsReviewsLoadingSelector);
 
   const defaultValues = {
     [REVIEW_FORM.COMMENT]: "",
@@ -77,12 +80,19 @@ export const ReviewForm = ({
     setDate(selectedDate);
   };
 
+  const clear = () => {
+    reset();
+    setDate(new Date());
+    setRate(0);
+  };
+
   const handleSendReview = async () => {
     const userName = configureUserName(firstName, secondName);
     const dateOfReview = new Date().toLocaleDateString();
     const dateOfGame = date.toLocaleDateString();
     const reviewText = getValues().comment;
     const id = uuid.v4("string") as string;
+
     const review: IReview = {
       id,
       userId,
@@ -95,14 +105,9 @@ export const ReviewForm = ({
       rate,
     };
     try {
-      await dispatch(
-        sendReviewAction({ collectionName: "reviews", doc: review })
-      );
+      await dispatch(sendReviewAction({ collectionName: "reviews", review }));
       handleClose();
-      reset();
-      await dispatch(
-        getQuestReviewsAction({ collectionName: "reviews", questId })
-      );
+      clear();
 
       toast.show(t("sendReviewSuccessfully"), {
         type: "success",
@@ -111,7 +116,12 @@ export const ReviewForm = ({
         icon: <FontAwesome6 name="face-smile-wink" size={24} color="#fff" />,
       });
     } catch (e) {
-      alert(e);
+      toast.show(t("Ошибка сохранения отзыва"), {
+        type: "danger",
+        placement: "top",
+        animationType: "slide-in",
+        icon: <FontAwesome6 name="face-smile-wink" size={24} color="#fff" />,
+      });
     }
   };
 
@@ -128,6 +138,7 @@ export const ReviewForm = ({
     >
       <ScrollView contentContainerStyle={styles.centeredView}>
         <View style={[styles.card, styles.cardShadow]}>
+          {isLoadingReviews && <Loader />}
           <View style={styles.header}>
             <Text style={styles.title}>{t("leaveReviewFor")}</Text>
             <Text style={styles.name}>{questName}</Text>
@@ -173,7 +184,7 @@ export const ReviewForm = ({
               }
             />
             <CustomButton
-              title="leaveReview"
+              title="buttons.leaveReview"
               disabled={isDisabled}
               familyIcon="MaterialIcons"
               iconName="reviews"

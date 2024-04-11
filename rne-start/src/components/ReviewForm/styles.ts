@@ -11,6 +11,7 @@ export const createStyles = (theme: Theme) =>
       backgroundColor: "rgba(0,0,0,0.7)",
     },
     card: {
+      position: "relative",
       width: "95%",
       justifyContent: "center",
       overflow: "hidden",

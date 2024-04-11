@@ -49,7 +49,7 @@ export const CustomButton = <F extends keyof typeof IconComponentMap>({
           {iconStart && (
             <Icon name={iconName} size={size} color={theme.colors.text} />
           )}
-          <Text style={styles.text}>{t(`buttons.${title}`)}</Text>
+          <Text style={styles.text}>{t(title)}</Text>
           {iconEnd && (
             <Icon name={iconName} size={size} color={theme.colors.text} />
           )}

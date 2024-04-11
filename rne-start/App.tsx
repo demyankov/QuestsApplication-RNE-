@@ -23,6 +23,7 @@ export default function App() {
           warningColor="orange"
           offsetTop={scaleSize(180)}
           swipeEnabled={true}
+          duration={2000}
         >
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}>

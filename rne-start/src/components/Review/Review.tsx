@@ -5,38 +5,22 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { scaleSize } from "../../utils";
 import { IReview } from "../../types";
 import { LinearGradient } from "expo-linear-gradient";
-import {
-  deleteReviewAction,
-  getUserIdSelector,
-  useAppDispatch,
-  useAppSelector,
-} from "../../store";
-import { deleteDocumentById } from "../../api";
+import { getUserIdSelector, useAppSelector } from "../../store";
 
 interface ReviewProps {
   review: IReview;
+  handleDelete: (id: string) => void;
 }
 
-export const Review = ({ review }: ReviewProps) => {
+export const Review = ({ review, handleDelete }: ReviewProps) => {
   const { questName, reviewText, dateOfReview, userName, rate, userId, id } =
     review;
   const currentUserId = useAppSelector(getUserIdSelector);
   const theme = useTheme();
   const styles = createStyles(theme);
-  const dispatch = useAppDispatch();
-
   const gradient = ["#414042", "#1e1e1f", "#414042"];
 
   const isOwner = currentUserId === userId;
-
-  const handleDelete = () =>
-    dispatch(
-      deleteReviewAction({
-        collectionName: "reviews",
-        id,
-        userId: currentUserId,
-      })
-    );
 
   return (
     <LinearGradient
@@ -54,7 +38,10 @@ export const Review = ({ review }: ReviewProps) => {
         <Text style={styles.statisticsText}>{rate}</Text>
       </View>
       {isOwner && (
-        <TouchableOpacity style={styles.deleteIcon} onPress={handleDelete}>
+        <TouchableOpacity
+          style={styles.deleteIcon}
+          onPress={() => handleDelete(id)}
+        >
           <MaterialIcons
             name="delete-forever"
             size={scaleSize(50)}

@@ -34,6 +34,8 @@ i18n
           reviewExist: "You have already left a review for this quest",
           sendReviewSuccessfully: "Your review has been successfully published",
           noReviews: "No reviews",
+          noFavorites: "No favorites quests",
+          noVisited: "No visited quests",
           selectDate: "Select game date",
           futureDate: "Are you from the future?",
           oldDate: "More than 180 days have passed",
@@ -66,6 +68,7 @@ i18n
           booking: "Booking a quest",
           summary: "Total payable",
           chooseTariff: "chooseTariff",
+          leaveReviewFor: "Leave a review for the quest",
           errors: {
             incorrectEmail: "Incorrect email",
             incorrectName: "Incorrect name",
@@ -115,7 +118,6 @@ i18n
             next: "Next",
             book: "Book",
             leaveReview: "Leave review",
-            leaveReviewFor: "Leave a review for the quest",
           },
           days: {
             0: "Sunday",
@@ -138,6 +140,8 @@ i18n
           selectDate: "Выберите дату игры",
           sendReviewSuccessfully: "Ваш отзыв успешно опубликован",
           noReviews: "Отзывы отсутствуют",
+          noFavorites: "Избранные квесты отсутствуют",
+          noVisited: "Посещенные квесты отсутствуют",
           futureDate: "Вы из будущего?",
           oldDate: "Прошло более 180 дней",
           rateGame: "Оцените игру",
@@ -170,6 +174,7 @@ i18n
           booking: "Бронирование квеста",
           summary: "Итого к оплате",
           chooseTariff: "Выберите тариф",
+          leaveReviewFor: "Оставить отзыв на квест",
           errors: {
             incorrectEmail: "Некорректный email",
             incorrectName: "Некорректное имя",
@@ -218,7 +223,6 @@ i18n
             next: "Далее",
             book: "Забронировать",
             leaveReview: "Оставить отзыв",
-            leaveReviewFor: "Оставить отзыв на квест",
           },
           days: {
             0: "Воскресенье",

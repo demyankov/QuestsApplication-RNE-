@@ -16,8 +16,11 @@ import {
   getQuestReviewsAction,
   clearReviews,
   getQuestReviewsSelector,
-  getIsReviewsLoadingMessage,
+  getReviewsLoadingMessage,
   getIsLoadinQuestDetailsMessage,
+  getReviewsErrorMessage,
+  deleteReviewAction,
+  getIsReviewsLoadingSelector,
 } from "../../store";
 import { createStyles } from "./styles";
 import {
@@ -37,7 +40,7 @@ import { toggleFavoritesAction } from "../../store/actions/toggleFavoritesAction
 import { ReviewForm } from "../../components";
 import { ToastOptions, useToast } from "react-native-toast-notifications";
 import { useTranslation } from "react-i18next";
-import { FontAwesome } from "@expo/vector-icons";
+import { FontAwesome, FontAwesome6 } from "@expo/vector-icons";
 import { SCREENS } from "../../constants";
 
 export const QuestDetails = () => {
@@ -51,7 +54,6 @@ export const QuestDetails = () => {
   const user = useAppSelector(getUserSelector);
   const { t } = useTranslation();
   const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
-  const errorReviewsMessage = useAppSelector(getIsReviewsLoadingMessage);
   const errorMessage = useAppSelector(getIsLoadinQuestDetailsMessage);
 
   const {
@@ -78,7 +80,12 @@ export const QuestDetails = () => {
       type: type,
       placement: "top",
       animationType: "slide-in",
-      icon: <FontAwesome name="hand-stop-o" size={24} color="#fff" />,
+      icon:
+        type === "success" ? (
+          <FontAwesome6 name="face-smile-wink" size={24} color="#fff" />
+        ) : (
+          <FontAwesome name="hand-stop-o" size={24} color="#fff" />
+        ),
     });
 
   const handleToggleFavorite = () => {
@@ -108,6 +115,29 @@ export const QuestDetails = () => {
         isInclude: isVisited,
       })
     );
+
+  const handleDelete = async (id: string) => {
+    try {
+      await dispatch(
+        deleteReviewAction({
+          collectionName: "reviews",
+          id,
+          userId: user.id,
+        })
+      );
+
+      await dispatch(
+        getQuestReviewsAction({
+          collectionName: "reviews",
+          questId: quest.id,
+        })
+      );
+
+      showMessage("Отзыв успешно удален", "success");
+    } catch {
+      showMessage("Ошибка удаления отзыва", "danger");
+    }
+  };
 
   useEffect(() => {
     dispatch(
@@ -139,19 +169,18 @@ export const QuestDetails = () => {
   }, [user.id]);
 
   useEffect(() => {
-    if (errorReviewsMessage || errorMessage) {
-      showMessage(errorReviewsMessage || errorMessage, "danger");
-    }
-  }, [errorReviewsMessage, errorMessage]);
+    errorMessage && showMessage(errorMessage, "danger");
+  }, [errorMessage]);
+
+  const uri =
+    "https://i.pinimg.com/originals/ad/b7/fe/adb7fe55390b917de8d3670babd0d4ff.jpg";
 
   return isLoading ? (
     <Loader />
   ) : (
     <ScrollView>
       <ImageBackground
-        source={{
-          uri: "https://i.pinimg.com/originals/ad/b7/fe/adb7fe55390b917de8d3670babd0d4ff.jpg",
-        }}
+        source={{ uri }}
         resizeMode="cover"
         style={{ flex: 1 }}
         imageStyle={{ resizeMode: "repeat", opacity: 0.4 }}
@@ -239,11 +268,11 @@ export const QuestDetails = () => {
               familyIcon="MaterialIcons"
               iconName="reviews"
             />
-            <ReviewsList reviews={reviews} />
+            <ReviewsList reviews={reviews} handleDelete={handleDelete} />
             {user.id && (
               <>
                 <CustomButton
-                  title="leaveReview"
+                  title="buttons.leaveReview"
                   familyIcon="Fontisto"
                   iconName="favorite"
                   handleClick={handleToggleReviewModal}

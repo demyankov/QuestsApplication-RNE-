@@ -80,7 +80,7 @@ export const Settings = () => {
             );
           })}
           <CustomButton
-            title={t("buttons.save")}
+            title="buttons.save"
             handleClick={handleSubmit(handleUpdateProfile)}
             disabled={disabled}
           />

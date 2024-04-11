@@ -1,7 +1,11 @@
 import { Text, View } from "react-native";
 import { StatisticsItem } from "../StatisticsItem/StatisticsItem";
 import { createStyles } from "./styles";
-import { getUserSelector, useAppSelector } from "../../store";
+import {
+  getUserSelector,
+  getsAverageRatingSelector,
+  useAppSelector,
+} from "../../store";
 import { useTheme } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 import { statistics } from "./config";
@@ -10,6 +14,8 @@ export const ProfileStatistics = () => {
   const theme = useTheme();
   const styles = createStyles(theme);
   const { t } = useTranslation();
+
+  const averageRating = useAppSelector(getsAverageRatingSelector);
 
   return (
     <View style={{ minWidth: "100%" }}>
@@ -28,7 +34,9 @@ export const ProfileStatistics = () => {
         })}
       </View>
       <View style={styles.statisticsReviews}>
-        <Text style={styles.text}>{`${t("averageRating")} - ${"0"}`}</Text>
+        <Text style={styles.text}>{`${t(
+          "averageRating"
+        )} - ${averageRating}`}</Text>
       </View>
     </View>
   );

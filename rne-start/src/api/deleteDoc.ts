@@ -18,7 +18,7 @@ export const deleteDocumentById = async (
 
   let querySnapshot = await getDocs(q);
 
-  querySnapshot.forEach((document) => {
-    deleteDoc(document.ref);
+  querySnapshot.forEach(async (document) => {
+    await deleteDoc(document.ref);
   });
 };

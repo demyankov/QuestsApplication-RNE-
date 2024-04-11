@@ -2,6 +2,15 @@ import { createSlice } from "@reduxjs/toolkit";
 import { User } from "../types";
 import { faker } from "@faker-js/faker";
 import { SettingProfileType } from "../../types";
+import { signUpAction } from "..";
+
+interface IUserSlice {
+  isAuth: boolean;
+  user: User;
+  isLoading: boolean;
+  errorMessage: string;
+  successMessage: string;
+}
 
 const initialState: User = {
   id: "001",
@@ -28,6 +37,20 @@ const userSlice = createSlice({
       state.location = payload.location;
     },
   },
+  // extraReducers(builder) {
+  //   builder
+  //     .addCase(signUpAction.pending, (state, action) => {
+  //       // state.isLoaderVisible = true;
+  //       // state.loadingMessage = "";
+  //     })
+  //     .addCase(signUpAction.fulfilled, (state, { payload }) => {
+  //       // state.isLoaderVisible = false;
+  //     })
+  //     .addCase(signUpAction.rejected, (state, { error }) => {
+  //       // state.isLoaderVisible = false;
+  //       // state.loadingMessage = error.message || "Ошибка запроса";
+  //     });
+  // },
 });
 
 export const {

@@ -7,9 +7,10 @@ import { Review } from "../Review/Review";
 
 interface IReviewsList {
   reviews: IReview[];
+  handleDelete: (id: string) => void;
 }
 
-export const ReviewsList = ({ reviews }: IReviewsList) => {
+export const ReviewsList = ({ reviews, handleDelete }: IReviewsList) => {
   const theme = useTheme();
   const styles = createStyles(theme);
   const { t } = useTranslation();
@@ -22,7 +23,9 @@ export const ReviewsList = ({ reviews }: IReviewsList) => {
     <FlatList
       contentContainerStyle={styles.wrapper}
       data={reviews}
-      renderItem={({ item }) => <Review review={item} />}
+      renderItem={({ item }) => (
+        <Review review={item} handleDelete={handleDelete} />
+      )}
       keyExtractor={(review) => review.id}
       horizontal
       nestedScrollEnabled

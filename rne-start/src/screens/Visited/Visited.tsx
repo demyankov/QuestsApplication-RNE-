@@ -1,5 +1,5 @@
-import { ImageBackground, SafeAreaView } from "react-native";
-import { styles } from "./styles";
+import { ImageBackground, SafeAreaView, Text } from "react-native";
+import { createStyles } from "./styles";
 import {
   getIsVisitedLoadingSelector,
   getQuests,
@@ -11,8 +11,9 @@ import {
 } from "../../store";
 import { Loader, QuestsList } from "../../components";
 import { filteredByArray } from "../../services";
-import { useFocusEffect } from "@react-navigation/native";
+import { useFocusEffect, useTheme } from "@react-navigation/native";
 import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 
 export const Visited = () => {
   const visited = useAppSelector(getVisitedSelector);
@@ -21,6 +22,12 @@ export const Visited = () => {
   const list = filteredByArray(quests, visited);
   const dispatch = useAppDispatch();
   const { id } = useAppSelector(getUserSelector);
+  const { t } = useTranslation();
+
+  const theme = useTheme();
+  const styles = createStyles(theme);
+
+  const isNoVisited = !list.length;
 
   useFocusEffect(
     useCallback(() => {
@@ -38,6 +45,7 @@ export const Visited = () => {
         resizeMode="cover"
       >
         <QuestsList list={list} />
+        {isNoVisited && <Text style={styles.text}>{t("noVisited")}</Text>}
       </ImageBackground>
     </SafeAreaView>
   );

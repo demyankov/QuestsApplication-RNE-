@@ -4,7 +4,7 @@ import { Modal, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Controller, useForm } from "react-hook-form";
-
+import uuid from "react-native-uuid";
 import { inputs } from "./config";
 import { createStyles } from "./styles";
 
@@ -14,8 +14,10 @@ import { CustomInput } from "../CustomInput/CustomInput";
 import { convertPrices, formatDate } from "../../services";
 import {
   ISchedule,
+  bookingAction,
   getQuestDetails,
   getUserSelector,
+  useAppDispatch,
   useAppSelector,
 } from "../../store";
 import { BOOKING_FORM } from "../../constants";
@@ -43,12 +45,14 @@ export const BookingCard = ({
     players_num: "",
     option: "",
   });
+  const dispatch = useAppDispatch();
 
   const { t } = useTranslation();
   const { firstName, phone, email } = useAppSelector(getUserSelector);
-
+  const uid = uuid.v4("string") as string;
   const { name, location } = useAppSelector(getQuestDetails);
   const { date, time, extraPrices, our_time_id } = slot;
+  let md5 = require("md5");
 
   const convertedPrices = convertPrices(extraPrices);
   const prices = convertedPrices.map(({ option }) => option);
@@ -74,6 +78,49 @@ export const BookingCard = ({
   });
 
   const isDisabled = !isValid ?? !isDirty;
+
+  const handleBook = () => {
+    // const bookedItem = {
+    //   ...getValues(),
+    //   datetime: `${date} ${time}`,
+    //   price: selectedPrice.price,
+    //   our_time_id,
+    //   signature: md5(`${date} ${time}:00 . BR`),
+    //   source: "BR Application",
+    //   uid,
+    // };
+
+    const secret = md5(
+      getValues().name +
+        getValues().phone +
+        getValues().email +
+        "BlackOrgRoomSecret"
+    );
+
+    const bookedItem = {
+      ...getValues(),
+      id_quest: our_time_id,
+      date_quest: date,
+      time_quest: time,
+      price_quest: selectedPrice.price,
+      source: "BR Application",
+      quest_id: "2",
+      key_input: "BR Application",
+      // secret,
+    };
+
+    const formData = new URLSearchParams();
+    Object.keys(bookedItem).forEach((key) =>
+      formData.append(key, bookedItem[key])
+    );
+
+    dispatch(
+      bookingAction({
+        apiPath: "https://blackroom.by/api/my/quests/2/order",
+        bookedItem: formData,
+      })
+    ).then(() => reset());
+  };
 
   return (
     <Modal
@@ -144,24 +191,12 @@ export const BookingCard = ({
               }
             />
             <CustomButtonSecondary
-              title="book"
+              title="buttons.book"
               disabled={isDisabled}
               familyIcon="AntDesign"
               iconName="check"
               iconEnd
-              handleClick={handleSubmit(() => {
-                const params = {
-                  ...getValues(),
-                  // дата и время игры в формате "Y-m-d H:i:s"
-                  datetime: `${date} ${time}`,
-                  price: selectedPrice.price,
-                  signature: "fhfnjffjnjnyjf",
-                  source: "BR Application",
-                  uid: "12345",
-                };
-
-                reset();
-              })}
+              handleClick={handleSubmit(handleBook)}
             />
           </View>
         </View>

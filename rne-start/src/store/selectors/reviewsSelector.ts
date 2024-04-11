@@ -12,5 +12,11 @@ export const getCoutOfUserReviewsSelector = (state: RootState) =>
 export const getIsReviewsLoadingSelector = (state: RootState) =>
   state.reviews.isLoading;
 
-export const getIsReviewsLoadingMessage = (state: RootState) =>
+export const getReviewsLoadingMessage = (state: RootState) =>
   state.reviews.loadingMessage;
+
+export const getReviewsErrorMessage = (state: RootState) =>
+  state.reviews.errorMessage;
+
+export const getsAverageRatingSelector = (state: RootState) =>
+  state.reviews.averageRating;

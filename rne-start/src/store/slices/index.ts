@@ -5,3 +5,4 @@ export * from "./questDetailsSlice";
 export * from "./visitedSlice";
 export * from "./questsSlice";
 export * from "./reviewsSlice";
+export * from "./bookingSlice";
