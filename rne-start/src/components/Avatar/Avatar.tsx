@@ -1,8 +1,4 @@
-import {
-  TouchableHighlight,
-  TouchableWithoutFeedback,
-  View,
-} from "react-native";
+import { TouchableWithoutFeedback, View } from "react-native";
 import { styles } from "./styles";
 import { Image, ImageProps } from "expo-image";
 

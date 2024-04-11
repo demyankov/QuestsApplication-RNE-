@@ -44,8 +44,8 @@ export const Visited = () => {
         source={require("../../assets/bg.jpg")}
         resizeMode="cover"
       >
-        <QuestsList list={list} />
         {isNoVisited && <Text style={styles.text}>{t("noVisited")}</Text>}
+        <QuestsList list={list} />
       </ImageBackground>
     </SafeAreaView>
   );

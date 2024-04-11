@@ -9,3 +9,4 @@ export * from "./deleteDoc";
 export * from "./book";
 export * from "./setDoc";
 export * from "./signUp";
+export * from "./signIn";

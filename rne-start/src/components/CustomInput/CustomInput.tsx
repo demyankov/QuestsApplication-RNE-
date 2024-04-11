@@ -11,6 +11,7 @@ interface CustomInputProps {
   label?: string;
   name: string;
   error: string | undefined;
+  secure?: boolean;
   control: any;
   numberOfLines?: number;
   placeholder?: string;
@@ -21,6 +22,7 @@ export const CustomInput = ({
   name,
   error,
   control,
+  secure = false,
   placeholder = "",
   numberOfLines = 1,
   ...otherProps
@@ -47,6 +49,7 @@ export const CustomInput = ({
             <TextInput
               style={inputStyles}
               placeholder={placeholder}
+              secureTextEntry={secure}
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}

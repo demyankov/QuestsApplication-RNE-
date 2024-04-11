@@ -13,7 +13,6 @@ export const createStyles = (theme: Theme) =>
       margin: 0,
       paddingVertical: scaleSize(10),
       paddingHorizontal: scaleSize(20),
-      backgroundColor: theme.colors.inputBackground,
       borderRadius: scaleSize(10),
       borderColor: "#b1b1b3",
       borderWidth: 1,

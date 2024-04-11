@@ -3,6 +3,7 @@ export enum STACKS {
 }
 
 export enum SCREENS {
+  AUTH = "Auth",
   PROFILE = "Profile",
   SETTINGS = "Settings",
   MAIN = "Main",

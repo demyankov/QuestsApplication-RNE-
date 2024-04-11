@@ -2,12 +2,14 @@ import { createSlice } from "@reduxjs/toolkit";
 import { bookingAction } from "../actions";
 
 interface IBookingSlice {
-  loadingMessage: string;
+  successMessage: string;
+  errorMessage: string;
   isLoading: boolean;
 }
 
 const initialState: IBookingSlice = {
-  loadingMessage: "",
+  successMessage: "",
+  errorMessage: "",
   isLoading: true,
 };
 
@@ -19,13 +21,15 @@ const bookingSlice = createSlice({
     builder
       .addCase(bookingAction.pending, (state) => {
         state.isLoading = true;
+        state.successMessage = "";
+        state.errorMessage = "";
       })
       .addCase(bookingAction.fulfilled, (state) => {
         state.isLoading = false;
-        state.loadingMessage = "";
+        state.successMessage = "Квест успешно забронирован";
       })
       .addCase(bookingAction.rejected, (state, { error }) => {
-        state.loadingMessage = error.message || "Ошибка запроса";
+        state.errorMessage = error.message || "Ошибка бронирования квеста";
         state.isLoading = false;
       });
   },

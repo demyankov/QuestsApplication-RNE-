@@ -3,7 +3,7 @@ import * as Localization from "expo-localization";
 import { createStyles } from "./styles";
 import { Header, Loader, QuestsList } from "../../components";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Pressable, Text } from "react-native";
+import { Text } from "react-native";
 import { useTranslation } from "react-i18next";
 import { SCREENS } from "../../constants";
 import { ImageBackground } from "expo-image";
@@ -13,7 +13,6 @@ import {
   getQuestsAction,
   useAppDispatch,
   useAppSelector,
-  signUpAction,
 } from "../../store";
 import { useEffect } from "react";
 
@@ -25,10 +24,6 @@ export const Main = () => {
   const language = Localization.locale.substring(0, 2);
   const quests = useAppSelector(getActiveQuests);
   const isLoading = useAppSelector(getIsLoadingQuests);
-
-  const handleSignUp = () => {
-    dispatch(signUpAction({ email: "2@mail.ru", password: "1234587" }));
-  };
 
   useEffect(() => {
     dispatch(getQuestsAction("questsDetails"));
@@ -44,9 +39,6 @@ export const Main = () => {
         imageStyle={{ resizeMode: "cover", opacity: 0.4 }}
       >
         <Header />
-        <Pressable onPress={handleSignUp}>
-          <Text style={styles.text}>Регистрация</Text>
-        </Pressable>
         <Text style={[styles.title, styles.textShadow]}>
           {t(`${SCREENS.MAIN}.title`)}
         </Text>

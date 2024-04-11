@@ -47,8 +47,8 @@ export const Favorites = () => {
         source={require("../../assets/bg.jpg")}
         imageStyle={{ resizeMode: "cover", opacity: 0.4 }}
       >
-        <QuestsList list={list} />
         {isNoFavorites && <Text style={styles.text}>{t("noFavorites")}</Text>}
+        <QuestsList list={list} />
       </ImageBackground>
     </SafeAreaView>
   );

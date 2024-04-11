@@ -2,12 +2,10 @@ import { useTheme } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 import { Modal, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { MaterialIcons } from "@expo/vector-icons";
+import { FontAwesome, FontAwesome6, MaterialIcons } from "@expo/vector-icons";
 import { Controller, useForm } from "react-hook-form";
-import uuid from "react-native-uuid";
-import { inputs } from "./config";
+import { defaultPrice, inputs } from "./config";
 import { createStyles } from "./styles";
-
 import { CustomButtonSecondary } from "../CustomButtonSecondary/CustomButtonSecondary";
 import { CustomInput } from "../CustomInput/CustomInput";
 
@@ -15,7 +13,11 @@ import { convertPrices, formatDate } from "../../services";
 import {
   ISchedule,
   bookingAction,
+  getBookingErrorMessageSelector,
+  getBookingSuccessMessageSelector,
+  getIsBookingLoadingSelector,
   getQuestDetails,
+  getScheduleAction,
   getUserSelector,
   useAppDispatch,
   useAppSelector,
@@ -26,6 +28,8 @@ import { bookingFormScheme } from "../../shared/validationSchemes";
 import { CustomSelect } from "../CustomSelect/CustomSelect";
 import { useState } from "react";
 import { IConvertPrice } from "../../services/convertPrices";
+import { Loader } from "../Loader/Loader";
+import { ToastOptions, useToast } from "react-native-toast-notifications";
 
 interface BookingCardProps {
   slot: ISchedule;
@@ -40,19 +44,21 @@ export const BookingCard = ({
 }: BookingCardProps) => {
   const theme = useTheme();
   const styles = createStyles(theme);
-  const [selectedPrice, setSelectedPrice] = useState<IConvertPrice>({
-    price: "0",
-    players_num: "",
-    option: "",
-  });
-  const dispatch = useAppDispatch();
-
   const { t } = useTranslation();
+  const [selectedPrice, setSelectedPrice] =
+    useState<IConvertPrice>(defaultPrice);
+
+  const dispatch = useAppDispatch();
+  const isLoading = useAppSelector(getIsBookingLoadingSelector);
   const { firstName, phone, email } = useAppSelector(getUserSelector);
-  const uid = uuid.v4("string") as string;
-  const { name, location } = useAppSelector(getQuestDetails);
+  const { name, location, id, bookingApiPath, apiPath } =
+    useAppSelector(getQuestDetails);
+  const errorMessage = useAppSelector(getBookingErrorMessageSelector);
+  const successMessage = useAppSelector(getBookingSuccessMessageSelector);
+
+  const toast = useToast();
+
   const { date, time, extraPrices, our_time_id } = slot;
-  let md5 = require("md5");
 
   const convertedPrices = convertPrices(extraPrices);
   const prices = convertedPrices.map(({ option }) => option);
@@ -77,49 +83,47 @@ export const BookingCard = ({
     mode: "onBlur",
   });
 
-  const isDisabled = !isValid ?? !isDirty;
+  const showMessage = (text: string, type: ToastOptions["type"]) =>
+    toast.show(t(text), {
+      type: type,
+      placement: "top",
+      animationType: "slide-in",
+      icon:
+        type === "success" ? (
+          <FontAwesome6 name="face-smile-wink" size={24} color="#fff" />
+        ) : (
+          <FontAwesome name="hand-stop-o" size={24} color="#fff" />
+        ),
+    });
 
-  const handleBook = () => {
-    // const bookedItem = {
-    //   ...getValues(),
-    //   datetime: `${date} ${time}`,
-    //   price: selectedPrice.price,
-    //   our_time_id,
-    //   signature: md5(`${date} ${time}:00 . BR`),
-    //   source: "BR Application",
-    //   uid,
-    // };
+  const isDisabled = !isValid && !isDirty && !isLoading;
 
-    const secret = md5(
-      getValues().name +
-        getValues().phone +
-        getValues().email +
-        "BlackOrgRoomSecret"
-    );
-
+  const handleBook = async () => {
     const bookedItem = {
       ...getValues(),
       id_quest: our_time_id,
       date_quest: date,
       time_quest: time,
-      price_quest: selectedPrice.price,
+      price_quest: getValues()[BOOKING_FORM.TARIFF],
       source: "BR Application",
-      quest_id: "2",
+      quest_id: id,
       key_input: "BR Application",
-      // secret,
     };
 
-    const formData = new URLSearchParams();
-    Object.keys(bookedItem).forEach((key) =>
-      formData.append(key, bookedItem[key])
-    );
-
-    dispatch(
-      bookingAction({
-        apiPath: "https://blackroom.by/api/my/quests/2/order",
-        bookedItem: formData,
-      })
-    ).then(() => reset());
+    try {
+      await dispatch(
+        bookingAction({
+          apiPath: bookingApiPath,
+          bookedItem: bookedItem,
+        })
+      );
+      showMessage(successMessage, "success");
+      handleClose();
+      reset();
+      dispatch(getScheduleAction({ apiPath }));
+    } catch {
+      showMessage(errorMessage, "danger");
+    }
   };
 
   return (
@@ -131,6 +135,7 @@ export const BookingCard = ({
     >
       <ScrollView contentContainerStyle={styles.centeredView}>
         <View style={[styles.card, styles.cardShadow]}>
+          {isLoading && <Loader />}
           <View style={styles.header}>
             <Text style={styles.title}>{t("booking")}</Text>
             <Text style={styles.name}>{name}</Text>

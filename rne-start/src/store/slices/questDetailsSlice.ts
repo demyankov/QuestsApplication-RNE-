@@ -12,6 +12,7 @@ interface IQuestDetailsSlice {
 const initialQuest = {
   id: "",
   apiPath: "",
+  bookingApiPath: "",
   name: "",
   mainGenre: "",
   genres: [],

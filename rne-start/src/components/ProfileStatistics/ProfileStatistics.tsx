@@ -22,6 +22,7 @@ export const ProfileStatistics = () => {
       <View style={styles.statisticsWrapper}>
         {statistics.map(({ text, iconColor, selector, to }) => {
           const count = useAppSelector(selector);
+          console.log(text, count);
           return (
             <StatisticsItem
               key={to}

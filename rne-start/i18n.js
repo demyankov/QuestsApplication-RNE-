@@ -69,6 +69,10 @@ i18n
           summary: "Total payable",
           chooseTariff: "chooseTariff",
           leaveReviewFor: "Leave a review for the quest",
+          signUp: "Registration",
+          signIn: "Login",
+          password: "Password",
+          goToMain: "Go to main",
           errors: {
             incorrectEmail: "Incorrect email",
             incorrectName: "Incorrect name",
@@ -111,6 +115,7 @@ i18n
           },
           buttons: {
             save: "Save",
+            cancel: "Cancel",
             details: "More details...",
             passed: "The quest passed",
             favorite: "Favorite",
@@ -118,6 +123,8 @@ i18n
             next: "Next",
             book: "Book",
             leaveReview: "Leave review",
+            signUp: "Registration",
+            signIn: "Login",
           },
           days: {
             0: "Sunday",
@@ -175,6 +182,10 @@ i18n
           summary: "Итого к оплате",
           chooseTariff: "Выберите тариф",
           leaveReviewFor: "Оставить отзыв на квест",
+          signUp: "Регистрация",
+          signIn: "Войти",
+          password: "Пароль",
+          goToMain: "Назад на главную",
           errors: {
             incorrectEmail: "Некорректный email",
             incorrectName: "Некорректное имя",
@@ -216,6 +227,7 @@ i18n
           },
           buttons: {
             save: "Сохранить",
+            cancel: "Отмена",
             details: "Подробнее...",
             passed: "Квест пройден",
             favorite: "Избранный",
@@ -223,6 +235,8 @@ i18n
             next: "Далее",
             book: "Забронировать",
             leaveReview: "Оставить отзыв",
+            signUp: "Регистрация",
+            signIn: "Войти",
           },
           days: {
             0: "Воскресенье",

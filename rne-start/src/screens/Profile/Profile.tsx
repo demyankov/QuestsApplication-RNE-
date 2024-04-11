@@ -5,6 +5,9 @@ import { ProfileStatistics, User, CustomLink, Loader } from "../../components";
 import { SCREENS } from "../../constants/screens";
 import { useTranslation } from "react-i18next";
 import {
+  clearFavorites,
+  clearReviews,
+  clearVisited,
   getFavoritesAction,
   getIsFavoritesLoadingSelector,
   getIsVisitedLoadingSelector,
@@ -14,7 +17,7 @@ import {
   useAppDispatch,
   useAppSelector,
 } from "../../store";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 
 export const Profile = () => {
   const theme = useTheme();
@@ -37,8 +40,17 @@ export const Profile = () => {
         getVisitedAction({ collectionName: "visited", docName: userId })
       );
       dispatch(getUserReviewsAction({ collectionName: "reviews", userId }));
-    }, [])
+    }, [userId])
   );
+
+  useEffect(() => {
+    console.log("userId", userId);
+    return () => {
+      clearReviews();
+      clearFavorites();
+      clearVisited();
+    };
+  }, []);
 
   return isLoading ? (
     <Loader />

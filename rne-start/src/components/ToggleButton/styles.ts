@@ -16,9 +16,14 @@ export const createStyles = (theme: Theme) =>
       borderRadius: scaleSize(8),
       borderWidth: 1,
     },
+    width: {
+      width: "100%",
+    },
     wrapper: {
       flexDirection: "row",
       gap: scaleSize(20),
+      alignItems: "center",
+      justifyContent: "center",
     },
     text: {
       fontSize: scaleSize(30),
@@ -26,10 +31,12 @@ export const createStyles = (theme: Theme) =>
     },
     clicked: {
       backgroundColor: "#8300FF",
-      // borderColor: "green",
-      // borderWidth: 0,
     },
     clickedText: {
       color: "white",
+    },
+    withoutBorder: {
+      borderWidth: 0,
+      borderRadius: 0,
     },
   });

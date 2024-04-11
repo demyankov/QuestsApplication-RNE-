@@ -6,6 +6,7 @@ import { Visited } from "./Visited/Visited";
 import { Favorites } from "./Favorites/Favorites";
 import { Reviews } from "./Reviews/Reviews";
 import { History } from "./History/History";
+import { Auth } from "./Auth/Auth";
 
 export {
   Main,
@@ -16,4 +17,5 @@ export {
   Favorites,
   Reviews,
   History,
+  Auth,
 };

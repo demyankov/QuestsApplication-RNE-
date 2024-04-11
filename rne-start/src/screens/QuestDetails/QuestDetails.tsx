@@ -16,11 +16,9 @@ import {
   getQuestReviewsAction,
   clearReviews,
   getQuestReviewsSelector,
-  getReviewsLoadingMessage,
   getIsLoadinQuestDetailsMessage,
-  getReviewsErrorMessage,
   deleteReviewAction,
-  getIsReviewsLoadingSelector,
+  getIsAuthSelector,
 } from "../../store";
 import { createStyles } from "./styles";
 import {
@@ -52,6 +50,7 @@ export const QuestDetails = () => {
   const reviews = useAppSelector(getQuestReviewsSelector);
   const isLoading = useAppSelector(getIsLoadingQuestDetails);
   const user = useAppSelector(getUserSelector);
+  const isAuth = useAppSelector(getIsAuthSelector);
   const { t } = useTranslation();
   const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
   const errorMessage = useAppSelector(getIsLoadinQuestDetailsMessage);
@@ -198,22 +197,24 @@ export const QuestDetails = () => {
             iconName="tagso"
           />
           <QuestsDetailsStatistics quest={quest} />
-          <View style={styles.buttonsWrapper}>
-            <ToggleButton
-              title="passed"
-              familyIcon="Entypo"
-              iconName="check"
-              handleClick={handleToggleVisited}
-              clicked={isVisited}
-            />
-            <ToggleButton
-              clicked={isFavorite}
-              title="favorite"
-              familyIcon="Fontisto"
-              iconName="favorite"
-              handleClick={handleToggleFavorite}
-            />
-          </View>
+          {isAuth && (
+            <View style={styles.buttonsWrapper}>
+              <ToggleButton
+                title="passed"
+                familyIcon="Entypo"
+                iconName="check"
+                handleClick={handleToggleVisited}
+                clicked={isVisited}
+              />
+              <ToggleButton
+                clicked={isFavorite}
+                title="favorite"
+                familyIcon="Fontisto"
+                iconName="favorite"
+                handleClick={handleToggleFavorite}
+              />
+            </View>
+          )}
           {(!!description.length || !!additionalDescription.length) && (
             <>
               <DetailsTitle

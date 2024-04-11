@@ -8,6 +8,7 @@ import {
   Reviews,
   Visited,
   History,
+  Auth,
 } from "../screens";
 import { SCREENS } from "../constants/screens";
 import { MainStackParamsList } from "../types";
@@ -22,6 +23,7 @@ interface IStackList {
 }
 
 const stackList: IStackList[] = [
+  { name: SCREENS.AUTH, component: Auth },
   { name: SCREENS.PROFILE, component: Profile, title: "profile" },
   { name: SCREENS.SETTINGS, component: Settings, title: "settings" },
   { name: SCREENS.FAVORITES, component: Favorites, title: "favoritesQuests" },

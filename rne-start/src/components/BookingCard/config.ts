@@ -5,3 +5,9 @@ export const inputs = [
   { name: BOOKING_FORM.EMAIL, label: "E-mail" },
   { name: BOOKING_FORM.PHONE, label: "phone" },
 ];
+
+export const defaultPrice = {
+  price: "0",
+  players_num: "",
+  option: "",
+};

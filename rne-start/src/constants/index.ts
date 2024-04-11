@@ -5,3 +5,4 @@ export * from "./slotStatus";
 export * from "./bookingForm";
 export * from "./theme";
 export * from "./reviewForm";
+export * from "./authForm";

@@ -1,4 +1,6 @@
 export const getAge = (age: string): string => {
+  if (!age) return;
+
   const numbers = ["2", "3", "4"];
   const lastNumber = age[age.length - 1];
   const penultimateNumber = age[age.length - 2];

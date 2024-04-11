@@ -5,15 +5,23 @@ import { TouchableHighlight, View } from "react-native";
 import { scaleSize } from "../../utils";
 import { MainStackType } from "../../types";
 import { SCREENS } from "../../constants";
-import { getQuestsAction, useAppDispatch } from "../../store";
+import {
+  getIsAuthSelector,
+  getQuestsAction,
+  useAppDispatch,
+  useAppSelector,
+} from "../../store";
 
 export const Header = () => {
   const theme = useTheme();
   const styles = createStyles(theme);
   const { navigate } = useNavigation<MainStackType>();
   const dispatch = useAppDispatch();
+  const isAuth = useAppSelector(getIsAuthSelector);
 
-  const handleClick = () => navigate(SCREENS.PROFILE);
+  const handleClick = () =>
+    isAuth ? navigate(SCREENS.PROFILE) : navigate(SCREENS.AUTH);
+
   const handleReload = () => dispatch(getQuestsAction("questsDetails"));
 
   return (

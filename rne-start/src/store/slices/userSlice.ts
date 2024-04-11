@@ -2,26 +2,33 @@ import { createSlice } from "@reduxjs/toolkit";
 import { User } from "../types";
 import { faker } from "@faker-js/faker";
 import { SettingProfileType } from "../../types";
-import { signUpAction } from "..";
+import { signUpAction, signInAction } from "../actions";
 
 interface IUserSlice {
   isAuth: boolean;
   user: User;
   isLoading: boolean;
+  isAuthChangedLoading: boolean;
   errorMessage: string;
   successMessage: string;
 }
 
-const initialState: User = {
-  id: "001",
-  isAuth: true,
-  firstName: "Геннадий",
-  secondName: "Бабушкин",
-  age: "9",
-  email: "daa@mail.ru",
-  avatar: faker.image.avatar(),
-  phone: "",
-  location: "Беларусь",
+const initialState: IUserSlice = {
+  isAuth: false,
+  user: {
+    id: "",
+    firstName: "",
+    secondName: "",
+    age: "",
+    email: "",
+    avatar: faker.image.avatar(),
+    phone: "",
+    location: "",
+  },
+  isLoading: false,
+  isAuthChangedLoading: false,
+  errorMessage: "",
+  successMessage: "",
 };
 
 const userSlice = createSlice({
@@ -29,31 +36,50 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     updateProfileSettings(state, { payload }: { payload: SettingProfileType }) {
-      state.firstName = payload.firstName;
-      state.secondName = payload.secondName;
-      state.age = payload.age;
-      state.email = payload.email || "";
-      state.phone = payload.phone || "";
-      state.location = payload.location;
+      state.user = { ...state.user, ...payload };
+    },
+    clearUser(state) {
+      state.user = initialState.user;
+    },
+    setUser(state, { payload }: { payload: User }) {
+      state.user = payload;
+      if (state.user.id) {
+        state.isAuth = true;
+      }
+      console.log("UserSlise", payload);
     },
   },
-  // extraReducers(builder) {
-  //   builder
-  //     .addCase(signUpAction.pending, (state, action) => {
-  //       // state.isLoaderVisible = true;
-  //       // state.loadingMessage = "";
-  //     })
-  //     .addCase(signUpAction.fulfilled, (state, { payload }) => {
-  //       // state.isLoaderVisible = false;
-  //     })
-  //     .addCase(signUpAction.rejected, (state, { error }) => {
-  //       // state.isLoaderVisible = false;
-  //       // state.loadingMessage = error.message || "Ошибка запроса";
-  //     });
-  // },
+  extraReducers(builder) {
+    builder
+      .addCase(signUpAction.pending, (state) => {
+        state.isLoading = true;
+        state.errorMessage = "";
+      })
+      .addCase(signUpAction.fulfilled, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(signUpAction.rejected, (state, { error }) => {
+        state.isLoading = false;
+        state.errorMessage = error.message || "Ошибка регистрации";
+      })
+      .addCase(signInAction.pending, (state) => {
+        state.isLoading = true;
+        state.errorMessage = "";
+      })
+      .addCase(signInAction.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.user = payload;
+        state.isAuth = true;
+        console.log(payload);
+      })
+      .addCase(signInAction.rejected, (state, { error }) => {
+        state.isLoading = false;
+        state.errorMessage = error.message || "Ошибка авторизации";
+      });
+  },
 });
 
 export const {
   reducer: userReducer,
-  actions: { updateProfileSettings },
+  actions: { updateProfileSettings, clearUser, setUser },
 } = userSlice;

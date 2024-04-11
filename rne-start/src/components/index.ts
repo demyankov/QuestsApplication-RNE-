@@ -18,6 +18,8 @@ import { Header } from "./Header/Header";
 import { Loader } from "./Loader/Loader";
 import { DetailsTitle } from "./DetailsTitle/DetailsTitle";
 import { ReviewForm } from "./ReviewForm/ReviewForm";
+import { SignUpForm } from "./SignUpForm/SignUpForm";
+import { SignInForm } from "./SignInForm/SignInForm";
 
 export {
   Avatar,
@@ -40,4 +42,6 @@ export {
   Loader,
   ReviewForm,
   DetailsTitle,
+  SignUpForm,
+  SignInForm,
 };

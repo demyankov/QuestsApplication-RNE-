@@ -13,6 +13,7 @@ export type ToggleButtonProps<F extends keyof typeof IconComponentMap> = {
   familyIcon?: F;
   iconName?: IconNameMap[F];
   size?: number;
+  withoutBorder?: boolean;
 };
 
 export const ToggleButton = <F extends keyof typeof IconComponentMap>({
@@ -22,6 +23,7 @@ export const ToggleButton = <F extends keyof typeof IconComponentMap>({
   familyIcon,
   iconName,
   size = 20,
+  withoutBorder = false,
 }: ToggleButtonProps<F>) => {
   const theme = useTheme();
   const styles = createStyles(theme);
@@ -39,9 +41,9 @@ export const ToggleButton = <F extends keyof typeof IconComponentMap>({
       colors={gradient}
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
-      style={styles.button}
+      style={[styles.button, withoutBorder && styles.withoutBorder]}
     >
-      <Pressable onPress={handleClick} style={{ width: "100%" }}>
+      <Pressable onPress={handleClick} style={styles.width}>
         <View style={styles.wrapper}>
           <Icon
             name={iconName}

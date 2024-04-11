@@ -9,6 +9,7 @@ export type MainStackParamsList = {
   [SCREENS.REVIEWS]: undefined;
   [SCREENS.VISITED]: undefined;
   [SCREENS.HISTORY]: undefined;
+  [SCREENS.AUTH]: undefined;
   [SCREENS.QUESTDETAILS]: { questId: string } | undefined;
 };
 

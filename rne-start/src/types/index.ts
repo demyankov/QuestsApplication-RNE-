@@ -7,6 +7,7 @@ import {
 
 import { SettingProfileType } from "./SettingProfileType";
 import { BookingFormType } from "./BookingFormType";
+import { AuthFormType } from "./AuthFormType";
 import { ReviewFormType } from "./ReviewFormType";
 
 import { type IQuestCard } from "./IQuestCard";
@@ -23,6 +24,7 @@ export {
   type IconNameMap,
   type ReviewFormType,
   type BookingFormType,
+  type AuthFormType,
   type IBooking,
   type IQuest,
   type IReview,

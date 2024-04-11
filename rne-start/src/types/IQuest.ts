@@ -3,6 +3,7 @@ import { GENRES } from "../constants";
 export interface IQuest {
   id: string;
   apiPath: string;
+  bookingApiPath: string;
   name: string;
   mainGenre: string;
   location: string;

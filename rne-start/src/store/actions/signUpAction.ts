@@ -8,8 +8,5 @@ export interface SignUpActionProps {
 
 export const signUpAction = createAsyncThunk<void, SignUpActionProps>(
   "User/signUpAction",
-  async ({ email, password }) => {
-    console.log("click");
-    signUp(email, password);
-  }
+  async ({ email, password }) => signUp(email, password)
 );
