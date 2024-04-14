@@ -1,11 +1,13 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { STACKS } from "../constants/screens";
-import { MainStack } from "./MainStack";
-import { AppNavigatorParamList } from "../types";
-import { User, clearUser, setUser, useAppDispatch } from "../store";
 import { useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
+
+import { MainStack } from "./MainStack";
+
+import { STACKS } from "../constants/screens";
+import { AppNavigatorParamList } from "../types";
+import { User, clearUser, setUser, useAppDispatch } from "../store";
 import { auth } from "../firebase";
 import { getDocByName } from "../api";
 
@@ -17,9 +19,11 @@ export const AppNavigator = () => {
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
       // Получаем информацию о пользователе
-      const data = await getDocByName("users", user.uid);
-      console.log("data", data);
-      dispatch(setUser(data as User));
+      if (user?.uid) {
+        const data = await getDocByName("users", user.uid);
+
+        dispatch(setUser(data as User));
+      }
     });
     return () => {
       dispatch(clearUser());

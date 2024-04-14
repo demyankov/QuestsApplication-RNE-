@@ -1,14 +1,13 @@
 import { Text, View } from "react-native";
-import { StatisticsItem } from "../StatisticsItem/StatisticsItem";
-import { createStyles } from "./styles";
-import {
-  getUserSelector,
-  getsAverageRatingSelector,
-  useAppSelector,
-} from "../../store";
 import { useTheme } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
+
+import { createStyles } from "./styles";
 import { statistics } from "./config";
+
+import { StatisticsItem } from "../StatisticsItem/StatisticsItem";
+
+import { getsAverageRatingSelector, useAppSelector } from "../../store";
 
 export const ProfileStatistics = () => {
   const theme = useTheme();
@@ -22,7 +21,7 @@ export const ProfileStatistics = () => {
       <View style={styles.statisticsWrapper}>
         {statistics.map(({ text, iconColor, selector, to }) => {
           const count = useAppSelector(selector);
-          console.log(text, count);
+
           return (
             <StatisticsItem
               key={to}

@@ -1,12 +1,27 @@
 import { ImageBackground } from "react-native";
-import { createStyles } from "./styles";
-import { useFocusEffect, useTheme } from "@react-navigation/native";
-import { ProfileStatistics, User, CustomLink, Loader } from "../../components";
-import { SCREENS } from "../../constants/screens";
+import { useCallback, useEffect } from "react";
+import {
+  useFocusEffect,
+  useNavigation,
+  useTheme,
+} from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
+
+import { createStyles } from "./styles";
+
+import {
+  ProfileStatistics,
+  User,
+  CustomLink,
+  Loader,
+  CustomButton,
+} from "../../components";
+import { SCREENS } from "../../constants/screens";
+
 import {
   clearFavorites,
   clearReviews,
+  clearUser,
   clearVisited,
   getFavoritesAction,
   getIsFavoritesLoadingSelector,
@@ -17,7 +32,8 @@ import {
   useAppDispatch,
   useAppSelector,
 } from "../../store";
-import { useCallback, useEffect } from "react";
+import { auth } from "../../firebase";
+import { MainStackType } from "../../types";
 
 export const Profile = () => {
   const theme = useTheme();
@@ -25,11 +41,23 @@ export const Profile = () => {
   const { t } = useTranslation();
   const userId = useAppSelector(getUserIdSelector);
   const dispatch = useAppDispatch();
+  const { navigate } = useNavigation<MainStackType>();
 
   const isLoadingFavorites = useAppSelector(getIsFavoritesLoadingSelector);
   const isLoadingVisited = useAppSelector(getIsVisitedLoadingSelector);
 
   const isLoading = isLoadingFavorites || isLoadingVisited;
+
+  const handleQuit = async () => {
+    try {
+      await auth.signOut();
+      dispatch(clearUser());
+      navigate(SCREENS.MAIN);
+    } catch (error) {
+      navigate(SCREENS.MAIN);
+      console.log(error);
+    }
+  };
 
   useFocusEffect(
     useCallback(() => {
@@ -44,7 +72,6 @@ export const Profile = () => {
   );
 
   useEffect(() => {
-    console.log("userId", userId);
     return () => {
       clearReviews();
       clearFavorites();
@@ -63,6 +90,13 @@ export const Profile = () => {
       <User />
       <ProfileStatistics />
       <CustomLink title={t("settings")} to={SCREENS.SETTINGS} />
+      <CustomButton
+        title={t("quit")}
+        handleClick={handleQuit}
+        familyIcon="AntDesign"
+        iconName="export"
+        iconEnd
+      />
       <CustomLink title={t("history")} to={SCREENS.HISTORY} />
     </ImageBackground>
   );

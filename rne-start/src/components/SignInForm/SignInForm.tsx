@@ -14,6 +14,7 @@ import { Loader } from "../Loader/Loader";
 import { CustomButton } from "../CustomButton/CustomButton";
 
 import {
+  getIsUserErrorSelector,
   getIsUserLoadingSelector,
   signInAction,
   useAppDispatch,
@@ -22,6 +23,7 @@ import {
 import { AuthFormType, MainStackType } from "../../types";
 import { authFormScheme } from "../../shared/validationSchemes";
 import { AUTH_FORM, SCREENS } from "../../constants";
+import { auth } from "../../firebase";
 
 export const SignInForm = () => {
   const theme = useTheme();
@@ -31,6 +33,7 @@ export const SignInForm = () => {
   const isLoading = useAppSelector(getIsUserLoadingSelector);
   const toast = useToast();
   const { navigate } = useNavigation<MainStackType>();
+  const error = useAppSelector(getIsUserErrorSelector);
 
   const {
     control,
@@ -52,15 +55,15 @@ export const SignInForm = () => {
   };
 
   const handleSignIn = async () => {
-    try {
-      const { email, password } = getValues();
+    const { email, password } = getValues();
+    await auth.signOut();
+    await dispatch(signInAction({ email, password }));
 
-      await dispatch(signInAction({ email, password }));
-
+    if (!error) {
       reset();
       navigate(SCREENS.PROFILE);
-    } catch (error) {
-      toast.show(t(error.Message || "Ошибка авторизации"), {
+    } else {
+      toast.show(t(error || "Ошибка авторизации"), {
         type: "danger",
         placement: "top",
         animationType: "slide-in",

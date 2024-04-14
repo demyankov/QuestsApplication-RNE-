@@ -31,19 +31,16 @@ export const emailValidation = Yup.string()
 export const nameValidation = Yup.string()
   .matches(USERNAME_PATTERN, "incorrectName")
   .min(2, "minChar2")
-  .max(25, "maxChar25")
-  .required("requiredField");
+  .max(25, "maxChar25");
 
 export const ageValidation = Yup.string()
   .matches(NUMBER_PATTERN, "incorrectNumber")
-  .max(3, "maxAge")
-  .required("requiredField");
+  .max(3, "maxAge");
 
 export const countryValidation = Yup.string()
   .matches(COUNTRY_PATTERN, "incorrectName")
   .min(2, "minChar2")
-  .max(50, "maxChar50")
-  .required("requiredField");
+  .max(50, "maxChar50");
 
 export const phoneValidationRequired = Yup.string()
   .matches(/^\d+$/, "incorrectPhone")

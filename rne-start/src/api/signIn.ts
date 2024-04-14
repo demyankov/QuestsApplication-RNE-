@@ -11,7 +11,9 @@ export const signIn = async (
   const { user } = await signInWithEmailAndPassword(auth, email, password);
 
   // Получаем информацию о пользователе
-  const userData = await getDocByName("users", user.uid);
+  if (user.uid) {
+    const userData = await getDocByName("users", user.uid);
 
-  return userData as User;
+    return userData as User;
+  }
 };

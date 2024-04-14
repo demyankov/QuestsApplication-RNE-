@@ -40,13 +40,13 @@ const userSlice = createSlice({
     },
     clearUser(state) {
       state.user = initialState.user;
+      state.isAuth = false;
     },
     setUser(state, { payload }: { payload: User }) {
       state.user = payload;
       if (state.user.id) {
         state.isAuth = true;
       }
-      console.log("UserSlise", payload);
     },
   },
   extraReducers(builder) {
@@ -57,10 +57,12 @@ const userSlice = createSlice({
       })
       .addCase(signUpAction.fulfilled, (state) => {
         state.isLoading = false;
+        state.isAuth = false;
       })
       .addCase(signUpAction.rejected, (state, { error }) => {
         state.isLoading = false;
         state.errorMessage = error.message || "Ошибка регистрации";
+        state.isAuth = false;
       })
       .addCase(signInAction.pending, (state) => {
         state.isLoading = true;
@@ -70,11 +72,11 @@ const userSlice = createSlice({
         state.isLoading = false;
         state.user = payload;
         state.isAuth = true;
-        console.log(payload);
       })
       .addCase(signInAction.rejected, (state, { error }) => {
         state.isLoading = false;
         state.errorMessage = error.message || "Ошибка авторизации";
+        state.isAuth = false;
       });
   },
 });

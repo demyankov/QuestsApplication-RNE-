@@ -4,10 +4,15 @@ import { Modal, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FontAwesome, FontAwesome6, MaterialIcons } from "@expo/vector-icons";
 import { Controller, useForm } from "react-hook-form";
+import { useState } from "react";
+import { ToastOptions, useToast } from "react-native-toast-notifications";
+
 import { defaultPrice, inputs } from "./config";
 import { createStyles } from "./styles";
+
 import { CustomButtonSecondary } from "../CustomButtonSecondary/CustomButtonSecondary";
 import { CustomInput } from "../CustomInput/CustomInput";
+import { Loader } from "../Loader/Loader";
 
 import { convertPrices, formatDate } from "../../services";
 import {
@@ -26,10 +31,7 @@ import { BOOKING_FORM } from "../../constants";
 import { BookingFormType } from "../../types";
 import { bookingFormScheme } from "../../shared/validationSchemes";
 import { CustomSelect } from "../CustomSelect/CustomSelect";
-import { useState } from "react";
 import { IConvertPrice } from "../../services/convertPrices";
-import { Loader } from "../Loader/Loader";
-import { ToastOptions, useToast } from "react-native-toast-notifications";
 
 interface BookingCardProps {
   slot: ISchedule;

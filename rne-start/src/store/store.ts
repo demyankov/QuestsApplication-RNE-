@@ -26,34 +26,16 @@ const persistConfig = {
   storage: AsyncStorage,
 };
 
-const persistFavoriteConfig = {
-  key: "favorite",
-  storage: AsyncStorage,
-};
-
-const persistVisitedConfig = {
-  key: "visited",
-  storage: AsyncStorage,
-};
-// const persistedUserReducer = persistReducer(persistConfig, userReducer);
-const persistedFavoriteReducer = persistReducer(
-  persistFavoriteConfig,
-  favoritesReducer
-);
-const persistedVisitedReducer = persistReducer(
-  persistVisitedConfig,
-  visitedReducer
-);
+const persistedUserReducer = persistReducer(persistConfig, userReducer);
 
 const reducers = combineReducers({
-  // user: persistedUserReducer,
-  user: userReducer,
+  user: persistedUserReducer,
   booking: bookingReducer,
   questDetails: questDetailsReducer,
   quests: questsReducer,
   schedule: scheduleReducer,
-  favorites: persistedFavoriteReducer,
-  visited: persistedVisitedReducer,
+  favorites: favoritesReducer,
+  visited: visitedReducer,
   reviews: reviewsReducer,
 });
 

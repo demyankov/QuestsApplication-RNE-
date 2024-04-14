@@ -1,6 +1,7 @@
 import { RouteProp, useRoute, useTheme } from "@react-navigation/native";
 import { ImageBackground, ScrollView, Text, View } from "react-native";
 import { MainStackParamsList } from "../../types";
+import * as Localization from "expo-localization";
 import {
   useAppSelector,
   getQuestDetails,
@@ -49,6 +50,7 @@ export const QuestDetails = () => {
   const visited = useAppSelector(getVisitedSelector);
   const reviews = useAppSelector(getQuestReviewsSelector);
   const isLoading = useAppSelector(getIsLoadingQuestDetails);
+  const language = Localization.locale.substring(0, 2);
   const user = useAppSelector(getUserSelector);
   const isAuth = useAppSelector(getIsAuthSelector);
   const { t } = useTranslation();
@@ -67,6 +69,10 @@ export const QuestDetails = () => {
     apiPath,
   } = quest;
 
+  console.log(user);
+  console.log(isAuth);
+
+  const collection = language === "en" ? "questDetailsEn" : "questsDetails";
   const isFavorite = favorites.includes(id);
   const isVisited = visited.includes(id);
 
@@ -141,7 +147,7 @@ export const QuestDetails = () => {
   useEffect(() => {
     dispatch(
       getQuestDetailsAction({
-        collectionName: "questsDetails",
+        collectionName: collection,
         id: params.questId,
       })
     );

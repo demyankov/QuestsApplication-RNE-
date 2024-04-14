@@ -2,32 +2,40 @@ import { View, Text, KeyboardAvoidingView, Platform } from "react-native";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "@react-navigation/native";
+import { useNavigation, useTheme } from "@react-navigation/native";
 
 import { createStyles } from "./styles";
 import { inputs } from "./data";
 
 import {
   getUserSelector,
-  updateProfileSettings,
+  setUser,
   useAppDispatch,
   useAppSelector,
 } from "../../store";
-import { SettingProfileType } from "../../types";
+import { MainStackType, SettingProfileType } from "../../types";
 import { settingsProfileScheme } from "../../shared/validationSchemes";
 import { CustomButton, CustomInput, User } from "../../components";
-import { PROFILE_SETTINGS } from "../../constants";
+import { PROFILE_SETTINGS, SCREENS } from "../../constants";
 import { ImageBackground } from "expo-image";
 import { scaleSize } from "../../utils";
+import { setUserAction } from "../../store/actions/setUserAction";
+import { ToastOptions, useToast } from "react-native-toast-notifications";
+import { FontAwesome, FontAwesome6 } from "@expo/vector-icons";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../firebase";
+import { getDocByName } from "../../api";
 
 export const Settings = () => {
   const dispatch = useAppDispatch();
-  const { firstName, secondName, age, phone, location } =
-    useAppSelector(getUserSelector);
+  const user = useAppSelector(getUserSelector);
+  const { firstName, secondName, age, phone, location, id } = user;
+  const { navigate } = useNavigation<MainStackType>();
 
   const theme = useTheme();
   const styles = createStyles(theme);
   const { t } = useTranslation();
+  const toast = useToast();
 
   const defaultValues = {
     [PROFILE_SETTINGS.FIRST_NAME]: t(firstName),
@@ -50,9 +58,40 @@ export const Settings = () => {
 
   const disabled = !isDirty || !isValid;
 
-  const handleUpdateProfile = () =>
-    dispatch(updateProfileSettings(getValues()));
+  const showMessage = (text: string, type: ToastOptions["type"]) =>
+    toast.show(t(text), {
+      type: type,
+      placement: "top",
+      animationType: "slide-in",
+      icon:
+        type === "success" ? (
+          <FontAwesome6 name="face-smile-wink" size={24} color="#fff" />
+        ) : (
+          <FontAwesome name="hand-stop-o" size={24} color="#fff" />
+        ),
+    });
 
+  const handleUpdateProfile = async () => {
+    try {
+      await dispatch(
+        setUserAction({
+          collectionName: "users",
+          uid: id,
+          data: { ...user, ...getValues() },
+        })
+      );
+      onAuthStateChanged(auth, async (user) => {
+        // Получаем информацию о пользователе
+        const data = await getDocByName("users", user.uid);
+
+        dispatch(setUser(data));
+      });
+      navigate(SCREENS.PROFILE);
+      showMessage("Данные успешно сохранены", "success");
+    } catch (error) {
+      showMessage(error.message || "Ошибка сохранения данных", "danger");
+    }
+  };
   return (
     <View>
       <ImageBackground

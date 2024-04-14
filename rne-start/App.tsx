@@ -9,7 +9,6 @@ import { AppNavigator } from "./src/navigation/AppNavigator";
 import { NavigationContainer } from "@react-navigation/native";
 import { THEMES, theme } from "./src/constants/theme";
 import { PersistGate } from "redux-persist/integration/react";
-import Toast from "react-native-toast-notifications";
 import { scaleSize } from "./src/utils";
 
 export default function App() {
@@ -17,7 +16,6 @@ export default function App() {
 
   return (
     <>
-      <Toast ref={(ref) => (global["toast"] = ref)} />
       <I18nextProvider i18n={i18n}>
         <ToastProvider
           warningColor="orange"

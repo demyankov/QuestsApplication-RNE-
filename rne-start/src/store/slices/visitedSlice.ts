@@ -28,7 +28,6 @@ const visitedSlice = createSlice({
       })
       .addCase(getVisitedAction.fulfilled, (state, { payload }) => {
         state.visited = payload;
-        console.log("visited from slice", payload);
         state.loadingMessage = "";
         state.isLoading = false;
       })

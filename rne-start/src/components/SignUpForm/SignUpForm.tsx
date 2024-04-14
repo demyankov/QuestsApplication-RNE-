@@ -14,6 +14,7 @@ import { Loader } from "../Loader/Loader";
 import { CustomButton } from "../CustomButton/CustomButton";
 
 import {
+  getIsUserErrorSelector,
   getIsUserLoadingSelector,
   signUpAction,
   useAppDispatch,
@@ -22,6 +23,8 @@ import {
 import { AuthFormType, MainStackType } from "../../types";
 import { authFormScheme } from "../../shared/validationSchemes";
 import { AUTH_FORM, SCREENS } from "../../constants";
+import { auth } from "../../firebase";
+import { useEffect } from "react";
 
 interface SignUpFormProps {
   toggleForm: () => void;
@@ -35,6 +38,7 @@ export const SignUpForm = ({ toggleForm }: SignUpFormProps) => {
   const isLoading = useAppSelector(getIsUserLoadingSelector);
   const toast = useToast();
   const { navigate } = useNavigation<MainStackType>();
+  const error = useAppSelector(getIsUserErrorSelector);
 
   const {
     control,
@@ -56,15 +60,15 @@ export const SignUpForm = ({ toggleForm }: SignUpFormProps) => {
   };
 
   const handleSignUp = async () => {
-    try {
-      const { email, password } = getValues();
+    const { email, password } = getValues();
 
-      await dispatch(signUpAction({ email, password }));
+    await dispatch(signUpAction({ email, password }));
 
+    if (!error) {
       reset();
-      toggleForm();
-    } catch (error) {
-      toast.show(t(error.Message || "Ошибка регистрации"), {
+      navigate(SCREENS.PROFILE);
+    } else {
+      toast.show(t(error || "Ошибка регистрации"), {
         type: "danger",
         placement: "top",
         animationType: "slide-in",
@@ -72,6 +76,8 @@ export const SignUpForm = ({ toggleForm }: SignUpFormProps) => {
       });
     }
   };
+
+  useEffect(() => {}, []);
 
   return (
     <View style={styles.form}>

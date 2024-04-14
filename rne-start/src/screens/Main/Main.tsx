@@ -1,12 +1,15 @@
 import { useTheme } from "@react-navigation/native";
 import * as Localization from "expo-localization";
-import { createStyles } from "./styles";
-import { Header, Loader, QuestsList } from "../../components";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Text } from "react-native";
 import { useTranslation } from "react-i18next";
-import { SCREENS } from "../../constants";
 import { ImageBackground } from "expo-image";
+import { useEffect } from "react";
+
+import { createStyles } from "./styles";
+
+import { Header, Loader, QuestsList } from "../../components";
+import { SCREENS } from "../../constants";
 import {
   getActiveQuests,
   getIsLoadingQuests,
@@ -14,7 +17,6 @@ import {
   useAppDispatch,
   useAppSelector,
 } from "../../store";
-import { useEffect } from "react";
 
 export const Main = () => {
   const theme = useTheme();
@@ -25,8 +27,10 @@ export const Main = () => {
   const quests = useAppSelector(getActiveQuests);
   const isLoading = useAppSelector(getIsLoadingQuests);
 
+  const collection = language === "en" ? "questDetailsEn" : "questsDetails";
+
   useEffect(() => {
-    dispatch(getQuestsAction("questsDetails"));
+    dispatch(getQuestsAction(collection));
   }, []);
 
   return (

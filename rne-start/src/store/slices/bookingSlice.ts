@@ -10,7 +10,7 @@ interface IBookingSlice {
 const initialState: IBookingSlice = {
   successMessage: "",
   errorMessage: "",
-  isLoading: true,
+  isLoading: false,
 };
 
 const bookingSlice = createSlice({

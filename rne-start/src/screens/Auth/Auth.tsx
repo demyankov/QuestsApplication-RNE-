@@ -1,22 +1,39 @@
-import * as Localization from "expo-localization";
-import { ImageBackground, SafeAreaView, View } from "react-native";
-import { styles } from "./styles";
+import {
+  ImageBackground,
+  SafeAreaView,
+  View,
+  KeyboardAvoidingView,
+} from "react-native";
+import { useCallback, useEffect, useState } from "react";
 
-import { useTranslation } from "react-i18next";
-import { SignUpForm } from "../../components/SignUpForm/SignUpForm";
-import { useState } from "react";
+import { styles } from "./styles";
 import { AUTH_FORMS } from "./config";
+
+import { SignUpForm } from "../../components/SignUpForm/SignUpForm";
 import { SignInForm, ToggleButton } from "../../components";
+import { getUserIdSelector, useAppSelector } from "../../store";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import { MainStackType } from "../../types";
+import { SCREENS } from "../../constants";
 
 export const Auth = () => {
-  const { t } = useTranslation();
   const [form, setForm] = useState<AUTH_FORMS>(AUTH_FORMS.SIGN_IN);
+  const userId = useAppSelector(getUserIdSelector);
+  const { navigate } = useNavigation<MainStackType>();
 
   const toggleForm = () => {
     form === AUTH_FORMS.SIGN_IN
       ? setForm(AUTH_FORMS.SIGN_UP)
       : setForm(AUTH_FORMS.SIGN_IN);
   };
+
+  useFocusEffect(
+    useCallback(() => {
+      if (userId) {
+        navigate(SCREENS.MAIN);
+      }
+    }, [])
+  );
 
   return (
     <SafeAreaView style={styles.container}>
@@ -25,7 +42,7 @@ export const Auth = () => {
         source={require("../../assets/bg.jpg")}
         resizeMode="cover"
       >
-        <View>
+        <KeyboardAvoidingView behavior="padding">
           <View style={styles.tabs}>
             <View style={styles.tabsWrapper}>
               <ToggleButton
@@ -47,7 +64,7 @@ export const Auth = () => {
           ) : (
             <SignUpForm toggleForm={toggleForm} />
           )}
-        </View>
+        </KeyboardAvoidingView>
       </ImageBackground>
     </SafeAreaView>
   );
