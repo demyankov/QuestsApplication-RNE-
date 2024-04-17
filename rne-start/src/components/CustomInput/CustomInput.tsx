@@ -2,7 +2,6 @@ import { Controller } from "react-hook-form";
 import { createStyles } from "./styles";
 import { Text, TextInput, View } from "react-native";
 import { useTheme } from "@react-navigation/native";
-import { MaskedTextInput } from "react-native-mask-text";
 import { AntDesign } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { useTranslation } from "react-i18next";

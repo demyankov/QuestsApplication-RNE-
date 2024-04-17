@@ -4,7 +4,7 @@ import {
   View,
   KeyboardAvoidingView,
 } from "react-native";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 
 import { styles } from "./styles";
 import { AUTH_FORMS } from "./config";

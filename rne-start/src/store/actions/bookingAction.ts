@@ -1,7 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { book } from "../../api";
 import { IBooking } from "../../types";
-import { getScheduleAction } from "..";
 
 interface BookingActionProps {
   apiPath: string;

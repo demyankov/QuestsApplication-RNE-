@@ -1,4 +1,4 @@
-import { FlatList, Text, View } from "react-native";
+import { FlatList, Text } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { createStyles } from "./styles";
 import { useTranslation } from "react-i18next";

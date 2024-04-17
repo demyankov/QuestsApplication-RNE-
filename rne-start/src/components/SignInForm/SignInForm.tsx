@@ -1,4 +1,4 @@
-import { useNavigation, useRoute, useTheme } from "@react-navigation/native";
+import { useNavigation, useTheme } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -23,7 +23,6 @@ import {
 import { AuthFormType, MainStackType } from "../../types";
 import { authFormScheme } from "../../shared/validationSchemes";
 import { AUTH_FORM, SCREENS } from "../../constants";
-import { auth } from "../../firebase";
 
 export const SignInForm = () => {
   const theme = useTheme();

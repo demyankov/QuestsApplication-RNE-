@@ -7,7 +7,6 @@ import { scaleSize } from "../../utils";
 import { MainStackType } from "../../types";
 import { SCREENS } from "../../constants";
 import {
-  getIsAuthSelector,
   getQuestsAction,
   getUserIdSelector,
   useAppDispatch,

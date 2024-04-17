@@ -23,8 +23,6 @@ import {
 import { AuthFormType, MainStackType } from "../../types";
 import { authFormScheme } from "../../shared/validationSchemes";
 import { AUTH_FORM, SCREENS } from "../../constants";
-import { auth } from "../../firebase";
-import { useEffect } from "react";
 
 interface SignUpFormProps {
   toggleForm: () => void;

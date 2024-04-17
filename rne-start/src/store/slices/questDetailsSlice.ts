@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getQuestDetailsAction } from "../actions";
 import { IQuest } from "../../types";
-import { GENRES } from "../../constants";
 
 interface IQuestDetailsSlice {
   currentQuest: IQuest;
