@@ -21,7 +21,7 @@ const initialState: IUserSlice = {
     secondName: "",
     age: "",
     email: "",
-    avatar: faker.image.avatar(),
+    avatar: "",
     phone: "",
     location: "",
   },
@@ -58,6 +58,7 @@ const userSlice = createSlice({
       .addCase(signUpAction.fulfilled, (state) => {
         state.isLoading = false;
         state.isAuth = false;
+        state.errorMessage = "";
       })
       .addCase(signUpAction.rejected, (state, { error }) => {
         state.isLoading = false;
@@ -71,6 +72,8 @@ const userSlice = createSlice({
       .addCase(signInAction.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.user = payload;
+        console.log(payload);
+        state.errorMessage = "";
         state.isAuth = true;
       })
       .addCase(signInAction.rejected, (state, { error }) => {

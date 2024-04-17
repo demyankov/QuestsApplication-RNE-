@@ -26,13 +26,14 @@ export const Auth = () => {
       ? setForm(AUTH_FORMS.SIGN_UP)
       : setForm(AUTH_FORMS.SIGN_IN);
   };
+  console.log("userId", userId);
 
   useFocusEffect(
     useCallback(() => {
       if (userId) {
         navigate(SCREENS.MAIN);
       }
-    }, [])
+    }, [userId])
   );
 
   return (

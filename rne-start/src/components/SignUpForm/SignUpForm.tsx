@@ -77,8 +77,6 @@ export const SignUpForm = ({ toggleForm }: SignUpFormProps) => {
     }
   };
 
-  useEffect(() => {}, []);
-
   return (
     <View style={styles.form}>
       {isLoading && <Loader />}

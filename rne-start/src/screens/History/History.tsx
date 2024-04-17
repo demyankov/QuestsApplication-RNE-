@@ -14,7 +14,7 @@ export const History = () => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={styles.container}>
       <ImageBackground
         style={styles.wrapper}
         source={require("../../assets/bg.jpg")}

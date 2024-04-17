@@ -70,11 +70,11 @@ export const Reviews = () => {
   return isLoading ? (
     <Loader />
   ) : (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={styles.container}>
       <ImageBackground
         style={styles.wrapper}
         source={require("../../assets/bg.jpg")}
-        imageStyle={{ resizeMode: "cover", opacity: 0.4 }}
+        imageStyle={styles.imageStyle}
       >
         {isNoReviews && <Text style={styles.text}>{t("noReviews")}</Text>}
         <FlatList

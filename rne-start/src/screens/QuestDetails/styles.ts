@@ -8,6 +8,10 @@ export const createStyles = (theme: Theme) =>
       paddingHorizontal: scaleSize(15),
       paddingBottom: scaleSize(30),
     },
+    wrapper: {
+      flex: 1,
+    },
+    imageStyle: { resizeMode: "repeat", opacity: 0.4 },
     textShadow: {
       textShadowColor: "#000",
       textShadowOffset: { width: 1, height: 1 },

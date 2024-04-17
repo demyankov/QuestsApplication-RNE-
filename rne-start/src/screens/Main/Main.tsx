@@ -33,14 +33,15 @@ export const Main = () => {
     dispatch(getQuestsAction(collection));
   }, []);
 
+  const uri =
+    "https://avatars.mds.yandex.net/i?id=4f56b40839b746aa5ec7fccaaa462303_l-8230897-images-thumbs&ref=rim&n=13&w=1680&h=1050";
+
   return (
     <SafeAreaView style={styles.wrapper}>
       <ImageBackground
-        source={{
-          uri: "https://avatars.mds.yandex.net/i?id=4f56b40839b746aa5ec7fccaaa462303_l-8230897-images-thumbs&ref=rim&n=13&w=1680&h=1050",
-        }}
-        style={{ flex: 1 }}
-        imageStyle={{ resizeMode: "cover", opacity: 0.4 }}
+        source={{ uri }}
+        style={styles.background}
+        imageStyle={styles.imageStyle}
       >
         <Header />
         <Text style={[styles.title, styles.textShadow]}>

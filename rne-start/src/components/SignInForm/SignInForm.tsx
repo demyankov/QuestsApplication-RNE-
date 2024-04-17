@@ -56,7 +56,6 @@ export const SignInForm = () => {
 
   const handleSignIn = async () => {
     const { email, password } = getValues();
-    await auth.signOut();
     await dispatch(signInAction({ email, password }));
 
     if (!error) {

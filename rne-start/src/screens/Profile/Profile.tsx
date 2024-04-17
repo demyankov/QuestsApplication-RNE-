@@ -52,6 +52,9 @@ export const Profile = () => {
     try {
       await auth.signOut();
       dispatch(clearUser());
+      dispatch(clearVisited());
+      dispatch(clearReviews());
+      dispatch(clearFavorites());
       navigate(SCREENS.MAIN);
     } catch (error) {
       navigate(SCREENS.MAIN);
@@ -68,7 +71,7 @@ export const Profile = () => {
         getVisitedAction({ collectionName: "visited", docName: userId })
       );
       dispatch(getUserReviewsAction({ collectionName: "reviews", userId }));
-    }, [userId])
+    }, [])
   );
 
   useEffect(() => {

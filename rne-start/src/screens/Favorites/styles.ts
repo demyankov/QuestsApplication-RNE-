@@ -5,6 +5,9 @@ import { scaleSize } from "../../utils";
 
 export const createStyles = (theme: Theme) =>
   StyleSheet.create({
+    container: {
+      flex: 1,
+    },
     wrapper: {
       flex: 1,
       alignItems: "center",

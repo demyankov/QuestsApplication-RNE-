@@ -8,6 +8,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    zIndex: 10000,
   },
   bgDark: {
     backgroundColor: "RGBA(0,0,0,0.15)",

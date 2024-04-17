@@ -8,6 +8,10 @@ export const createStyles = (theme: Theme) =>
       paddingTop: scaleSize(15),
       flex: 1,
     },
+    background: {
+      flex: 1,
+    },
+    imageStyle: { resizeMode: "cover", opacity: 0.4 },
     title: {
       fontSize: scaleSize(45),
       marginBottom: scaleSize(15),

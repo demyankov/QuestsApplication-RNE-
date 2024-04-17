@@ -119,12 +119,12 @@ export const BookingCard = ({
           bookedItem: bookedItem,
         })
       );
-      showMessage(successMessage, "success");
+      showMessage(successMessage || "Квест успешно забронирован", "success");
       handleClose();
       reset();
       dispatch(getScheduleAction({ apiPath }));
     } catch {
-      showMessage(errorMessage, "danger");
+      showMessage(errorMessage || "Ошибка бронирования", "danger");
     }
   };
 

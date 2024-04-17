@@ -4,6 +4,9 @@ import { Theme } from "@react-navigation/native";
 
 export const createStyles = (theme: Theme) =>
   StyleSheet.create({
+    container: {
+      flex: 1,
+    },
     wrapper: {
       flex: 1,
       alignItems: "center",
@@ -19,4 +22,5 @@ export const createStyles = (theme: Theme) =>
       color: theme.colors.text,
       marginTop: scaleSize(20),
     },
+    imageStyle: { resizeMode: "cover", opacity: 0.4 },
   });

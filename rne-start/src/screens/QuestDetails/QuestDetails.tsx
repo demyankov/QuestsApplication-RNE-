@@ -187,8 +187,8 @@ export const QuestDetails = () => {
       <ImageBackground
         source={{ uri }}
         resizeMode="cover"
-        style={{ flex: 1 }}
-        imageStyle={{ resizeMode: "repeat", opacity: 0.4 }}
+        style={styles.wrapper}
+        imageStyle={styles.imageStyle}
       >
         <View style={styles.header}>
           <Image source={banner} style={styles.banner} />
