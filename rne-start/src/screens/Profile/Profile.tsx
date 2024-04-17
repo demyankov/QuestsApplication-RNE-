@@ -48,18 +48,21 @@ export const Profile = () => {
 
   const isLoading = isLoadingFavorites || isLoadingVisited;
 
+  const handleClear = () => {
+    dispatch(clearVisited());
+    dispatch(clearReviews());
+    dispatch(clearFavorites());
+  };
+
   const handleQuit = async () => {
     try {
       await auth.signOut();
       dispatch(clearUser());
-      dispatch(clearVisited());
-      dispatch(clearReviews());
-      dispatch(clearFavorites());
-      navigate(SCREENS.MAIN);
+      handleClear();
     } catch (error) {
-      navigate(SCREENS.MAIN);
       console.log(error);
     }
+    navigate(SCREENS.MAIN);
   };
 
   useFocusEffect(
@@ -76,9 +79,7 @@ export const Profile = () => {
 
   useEffect(() => {
     return () => {
-      clearReviews();
-      clearFavorites();
-      clearVisited();
+      handleClear();
     };
   }, []);
 

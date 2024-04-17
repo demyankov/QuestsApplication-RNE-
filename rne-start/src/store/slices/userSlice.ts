@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { User } from "../types";
-import { faker } from "@faker-js/faker";
 import { SettingProfileType } from "../../types";
 import { signUpAction, signInAction } from "../actions";
 
