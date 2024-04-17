@@ -11,7 +11,6 @@ export const styles = StyleSheet.create({
     elevation: 3,
     borderColor: "#b1b1b3",
     borderWidth: 1,
-    // backgroundColor: "#2b9ced",
   },
   text: {
     fontSize: scaleSize(32),
